@@ -1,0 +1,72 @@
+body{
+    background: silver;
+}
+
+#header{
+    padding: 20px;
+    background: gold;
+
+}
+
+#content{
+    background: #fff;
+    padding : 20px;
+
+}
+
+#footer {
+    background:green;
+    padding:20px;
+}
+
+body{
+    margin: 0;
+    width: 100%;
+}
+
+header{
+    background: #CDE8FC;
+    height: 240px;
+}
+
+.divheader{
+    width: 1024px;
+    margin: auto;
+}
+
+.divtitle{
+    display: inline-block;
+    height: 240px;
+    line-height: 240px;
+    padding: 0 0 0 50px;
+    vertical-align: top;
+    font-size: 24px;
+    font-family: 'Roboto';
+}
+
+footer{
+    background: #333;
+    height: 40px;
+    line-height: 40px;
+    border-top: 3px solid #1b9bff;
+}
+
+.logo {
+    display: inline-block;
+    width: 200px;
+    opacity: 0.5;
+    margin: 20px 20px auto 20px;
+}
+
+.align-right {
+    float: right;
+}
+
+section
+{
+    width: 1024px;
+    margin: auto;
+    padding: 30px 30px;
+    background: #EAF8FC;
+    font-family: "Roboto";
+}

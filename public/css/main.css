@@ -1,0 +1,38 @@
+
+
+body {
+ background-image: url('http://localhost/BTS/Mvc_GsbFormation/public/img/background.png');
+  background-repeat: no-repeat;
+   background-attachment: fixed;
+}
+
+#header-logo{
+    background-color: #48C6EC;
+
+}
+
+#banniere{
+    text-align: center;
+}
+
+#main
+{
+    margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.col-md-3#header-img{
+
+    padding: 0px;
+}
+
+#user-all{
+    background-color: #1b9bff;
+    color:white;
+    text-align: center;
+}
+
+#cpt-user{
+
+}

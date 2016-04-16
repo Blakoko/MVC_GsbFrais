@@ -1,0 +1,23 @@
+#back {
+    background-image: url(img/Background.png);
+}
+
+#cut, #brand-food {
+    color: #ffcc00;
+}
+
+#tags {
+    color: #c0c0c0;
+}
+
+#leaf, #brand-hero {
+    color: #33cc00;
+}
+
+#body {
+    padding-top: 60px;    
+}
+
+#contact, #partner {
+    margin-left: 5%;
+}
