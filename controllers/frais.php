@@ -1,14 +1,11 @@
 <?php
+
     /**
      * Created by PhpStorm.
      * User: albert
      * Date: 07/04/16
      * Time: 16:35
      */
-
-
-
-
     class Frais extends Controller
     {
         public function __construct()
@@ -18,12 +15,13 @@
             $logged = Session::get('loggedIn');
             if ($logged == false) {
                 Session::destroy();
-                header('location: '.URL.'');
+                header('location: ' . URL . '');
                 exit;
             }
 
             //$this->view->js = array('frais/js/jquery.js','frais/js/default.js');
         }
+
         public function index()
         {
             //$this->view->listformation = $this->model->listformation();
@@ -35,7 +33,7 @@
 
         public function liste()
         {
-                
+
 
             $this->view->getLesFraisForfait = $this->model->getLesFraisForfait();
             $this->view->getLesFraisHorsForfait = $this->model->getLesFraisHorsForfait();
@@ -46,8 +44,8 @@
         {
 
 
-            $data = array();
-            $data['id_user']= Session::get('id');
+            $data = [];
+            $data['id_user'] = Session::get('id');
             print_r($data);
 
             $this->view->getLestypes = $this->model->getLestypes();
@@ -57,10 +55,6 @@
 
             //$this->model->creeNouvellesLignesFrais($data);
             $this->view->render('frais/saisir');
-
-
-
-
 
 
         }

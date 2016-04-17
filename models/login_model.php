@@ -19,24 +19,25 @@
 				login = :login AND password = :password");
 
 
-            $sth->execute(array(
-                ':login' => $_POST['login'],
-                ':password' => /*Hash::create('sha1',*/$_POST['password']/*,HASH_PASSWORD_KEY)*/
-            ));
+            $sth->execute([
+                ':login'    => $_POST['login'],
+                ':password' => /*Hash::create('sha1',*/
+                    $_POST['password']/*,HASH_PASSWORD_KEY)*/
+            ]);
 
             $data = $sth->fetch();
-            $count =  $sth->rowCount();
+            $count = $sth->rowCount();
             if ($count > 0) {
                 // login
                 Session::init();
-                Session::set('id',$data['id']);
-                Session::set('nom',$data['nom']);
-                Session::set('prenom',$data['prenom']);
+                Session::set('id', $data['id']);
+                Session::set('nom', $data['nom']);
+                Session::set('prenom', $data['prenom']);
                 Session::set('loggedIn', true);
                 echo "Succes";
             } else {
 
-                echo"Mauvais Mot de Passe Ou Login";
+                echo "Mauvais Mot de Passe Ou Login";
             }
             //print_r($count);
 

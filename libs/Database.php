@@ -8,20 +8,20 @@
      */
     class Database extends PDO
     {
-        public function __construct($DB_TYPE,$DB_HOST,$DB_NAME,$DB_USER,$DB_PASS)
+        public function __construct($DB_TYPE, $DB_HOST, $DB_NAME, $DB_USER, $DB_PASS)
         {
-            parent::__construct(DB_TYPE.':host='.DB_HOST.';dbname='.DB_NAME, DB_USER, DB_PASS);
+            parent::__construct(DB_TYPE . ':host=' . DB_HOST . ';dbname=' . DB_NAME, DB_USER, DB_PASS);
 
             //parent::setAttribute(PDO::ATTR_ERRMODE,PDO::ERRMODE_EXCEPTIONS);
         }
 
         /**
-         * @param string $sql une chaine sql
-         * @param array $array Parametres a (bind)
+         * @param string   $sql       une chaine sql
+         * @param array    $array     Parametres a (bind)
          * @param constant $fetchMode Pdo Fetch mode
          * @return mixed
          */
-        public function select($sql, $array = array(), $fetchMode = PDO::FETCH_ASSOC)
+        public function select($sql, $array = [], $fetchMode = PDO::FETCH_ASSOC)
         {
             $sth = $this->prepare($sql);
             foreach ($array as $key => $value) {
@@ -29,11 +29,13 @@
             }
 
             $sth->execute();
+
             return $sth->fetchAll($fetchMode);
         }
+
         /**
-         * @param string $table nom de la table ou inserer les trucs ;)
-         * @param  string $data tableau associatif (array)Va sur WIKIPEDIA
+         * @param string  $table nom de la table ou inserer les trucs ;)
+         * @param  string $data  tableau associatif (array)Va sur WIKIPEDIA
          */
         public function insert($table, $data)
         {
@@ -50,17 +52,18 @@
 
             $sth->execute();
         }
+
         /**
-         * @param string $table nom de la table ou inserer les trucs ;)
-         * @param  string $data tableau associatif (array)Va sur WIKIPEDIA
-         * @param string $data  remplacement du WHERE sql
+         * @param string  $table nom de la table ou inserer les trucs ;)
+         * @param  string $data  tableau associatif (array)Va sur WIKIPEDIA
+         * @param string  $data  remplacement du WHERE sql
          */
         public function update($table, $data, $where)
         {
             ksort($data);
 
             $fieldDetails = NULL;
-            foreach($data as $key=> $value) {
+            foreach ($data as $key => $value) {
                 $fieldDetails .= "`$key`=:$key,";
             }
             $fieldDetails = rtrim($fieldDetails, ',');
@@ -75,12 +78,12 @@
         }
 
         /**
-         * @param   string  $table
-         * @param   string  $where
-         * @param int $limit
+         * @param   string $table
+         * @param   string $where
+         * @param int      $limit
          * @return int Lignes affectées
          */
-        public function delete($table, $where,$and, $limit = 1)
+        public function delete($table, $where, $and, $limit = 1)
         {
             return $this->exec("DELETE FROM $table WHERE $where AND $and LIMIT $limit");
         }

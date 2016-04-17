@@ -18,29 +18,29 @@
                         <tr>
 
                             <td>Profil</td>
-                            <td><?php echo $this->monprofil[0]['libelle']?></td>
+                            <td><?php echo $this->monprofil[0]['libelle'] ?></td>
                         </tr>
 
                         <tr>
 
                             <td>NOM</td>
-                            <td><?php echo $this->monprofil[0]['nom']?></td>
+                            <td><?php echo $this->monprofil[0]['nom'] ?></td>
                         </tr>
 
                         <tr>
 
                             <td>PRENOM</td>
-                            <td><?php echo $this->monprofil[0]['prenom']?></td>
+                            <td><?php echo $this->monprofil[0]['prenom'] ?></td>
                         </tr>
                         <tr>
 
                             <td>VIILLE</td>
-                            <td><?php echo $this->monprofil[0]['ville']?></td>
+                            <td><?php echo $this->monprofil[0]['ville'] ?></td>
                         </tr>
                         <tr>
 
                             <td>DATE D'EMBAUCHE</td>
-                            <td><?php echo $this->monprofil[0]['dateEmbauche']?></td>
+                            <td><?php echo $this->monprofil[0]['dateEmbauche'] ?></td>
                         </tr>
                         </tbody>
                     </table>

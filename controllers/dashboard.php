@@ -6,24 +6,24 @@
      * Date: 17/11/15
      * Time: 20:54
      */
-    class Dashboard extends Controller {
+    class Dashboard extends Controller
+    {
 
-        function __construct() {
+        function __construct()
+        {
             parent::__construct();
             Session::init();
             $logged = Session::get('loggedIn');
             if ($logged == false) {
                 Session::destroy();
-                header('location:' .URL);
+                header('location:' . URL);
                 exit;
             }
-           //print_r($_SESSION);
+            //print_r($_SESSION);
             //Integrer Javascript
-            $this->view->js = array('dashboard/js/default.js');
+            $this->view->js = ['dashboard/js/default.js'];
 
         }
-
-
 
 
         function index()
@@ -36,8 +36,9 @@
         function unsubscribe($id)
         {
             $this->model->unsubscribe($id);
-            header('location:'.URL.'dashboard');
+            header('location:' . URL . 'dashboard');
         }
+
         function profil()
         {
             $this->view->monprofil = $this->model->monprofil(Session::get('id'));
@@ -48,7 +49,7 @@
         function logout()
         {
             Session::destroy();
-            header('location: ' . URL .  '');
+            header('location: ' . URL . '');
             exit;
         }
 
@@ -71,13 +72,13 @@
         public function editprofil()
         {
             //$form = new Form();
-            $data = array();
+            $data = [];
             $data['id'] = Session::get('id');
             $data['login'] = $_POST['login'];
             $data['password'] = $_POST['password'];
             $data['mail'] = $_POST['mail'];
 
             $this->model->editprofil($data);
-            header('location:'.URL.'dashboard');
+            header('location:' . URL . 'dashboard');
         }
     }

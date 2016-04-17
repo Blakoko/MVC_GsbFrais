@@ -9,16 +9,17 @@
                 <div class="col-md-2">
                     <div class="form-group">
                         <form action="" method="post">
-                        <div class="form-group">
-                            <label class="control-label" for="formInput20">Type
-                                <br>
-                            </label>
-                            <select id="formInput20" class="form-control" name="type">
-                                <?php foreach($this->getLestypes as $key=>$value) :?>
-                                <option value="<?php echo $value['id']?>"><?php echo $value['libelle']?></option>
-                                <?endforeach;?>
-                            </select>
-                        </div>
+                            <div class="form-group">
+                                <label class="control-label" for="formInput20">Type
+                                    <br>
+                                </label>
+                                <select id="formInput20" class="form-control" name="type">
+                                    <?php foreach ($this->getLestypes as $key => $value) : ?>
+                                        <option
+                                            value="<?php echo $value['id'] ?>"><?php echo $value['libelle'] ?></option>
+                                    <? endforeach; ?>
+                                </select>
+                            </div>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -26,12 +27,12 @@
                         <label class="control-label" for="formInput27">Description&nbsp;
                             <br>
                         </label>
-                        <input type="text" class="form-control" id="datepicker" name="description" >
+                        <input type="text" class="form-control" id="datepicker" name="description">
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
-                        <label class="control-label" for="formInput22" >Debut &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
+                        <label class="control-label" for="formInput22">Debut &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
                             <br>
                         </label>
                         <input type="date" class="form-control" id="date" name="date_debut">
@@ -39,7 +40,7 @@
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
-                        <label class="control-label" for="formInput18" >Fin</label>
+                        <label class="control-label" for="formInput18">Fin</label>
                         <input type="date" class="form-control" name="date_fin">
                     </div>
                 </div>
@@ -47,13 +48,13 @@
                     <div class="form-group">
                         <label class="control-label" for="formInput12">Ajouter</label>
                         <button type="submit" class="btn btn-primary btn-sm">+</button>
-                       </form>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <hr id="separateur1" />
+    <hr id="separateur1"/>
     <div id="fichefrais">
         <div class="row">
             <div class="col-md-12">
@@ -85,7 +86,7 @@
         </div>
         <!-- FIn DIV Fiche FRais -->
     </div>
-    <hr id="separateur2" />
+    <hr id="separateur2"/>
     <div id="elementshorsforfait">
         <div class="row">
             <div class="col-md-12">
@@ -125,20 +126,20 @@
 
                 <div class="form-group">
                     <form action="" method="post">
-                    <label class="control-label" for="formInput29" >Date
-                        <br>
-                    </label>
-                    <input type="text" class="form-control" id="date" name="date_hf">
+                        <label class="control-label" for="formInput29">Date
+                            <br>
+                        </label>
+                        <input type="text" class="form-control" id="date" name="date_hf">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label class="control-label" for="formInput25" >Libellé&nbsp;
+                    <label class="control-label" for="formInput25">Libellé&nbsp;
                         <br>
                     </label>
                     <input type="text" class="form-control" id="formInput25" name="libelle_hf">
                 </div>
-                <br />
+                <br/>
             </div>
             <div class="col-md-4">
                 <div class="form-group">

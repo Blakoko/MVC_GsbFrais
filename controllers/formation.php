@@ -15,22 +15,24 @@
             $logged = Session::get('loggedIn');
             if ($logged == false) {
                 Session::destroy();
-                header('location: '.URL.'');
+                header('location: ' . URL . '');
                 exit;
             }
         }
+
         public function index()
         {
             $this->view->listformation = $this->model->listformation();
-            $this->view->listformateur  = $this->model->listformateur();
-            $this->view->listcategorie  = $this->model->listcategorie();
+            $this->view->listformateur = $this->model->listformateur();
+            $this->view->listcategorie = $this->model->listcategorie();
             $this->view->verifinscription = $this->model->verifinscription(Session::get('id'));
             $this->view->render('formation/index');
         }
 
-        public function delete($id){
+        public function delete($id)
+        {
             $this->model->delete($id);
-            header('location:'.URL.'formation');
+            header('location:' . URL . 'formation');
         }
 
         public function edit($id)
@@ -41,23 +43,24 @@
             $this->view->render('formation/edit');
         }
 
-        public function editSave($id){
+        public function editSave($id)
+        {
 
-            $data = array();
+            $data = [];
             $data['id'] = $id;
             $data['login'] = $_POST['login'];
             $data['password'] = $_POST['password'];
             $data['mail'] = $_POST['mail'];
 
             $this->model->editSave($data);
-            header('location:'.URL.'user');
+            header('location:' . URL . 'user');
         }
 
 
         public function create()
         {
-            if(Session::get('role')=='owner')
-            $data = array();
+            if (Session::get('role') == 'owner')
+                $data = [];
             $data['libelle_formation'] = $_POST['formation'];
             $data['date_formation'] = $_POST['date'];
             $data['nbrplace'] = $_POST['place'];
@@ -65,45 +68,42 @@
             $data['categorie_idCategorie'] = $_POST['categorie'];
 
             $this->model->create($data);
-            header('location:'.URL.'formation');
+            header('location:' . URL . 'formation');
         }
 
         public function inscription($id)
         {
-            $data = array();
-            $data['idFormation']=$id;
-            $data['membre_id']= Session::get('id');
+            $data = [];
+            $data['idFormation'] = $id;
+            $data['membre_id'] = Session::get('id');
             //print_r($data);
             $this->model->inscription($data);
-            header('location:'.URL.'formation');
+            header('location:' . URL . 'formation');
         }
 
         public function details($id)
         {
 
 
-           $this->view->details =  $this->model->details($id);
+            $this->view->details = $this->model->details($id);
             $this->view->render('formation/details');
-
-
-
 
 
         }
 
-       /*public function register()
-        {
-            $data = array();
-            $data['name']=$_POST['name'];
-            $data['age']=$_POST['age'];
-            $data['mail']=$_POST['mail'];
-            $data['gender']=$_POST['gender'];
-
-
-
-            $this->model->register();
-            header('location : '.URL.'formation');
-        }*/
+        /*public function register()
+         {
+             $data = array();
+             $data['name']=$_POST['name'];
+             $data['age']=$_POST['age'];
+             $data['mail']=$_POST['mail'];
+             $data['gender']=$_POST['gender'];
+ 
+ 
+ 
+             $this->model->register();
+             header('location : '.URL.'formation');
+         }*/
 
 
     }

@@ -8,35 +8,33 @@
      */
     class Form_Model extends Form
     {
-    public function __construct()
-    {
-        parent::__construct();
-    }
+        public function __construct()
+        {
+            parent::__construct();
+        }
 
         /**
          *
          */
-        public function register(){
+        public function register()
+        {
 
             if (isset($_REQUEST['run'])) {
                 try {
 
                     $form = new Form();
 
-                    $form    ->post('name')
+                    $form->post('name')
                         ->val('minlength', 2)
                         ->val('mail')
-
                         ->post('age')
                         ->val('minlength', 2)
                         ->val('digit')
-
                         ->post('mail')
                         ->val('mail')
-
                         ->post('gender');
 
-                    $form    ->submit();
+                    $form->submit();
 
                     echo 'The form passed!';
                     $data = $form->fetch();

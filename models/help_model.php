@@ -12,9 +12,10 @@
         {
             parent::__construct();
         }
+
         function blah()
         {
-            return 10+10;
+            return 10 + 10;
         }
 
     }

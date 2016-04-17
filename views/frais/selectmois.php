@@ -3,13 +3,13 @@
         <label class="control-label" for="formInput11">Field label</label>
 
         <select id="formInput11" class="form-control">
-            <?php foreach ($this->getLesMoisDisponibles as $key=>$value):?>
-            <option><?php echo $value['mois']?></option>
+            <?php foreach ($this->getLesMoisDisponibles as $key => $value): ?>
+                <option><?php echo $value['mois'] ?></option>
             <?php endforeach ?>
         </select>
 
     </div>
-    <hr id="separateur1" />
+    <hr id="separateur1"/>
     <div id="fichefrais" data-pg-collapsed>
         <div class="row">
             <div class="col-md-12">
@@ -27,15 +27,15 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($this->getLesFraisForfait as $key=>$val):?>
-                        <tr>
-                            <td><?php echo $val['']?></td>
-                            <td><?php echo $val['']?></td>
-                            <td><?php echo $val['']?></td>
-                            <td><?php echo $val['']?></td>
-                            <td class="text-uppercase bg-success text-center">Supprimer</td>
-                        </tr>
-                        <?php endforeach ;?>
+                        <?php foreach ($this->getLesFraisForfait as $key => $val): ?>
+                            <tr>
+                                <td><?php echo $val[''] ?></td>
+                                <td><?php echo $val[''] ?></td>
+                                <td><?php echo $val[''] ?></td>
+                                <td><?php echo $val[''] ?></td>
+                                <td class="text-uppercase bg-success text-center">Supprimer</td>
+                            </tr>
+                        <?php endforeach; ?>
                         </tbody>
                     </table>
                 </div>
@@ -43,7 +43,7 @@
         </div>
         <!-- FIn DIV Fiche FRais -->
     </div>
-    <hr id="separateur2" />
+    <hr id="separateur2"/>
     <div id="elementshorsforfait" data-pg-collapsed>
         <div class="row">
             <div class="col-md-12">
@@ -75,5 +75,5 @@
     </div>
     <hr id="separateur3">
 </div>
-<?php print_r($this->getLesMoisDisponibles)?>
-<?php echo date('Ym');?>
+<?php print_r($this->getLesMoisDisponibles) ?>
+<?php echo date('Ym'); ?>

@@ -14,16 +14,16 @@
      * - Valider
      * - Ecrire dans la BDD
      */
-    class Form 
+    class Form
     {
         /**@var array $_currentItem */
         private $_currentItem = null;
-        /**@var array $_postData garde les données postés*/
-        private $_postData = array();
-        /**@var objet $_val L'objet de validation*/
-        private $_val =array();
-        /**@var array $_error Garde l'erreur du formulaire courant*/
-        private $_error = array();
+        /**@var array $_postData garde les données postés */
+        private $_postData = [];
+        /**@var objet $_val L'objet de validation */
+        private $_val = [];
+        /**@var array $_error Garde l'erreur du formulaire courant */
+        private $_error = [];
 
         /**initaliser le constructeur*/
         public function __construct()
@@ -36,9 +36,11 @@
          * @param string $field - Nom de field(a traduire) a remplir
          * @return $this
          */
-        public function post($field){
-            $this->_postData[$field] = $_POST[$field];
+        public function post($field)
+        {
+            $this->_postData[ $field ] = $_POST[ $field ];
             $this->_currentItem = $field;
+
             return $this;
 
         }
@@ -50,26 +52,28 @@
         public function fetch($fieldName = false)
         {
             if ($fieldName) {
-                if(isset($this->_postData[$fieldName]))
-                    return $this->_postData[$fieldName];
+                if (isset($this->_postData[ $fieldName ]))
+                    return $this->_postData[ $fieldName ];
                 else
                     return false;
-            }else{
+            } else {
                 return $this->_postData;
             }
 
         }
+
         /** Function de validation */
-        public function validate($typeOfValidator,$arg = null){
+        public function validate($typeOfValidator, $arg = null)
+        {
 
             if ($arg == null)
-                $error = $this->_val->{$typeOfValidator}($this->_postData[$this->_currentItem]);
+                $error = $this->_val->{$typeOfValidator}($this->_postData[ $this->_currentItem ]);
             else
-                $error = $this->_val->{$typeOfValidator}($this->_postData[$this->_currentItem],$arg);
+                $error = $this->_val->{$typeOfValidator}($this->_postData[ $this->_currentItem ], $arg);
 
 
             if ($error)
-                $this->_error[$this->_currentItem] = $error;
+                $this->_error[ $this->_currentItem ] = $error;
 
             //print_r($this->_error);
             return $this;
@@ -77,13 +81,10 @@
 
         public function submit()
         {
-            if(empty($this->_error))
-            {
+            if (empty($this->_error)) {
                 return true;
-            }
-            else
-            {
-                $e = implode(', ',$this->_error);
+            } else {
+                $e = implode(', ', $this->_error);
                 throw new Exception($e);
             }
         }
