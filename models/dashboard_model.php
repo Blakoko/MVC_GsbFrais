@@ -64,7 +64,6 @@
         public function editprofil($data)
         {
 
-            https://search.disconnect.me/searchTerms/serp?search=4fce1239-aaf1-44bc-97eb-9356e9415a32
             $postData = [
                 'id'         => Session::get('id'),
                 'login'      => $data['login'],
@@ -86,12 +85,14 @@
                     'lastupdate' => date("Y-m-d H:i:s"),
                 ];
                 $this->db->update('membre', $postData, "`id` ={$data['id']}");
+                
             } else if (!empty($_POST['login'])) {
                 $postData = [
                     'login'      => $data['login'],
                     'lastupdate' => date("Y-m-d H:i:s"),
                 ];
                 $this->db->update('membre', $postData, "`id` ={$data['id']}");
+                
             } else if (!empty($_POST['password'])) {
                 $postData = [
                     'password'   => Hash::create('sha1', $data['password'], HASH_PASSWORD_KEY),

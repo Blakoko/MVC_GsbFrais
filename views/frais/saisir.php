@@ -6,9 +6,10 @@
                 <div class="col-md-1">
                     <h4>1:</h4>
                 </div>
+                <form action="" method="post">
                 <div class="col-md-2">
                     <div class="form-group">
-                        <form action="" method="post">
+
                             <div class="form-group">
                                 <label class="control-label" for="formInput20">Type
                                     <br>
@@ -27,7 +28,7 @@
                         <label class="control-label" for="formInput27">Description&nbsp;
                             <br>
                         </label>
-                        <input type="text" class="form-control" id="datepicker" name="description">
+                        <input type="text" class="form-control" name="description">
                     </div>
                 </div>
                 <div class="col-md-2">
@@ -35,22 +36,23 @@
                         <label class="control-label" for="formInput22">Debut &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;
                             <br>
                         </label>
-                        <input type="date" class="form-control" id="date" name="date_debut">
+                        <input type="text" class="form-control" id="datepicker" name="date_debut">
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div class="form-group">
                         <label class="control-label" for="formInput18">Fin</label>
-                        <input type="date" class="form-control" name="date_fin">
+                        <input type="text" class="form-control" name="date_fin" id="datepicker2">
                     </div>
                 </div>
                 <div class="col-md-1">
                     <div class="form-group">
                         <label class="control-label" for="formInput12">Ajouter</label>
                         <button type="submit" class="btn btn-primary btn-sm">+</button>
-                        </form>
-                    </div>
+
                 </div>
+                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -118,44 +120,47 @@
     </div>
     <hr id="separateur3">
     <div id="horsforfait">
-        <div class="row">
-            <div class="col-md-1">
-                <h4>1:</h4>
-            </div>
-            <div class="col-md-3">
+        <div id="repeat">
+            <div class="row" >
+                <div class="col-md-1">
+                    <h4>1:</h4>
+                </div>
+                <div class="col-md-3">
 
-                <div class="form-group">
-                    <form action="" method="post">
-                        <label class="control-label" for="formInput29">Date
+                    <div class="form-group">
+                        <form action="" method="post">
+                            <label class="control-label" for="formInput29">Date
+                                <br>
+                            </label>
+                            <input type="text" class="form-control" id="date" name="date_hf">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label" for="formInput25">Libellé&nbsp;
                             <br>
                         </label>
-                        <input type="text" class="form-control" id="date" name="date_hf">
+                        <input type="text" class="form-control" id="formInput25" name="libelle_hf">
+                    </div>
+                    <br/>
                 </div>
-            </div>
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label class="control-label" for="formInput25">Libellé&nbsp;
-                        <br>
-                    </label>
-                    <input type="text" class="form-control" id="formInput25" name="libelle_hf">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label" for="formInput7">Montant&nbsp;
+                            <br>
+                        </label>
+                        <input type="text" class="form-control" id="formInput7" name="montant">
+                    </div>
                 </div>
-                <br/>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <label class="control-label" for="formInput7">Montant&nbsp;
-                        <br>
-                    </label>
-                    <input type="text" class="form-control" id="formInput7" name="montant">
-                </div>
-            </div>
-            <div class="col-md-1">
-                <div class="form-group">
-                    <label class="control-label" for="formInput12">Ajouter</label>
-                    <button type="submit" class="btn btn-primary btn-sm">+</button>
+                <div class="col-md-1">
+                    <div class="form-group">
+                        <label class="control-label" for="formInput12">Ajouter</label>
+                        <button id="addhf" class="btn btn-primary btn-sm">+</button>
+                    </div>
                 </div>
             </div>
         </div>
+
         <ol>
         </ol>
         <div class="row">
@@ -170,3 +175,5 @@
 </div>
 
 <?php var_dump($_POST); ?>
+
+

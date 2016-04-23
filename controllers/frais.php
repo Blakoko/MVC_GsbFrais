@@ -19,7 +19,7 @@
                 exit;
             }
 
-            //$this->view->js = array('frais/js/jquery.js','frais/js/default.js');
+            //$this->view->js = ['frais/js/jquery.js','frais/js/default.js'];
         }
 
         public function index()
@@ -46,17 +46,14 @@
 
             $data = [];
             $data['id_user'] = Session::get('id');
-            print_r($data);
-
             $this->view->getLestypes = $this->model->getLestypes();
             $this->view->getLesFraisForfait = $this->model->getLesFraisForfait();
             $this->view->getLesFraisHorsForfait = $this->model->getLesFraisHorsForfait();
-
-
             //$this->model->creeNouvellesLignesFrais($data);
+
+            //CHarger Le JS (DATEPICKER,APPEND)
+            $this->view->js = ['frais/js/jquery.js','frais/js/default.js'];
             $this->view->render('frais/saisir');
-
-
         }
 
 

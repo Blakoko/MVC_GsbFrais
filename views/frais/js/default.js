@@ -3,7 +3,13 @@
  */
 
 $( "#datepicker" ).datepicker({
+
+    dateFormat:'yy-mm-dd',
     inline: true
 });
 
 
+$( "#datepicker2" ).datepicker({
+    dateFormat:'yy-mm-dd',
+    inline: true
+});
