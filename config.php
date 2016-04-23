@@ -18,8 +18,8 @@
     define('DB_PASS', 'root');
 
     //Clé de Cryptage pour les mots de passe. Ne pas changer ou tu casses tout.
-    define('HASH_GENERAL_KEY','klifgehrt215zklodmkbdazer');
+    define('HASH_GENERAL_KEY','.');
 
     //Clé uniquement pour la base de données
-    define('HASH_PASSWORD_KEY','zjrekelejnbgoemp21365ddg');
+    define('HASH_PASSWORD_KEY','.');
 
