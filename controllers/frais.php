@@ -45,10 +45,15 @@
 
 
             $data = [];
-            $data['id_user'] = Session::get('id');
+            $data['date_hf'] = $_POST['date_hf'];
+            $data['libelle_hf'] = $_POST['libelle_hf'];
+            $data['montant'] = $_POST['montant'];
+            //$data['id_user'] = Session::get('id');
             $this->view->getLestypes = $this->model->getLestypes();
             $this->view->getLesFraisForfait = $this->model->getLesFraisForfait();
             $this->view->getLesFraisHorsForfait = $this->model->getLesFraisHorsForfait();
+            $this->model->creeNouveauFraisHorsForfait($data);
+
             //$this->model->creeNouvellesLignesFrais($data);
 
             //CHarger Le JS (DATEPICKER,APPEND)

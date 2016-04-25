@@ -1,12 +1,16 @@
 /**
  * Created by albert on 08/04/16.
  */
-$( "#datepicker" ).datepicker({
+
+//SELECTION DE LA DATE
+
+$ (function(){
+    $( ".datepicker" ).datepicker({
     yearRange: '-1:+0',
     minDate:'-1Y',
     maxDate:'+0',
     firstDay: 1,
-    altField: "#datepicker",
+    altField: ".datepicker",
     closeText: 'Fermer',
     prevText: 'Précédent',
     nextText: 'Suivant',
@@ -19,7 +23,9 @@ $( "#datepicker" ).datepicker({
     weekHeader: 'Sem.',
     dateFormat: 'yy-mm-dd'
 });
+});
 
+//ne mettre que des chiffres
 $(function(){
 
     $('.number-only').keyup(function(e) {
@@ -35,4 +41,25 @@ $(function(){
 });
 
 
+//Empecher des valeures vides
 
+$('#formhf').submit(function() {
+    if ($.trim($("#montant").val()) === "" || $.trim($("#datepicker").val()) === "" || $.trim($("#desc").val()) === "" ) {
+        alert('Remplissez Les champs');
+        return false;
+    }
+});
+
+//repetition
+$(function(){
+
+    $('.repeat').click(function(){
+        var $clone = $('.repeat2:last').clone();
+        $clone.find('input').val('').end();
+        $clone.find('.datepicker').removeClass('hasDatepicker').datepicker();
+        $clone.appendTo('#repetition:last');
+        //filter('.datepicker').removeClass('hasDatepicker').datepicker();
+
+    });
+
+});

@@ -21,7 +21,7 @@
          * @param $mois sous la forme aaaamm
          * @return le nombre entier de justificatifs
          */
-        public function getNbjustificatifs()
+        public function getNbjustificatifs($id,$mois)
         {
 
         }
@@ -33,7 +33,7 @@
          * @param $mois sous la forme aaaamm
          * @return l'id, le libelle et la quantité sous la forme d'un tableau associatif
          */
-        public function getLesFraisForfait()
+        public function getLesFraisForfait($id,$mois)
         {
 
         }
@@ -47,7 +47,7 @@
          * @param $mois sous la forme aaaamm
          * @return tous les champs des lignes de frais hors forfait sous la forme d'un tableau associatif
          */
-        public function getLesFraisHorsForfait()
+        public function getLesFraisHorsForfait($id,$mois)
         {
             return $this->db->select('');
         }
@@ -84,7 +84,7 @@
          * @param $mois sous la forme aaaamm
          */
 
-        public function majNbJustificatifs()
+        public function majNbJustificatifs($id,$mois)
         {
             return $this->db->update('');
         }
@@ -138,25 +138,25 @@
          */
         public function creeNouveauFraisHorsForfait($data)
         {
+            //Compter le nombre d'entrée
 
+            $compt=count($data);
+                for ($i=0;$i<$compt;$i++)
+                {
+            $this->db->insert('test', [
+                'date'=>$data['date_hf'][$i],
+                'libelle'=>$data['libelle_hf'][$i],
+                'montant'=>$data['montant'][$i],
 
-            $this->db->insert('fraishorsforfait', [
-                'montant'         => $data['montant'],
-                'date'            => $data['date'],
-                'montant'         => $data['montant'],
-                'libelle'         => $data['libelle'],
-                'nb_justificatif' => $data['nb_justificatif'],
-                'id_fichefrais'   => $data['id_fichefrais']
             ]);
-
-
+                }
         }
 
         /**
          * Supprime le frais hors forfait dont l'id est passé en argument
          * @param $idFrais
          */
-        public function supprimerFraisHorsForfait()
+        public function supprimerFraisHorsForfait($id)
         {
 
             return $this->db->delete('');

@@ -29,7 +29,7 @@
                         <tbody>
                         <?php foreach ($this->getLesFraisForfait as $key => $val): ?>
                             <tr>
-                                <td><?php echo $val[''] ?></td>
+                                <td><?php echo $val['description'] ?></td>
                                 <td><?php echo $val[''] ?></td>
                                 <td><?php echo $val[''] ?></td>
                                 <td><?php echo $val[''] ?></td>

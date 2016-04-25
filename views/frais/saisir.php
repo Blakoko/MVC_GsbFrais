@@ -5,13 +5,13 @@
             <h3>Frais au forfait<br></h3>
             <form id="formff" action="" method="post">
                 <div>
-                    <div class="repeat1" id="repeatff">
+                    <div class="repeat1">
                         <div class="col-md-4">
                             <div class="form-group">
                                 <div class="form-group">
                                     <label class="control-label" for="formInput20">Type
                                     </label>
-                                    <select id="formInput20" class="form-control" name="type">
+                                    <select id="formInput20" class="form-control" name="type[]">
                                           <?php foreach ($this->getLestypes as $key => $value) : ?>
                                         <option
                                             value="<?php echo $value['id'] ?>"><?php echo $value['libelle'] ?></option>
@@ -23,7 +23,7 @@
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label class="control-label" for="formInput27">Quantité / Nombres</label>
-                                <input type="text" class="form-control number-only" name="description">
+                                <input type="text" class="form-control number-only" name="description[]">
                             </div>
                         </div>
                     </div>
@@ -31,7 +31,7 @@
                 <div class="col-md-1">
                     <div class="form-group">
                         <label class="control-label" for="formInput12">Ajouter</label>
-                        <button type="submit" class="btn btn-primary btn-sm">+</button>
+                        <button type="button" class="btn btn-primary btn-sm">+</button>
                     </div>
                 </div>
                 <div class="row" data-pg-hidden>
@@ -107,33 +107,34 @@
     <div id="horsforfait">
     </div>
     <div class="row">
-        <form id="formhf" action="" method="post">
-            <div class="repeat2" id="repeathf">
+        <form id="formhf" action="<?php echo URL ;?>frais/saisir/creeNouveauFraisHorsForfait" method="post">
+            <div class="repeat2">
                 <div class="col-md-3">
                     <div class="form-group">
                         <label class="control-label" for="formInput29">Date</label>
-                        <input type="text" class="form-control" id="datepicker" name="date_hf">
+                        <input type="text" class="datepicker form-control" id="" name="date_hf[]">
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
                         <label class="control-label" for="formInput25">Description &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                         </label>
-                        <input type="text" class="form-control" id="formInput25" name="libelle_hf">
+                        <input type="text" class="form-control" id="desc" name="libelle_hf[]">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label class="control-label" for="formInput7">Montant&nbsp;
                         </label>
-                        <input type="text" class="form-control number-only" id="formInput7" name="montant">
+                        <input type="text" class="form-control number-only" id="montant" name="montant[]">
                     </div>
                 </div>
             </div>
+            <div id="repetition"></div>
             <div class="col-md-1" data-pg-collapsed>
                 <div class="form-group">
                     <label class="control-label" for="formInput12">Ajouter</label>
-                    <button id="addhf" class="btn btn-primary btn-sm">+</button>
+                    <button id="addhf" type="button" class="btn btn-primary btn-sm repeat">+</button>
                 </div>
             </div>
             <div class="row">
@@ -152,6 +153,10 @@
 
 
 
-<?php var_dump($_POST); ?>
+<?php var_dump($_POST['date_hf']); ?>
+
+<?php print_r($_POST);?>
+
+<?php echo count($_POST)?>
 
 
