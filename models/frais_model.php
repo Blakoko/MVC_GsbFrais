@@ -141,15 +141,31 @@
             //Compter le nombre d'entrée
 
             $compt=count($data);
-                for ($i=0;$i<$compt;$i++)
-                {
-            $this->db->insert('test', [
-                'date'=>$data['date_hf'][$i],
-                'libelle'=>$data['libelle_hf'][$i],
-                'montant'=>$data['montant'][$i],
+            for ($i=0;$i<$compt;$i++)
+            {
+                $this->db->insert('test', [
+                    'date'=>$data['date_hf'][$i],
+                    'libelle'=>$data['libelle_hf'][$i],
+                    'montant'=>$data['montant'][$i],
 
-            ]);
-                }
+                ]);
+            }
+        }
+
+
+        public function creeNouveauFraisForfait($data)
+        {
+            //Compter le nombre d'entrée
+
+            $compt=count($data);
+            for ($i=0;$i<$compt;$i++)
+            {
+                $this->db->insert('test2', [
+                    'type'=>$data['type'][$i],
+                    'description'=>$data['description'][$i],
+
+                ]);
+            }
         }
 
         /**

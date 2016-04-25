@@ -3,7 +3,7 @@
     <div id="fraisforfait">
         <div class="row">
             <h3>Frais au forfait<br></h3>
-            <form id="formff" action="" method="post">
+            <form id="formff" action="<?php echo URL ;?>frais/ValFraisForfaits" method="post">
                 <div>
                     <div class="repeat1">
                         <div class="col-md-4">
@@ -12,10 +12,9 @@
                                     <label class="control-label" for="formInput20">Type
                                     </label>
                                     <select id="formInput20" class="form-control" name="type[]">
-                                          <?php foreach ($this->getLestypes as $key => $value) : ?>
-                                        <option
-                                            value="<?php echo $value['id'] ?>"><?php echo $value['libelle'] ?></option>
-                                    <? endforeach; ?>
+                                            <?php foreach ($this->getLestypes as $key => $value) : ?>
+                                        <option value="<?php echo $value['id'] ?>"><?php echo $value['libelle'] ?></option>
+                                            <? endforeach; ?>
                                     </select>
                                 </div>
                             </div>
@@ -27,11 +26,14 @@
                             </div>
                         </div>
                     </div>
+                    <div id="repetition1">
+
+                    </div>
                 </div>
                 <div class="col-md-1">
                     <div class="form-group">
                         <label class="control-label" for="formInput12">Ajouter</label>
-                        <button type="button" class="btn btn-primary btn-sm">+</button>
+                        <button type="button" class="btn btn-primary btn-sm repeatx" onclick="repet2()">+</button>
                     </div>
                 </div>
                 <div class="row" data-pg-hidden>
@@ -107,12 +109,12 @@
     <div id="horsforfait">
     </div>
     <div class="row">
-        <form id="formhf" action="<?php echo URL ;?>frais/saisir/creeNouveauFraisHorsForfait" method="post">
+        <form id="formhf" action="<?php echo URL ;?>frais/ValFraishorforfaits" method="post">
             <div class="repeat2">
                 <div class="col-md-3">
                     <div class="form-group">
                         <label class="control-label" for="formInput29">Date</label>
-                        <input type="text" class="datepicker form-control" id="" name="date_hf[]">
+                        <input type="text" class="datepicker form-control" name="date_hf[]">
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -134,7 +136,7 @@
             <div class="col-md-1" data-pg-collapsed>
                 <div class="form-group">
                     <label class="control-label" for="formInput12">Ajouter</label>
-                    <button id="addhf" type="button" class="btn btn-primary btn-sm repeat">+</button>
+                    <button id="addhf" type="button" class="btn btn-primary btn-sm repeat" onclick="repet()">+</button>
                 </div>
             </div>
             <div class="row">
@@ -153,10 +155,8 @@
 
 
 
-<?php var_dump($_POST['date_hf']); ?>
+<?php var_dump($_POST); ?>
 
 <?php print_r($_POST);?>
-
-<?php echo count($_POST)?>
 
 

@@ -60,6 +60,27 @@
             $this->view->js = ['frais/js/jquery.js','frais/js/default.js'];
             $this->view->render('frais/saisir');
         }
+        
+        public function ValFraishorforfaits()
+        {
+            $data = [];
+            $data['date_hf'] = $_POST['date_hf'];
+            $data['libelle_hf'] = $_POST['libelle_hf'];
+            $data['montant'] = $_POST['montant'];
+            $this->model->creeNouveauFraisHorsForfait($data);
+            header('location:' . URL . 'frais/saisir');
+            
+            
+        }
+
+        public function ValFraisForfaits()
+        {
+            $data = [];
+            $data['type']=$_POST['type'];
+            $data['description']=$_POST['description'];
+            $this->model->creeNouveauFraisForfait($data);
+            header('location:' . URL . 'frais/saisir');
+        }
 
 
         public function afficher()
