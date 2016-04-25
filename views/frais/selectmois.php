@@ -27,12 +27,12 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($this->getLesFraisForfait as $key => $val): ?>
+                        <?php foreach ($this->getLestest as $key => $val): ?>
                             <tr>
-                                <td><?php echo $val['description'] ?></td>
-                                <td><?php echo $val[''] ?></td>
-                                <td><?php echo $val[''] ?></td>
-                                <td><?php echo $val[''] ?></td>
+                                <td><?php echo $val['date'] ?></td>
+                                <td><?php echo $val['libelle'] ?></td>
+                                <td><?php echo $val['montant'] ?></td>
+                                <td><?php echo $val['id'] ?></td>
                                 <td class="text-uppercase bg-success text-center">Supprimer</td>
                             </tr>
                         <?php endforeach; ?>
@@ -60,12 +60,14 @@
                         </tr>
                         </thead>
                         <tbody>
+                        <?php foreach ($this->getLestest2 as $key => $val):?>
                         <tr>
-                            <td>1</td>
-                            <td>Mark</td>
-                            <td>Otto</td>
+                            <td><?php echo $val['id'] ?></td>
+                            <td><?php echo $val['type'] ?></td>
+                            <td><?php echo $val['description'] ?></td>
                             <td class="text-center bg-success">SUPPRIMER</td>
                         </tr>
+                        <?php endforeach; ?>
                         </tbody>
                     </table>
                     <!-- FIN DIV hors forfait-->

@@ -21,7 +21,7 @@
          * @param $mois sous la forme aaaamm
          * @return le nombre entier de justificatifs
          */
-        public function getNbjustificatifs($id,$mois)
+        public function getNbjustificatifs()
         {
 
         }
@@ -33,7 +33,7 @@
          * @param $mois sous la forme aaaamm
          * @return l'id, le libelle et la quantité sous la forme d'un tableau associatif
          */
-        public function getLesFraisForfait($id,$mois)
+        public function getLesFraisForfait()
         {
 
         }
@@ -47,19 +47,8 @@
          * @param $mois sous la forme aaaamm
          * @return tous les champs des lignes de frais hors forfait sous la forme d'un tableau associatif
          */
-        public function getLesFraisHorsForfait($id,$mois)
+        public function getLesFraisHorsForfait()
         {
-            return $this->db->select('');
-        }
-
-        /**
-         * Fonction statique qui crée l'unique instance de la classe
-         * Appel : $instancePdoGsb = PdoGsb::getPdoGsb();
-         * @return l'unique objet de la classe PdoGsb
-         */
-        public function getInfoVisiteur()
-        {
-
             return $this->db->select('');
         }
 
@@ -84,21 +73,11 @@
          * @param $mois sous la forme aaaamm
          */
 
-        public function majNbJustificatifs($id,$mois)
+        public function majNbJustificatifs()
         {
             return $this->db->update('');
         }
 
-        /**
-         * Teste si un Visiteur possède une fiche de frais pour le mois passé en argument
-         * @param $idVisiteur
-         * @param $mois sous la forme aaaamm
-         * @return vrai ou faux
-         */
-        public function estPremierFraisMois()
-        {
-            return $this->db->select('');
-        }
 
         /**
          * Retourne le dernier mois en cours d'un Visiteur
@@ -118,7 +97,7 @@
          * @param $idVisiteur
          * @param $mois sous la forme aaaamm
          */
-        public function creeNouvellesLignesFrais($data)
+        public function creeNouvellesLignesFrais()
         {
 
             $this->db->insert('fichefrais', [
@@ -157,17 +136,23 @@
         {
             //Compter le nombre d'entrée
 
-            $compt=count($data);
+            $compt = count($data);
             for ($i=0;$i<$compt;$i++)
             {
+
                 $this->db->insert('test2', [
                     'type'=>$data['type'][$i],
                     'description'=>$data['description'][$i],
+                    'gar'=>$data['gar'],
 
                 ]);
             }
         }
 
+        public function compter()
+        {
+            return $this->db->select('SELECT count(id)AS cont FROM fichefrais');
+        }
         /**
          * Supprime le frais hors forfait dont l'id est passé en argument
          * @param $idFrais
@@ -215,5 +200,29 @@
         {
             return $this->db->select('SELECT * FROM types');
         }
+        
+        public function getLestest()
+        {
+            return $this->db->select('SELECT * FROM test');
+        }
+        
+        public function getLestest2()
+        {
+            return $this->db->select('SELECT * FROM test2');
+        }
 
+        public function veriffichefrais($id,$mois)
+        {
+            $verif=$this->db->prepare('SELECT date from test3 WHERE id_test=:id AND date=:mois ',[':id'=>$id,':mois'=>$mois]);
+            $verif->execute([':id'=>$id,':mois'=>$mois]);
+            $count = $verif->rowCount();
+            
+            if($count > 0 ){
+
+            }
+            else {
+                $this->db->insert('test3',['id_test'=>$id,'date'=>$mois]);
+            }
+
+        }
     }

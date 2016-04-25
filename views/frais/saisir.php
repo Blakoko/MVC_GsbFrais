@@ -12,9 +12,9 @@
                                     <label class="control-label" for="formInput20">Type
                                     </label>
                                     <select id="formInput20" class="form-control" name="type[]">
-                                            <?php foreach ($this->getLestypes as $key => $value) : ?>
-                                        <option value="<?php echo $value['id'] ?>"><?php echo $value['libelle'] ?></option>
-                                            <? endforeach; ?>
+                                        <?php foreach ($this->getLestypes as $key => $value) : ?>
+                                            <option value="<?php echo $value['id'] ?>"><?php echo $value['libelle'] ?></option>
+                                        <? endforeach; ?>
                                     </select>
                                 </div>
                             </div>
@@ -53,21 +53,21 @@
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-hover table-condensed">
                         <thead>
-                            <h3>Au Forfait</h3><br>
-                            <tr class="bg-primary">
-                                <th>Repas Restaurants</th>
-                                <th>Nuitée Hotel</th>
-                                <th>Forfait Etape</th>
-                                <th>Frais Kilometriques</th>
-                            </tr>
+                        <h3>Au Forfait</h3><br>
+                        <tr class="bg-primary">
+                            <th>Repas Restaurants</th>
+                            <th>Nuitée Hotel</th>
+                            <th>Forfait Etape</th>
+                            <th>Frais Kilometriques</th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                                <td>0</td>
-                            </tr>
+                        <tr>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -82,22 +82,22 @@
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover table-striped table-condensed">
                         <thead>
-                            <h3>Hors Forfait</h3><br>
-                            <tr class="bg-primary">
-                                <th>Date</th>
-                                <th>Description</th>
-                                <th>Montant
-                                    <br>
-                                </th>
-                            </tr>
+                        <h3>Hors Forfait</h3><br>
+                        <tr class="bg-primary">
+                            <th>Date</th>
+                            <th>Description</th>
+                            <th>Montant
+                                <br>
+                            </th>
+                        </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>00-00-0000</td>
-                                <td>Seminaire</td>
-                                <td>0.89€</td>
-                                <td class="text-center bg-success">SUPPRIMER</td>
-                            </tr>
+                        <tr>
+                            <td>00-00-0000</td>
+                            <td>Seminaire</td>
+                            <td>0.89€</td>
+                            <td class="text-center bg-success">SUPPRIMER</td>
+                        </tr>
                         </tbody>
                     </table>
                     <!-- FIN DIV hors forfait-->
@@ -155,8 +155,11 @@
 
 
 
-<?php var_dump($_POST); ?>
+<?php //var_dump($_POST); ?>
+<?php //var_dump($this->veriffichefrais);?>
+<?php var_dump($this->compter[0]['cont'])?>
 
 <?php print_r($_POST);?>
 
 
+i
