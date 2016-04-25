@@ -3,7 +3,7 @@
     <div id="fraisforfait">
         <div class="row">
             <h3>Frais au forfait<br></h3>
-            <form id="formff">
+            <form id="formff" action="" method="post">
                 <div>
                     <div class="repeat1" id="repeatff">
                         <div class="col-md-4">
@@ -23,7 +23,7 @@
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label class="control-label" for="formInput27">Quantité / Nombres</label>
-                                <input type="text" class="form-control" name="description">
+                                <input type="text" class="form-control number-only" name="description">
                             </div>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                 <div class="table-responsive">
                     <table class="table table-bordered table-striped table-hover table-condensed">
                         <thead>
-                            <h3>Au Forfait<br></h3>
+                            <h3>Au Forfait</h3><br>
                             <tr class="bg-primary">
                                 <th>Repas Restaurants</th>
                                 <th>Nuitée Hotel</th>
@@ -80,7 +80,7 @@
                 <div class="table-responsive">
                     <table class="table table-bordered table-hover table-striped table-condensed">
                         <thead>
-                            <h3>Hors Forfait<br></h3>
+                            <h3>Hors Forfait</h3><br>
                             <tr class="bg-primary">
                                 <th>Date</th>
                                 <th>Description</th>
@@ -107,13 +107,12 @@
     <div id="horsforfait">
     </div>
     <div class="row">
-        <form id="formhf">
+        <form id="formhf" action="" method="post">
             <div class="repeat2" id="repeathf">
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label class="control-label" for="formInput29">Date
-                        </label>
-                        <input type="text" class="form-control" id="date" name="date_hf">
+                        <label class="control-label" for="formInput29">Date</label>
+                        <input type="text" class="form-control" id="datepicker" name="date_hf">
                     </div>
                 </div>
                 <div class="col-md-3">
@@ -127,7 +126,7 @@
                     <div class="form-group">
                         <label class="control-label" for="formInput7">Montant&nbsp;
                         </label>
-                        <input type="text" class="form-control" id="formInput7" name="montant">
+                        <input type="text" class="form-control number-only" id="formInput7" name="montant">
                     </div>
                 </div>
             </div>
