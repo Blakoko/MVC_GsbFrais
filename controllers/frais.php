@@ -43,19 +43,18 @@
         public function saisir()
         {
 
-            $this->view->veriffichefrais = $this->model->veriffichefrais(Session::get('id'),date('Y-m-d'));
+            $this->view->veriffichefrais = $this->model->veriffichefrais(Session::get('id'));
             $this->view->getLestypes = $this->model->getLestypes();
             $this->view->getLesFraisForfait = $this->model->getLesFraisForfait();
             $this->view->getLesFraisHorsForfait = $this->model->getLesFraisHorsForfait();
 
 
-
             //CHarger Le JS (DATEPICKER,APPEND)
-            $this->view->js = ['frais/js/jquery.js','frais/js/default.js'];
+            $this->view->js = ['frais/js/jquery.js', 'frais/js/default.js'];
             $this->view->render('frais/saisir');
 
         }
-        
+
         public function ValFraishorforfaits()
         {
             $data = [];
@@ -65,21 +64,20 @@
 
             $this->model->creeNouveauFraisHorsForfait($data);
             header('location:' . URL . 'frais/saisir');
-            
-            
+
+
         }
 
         public function ValFraisForfaits()
         {
             //selectionner le dernier id de la fichefrais enregistre par l'utilisateur
-            $gar=($this->view->compter = $this->model->compter());
+            $gar = ($this->view->compter = $this->model->compter());
 
             $data = [];
-            $data['type']=$_POST['type'];
-            $data['description']=$_POST['description'];
+            $data['type'] = $_POST['type'];
+            $data['description'] = $_POST['description'];
             $data['gar'] = $gar[0]['cont'];
             $this->model->creeNouveauFraisForfait($data);
-
             //var_dump($gar);
             header('location:' . URL . 'frais/saisir');
         }
@@ -98,7 +96,6 @@
 
             $this->view->getLestest = $this->model->getLestest();
             $this->view->getLestest2 = $this->model->getLestest2();
-
             $this->view->getLesMoisDisponibles = $this->model->getLesMoisDisponibles(Session::get('id'));
             $this->view->render('frais/selectmois');
         }

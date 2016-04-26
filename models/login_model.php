@@ -15,9 +15,7 @@
 
         public function run()
         {
-            $sth = $this->db->prepare("SELECT * FROM users WHERE
-				login = :login AND password = :password");
-
+            $sth = $this->db->prepare("SELECT * FROM users WHERE login = :login AND password = :password");
 
             $sth->execute([
                 ':login'    => $_POST['login'],
@@ -27,19 +25,21 @@
 
             $data = $sth->fetch();
             $count = $sth->rowCount();
+
             if ($count > 0) {
-                // login
+
                 Session::init();
                 Session::set('id', $data['id']);
                 Session::set('nom', $data['nom']);
                 Session::set('prenom', $data['prenom']);
+                Session::set('profil', $data['id_profile']);
                 Session::set('loggedIn', true);
-                echo "Succes";
+                echo "Bienvenue";
+
             } else {
 
                 echo "Mauvais Mot de Passe Ou Login";
             }
-            //print_r($count);
 
         }
 

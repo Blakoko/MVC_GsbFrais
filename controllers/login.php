@@ -16,13 +16,23 @@
 
         function index()
         {
-            $this->view->msg ='we are inside Login </br>';
-            $this->view->render('login/index');
+
+
+            if ( Session::get('loggedIn') == true) {
+
+                $this->view->render('dashboard/profil');
+
+            }
+            else {
+                header('location:'.URL);
+                exit;
+            }
         }
 
         function run()
         {
             $this->model->run();
-
+            header('location:'.URL);
+            exit;
         }
     }

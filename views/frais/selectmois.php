@@ -2,11 +2,11 @@
     <div class="form-group" data-pg-collapsed>
         <label class="control-label" for="formInput11">Field label</label>
         <form>
-        <select id="formInput11" class="form-control">
-            <?php foreach ($this->getLesMoisDisponibles as $key => $value): ?>
-                <option><?php echo $value['mois'] ?></option>
-            <?php endforeach ?>
-        </select>
+            <select id="formInput11" class="form-control">
+                <?php foreach ($this->getLesMoisDisponibles as $key => $value): ?>
+                    <option><?php echo $value['mois'] ?></option>
+                <?php endforeach ?>
+            </select>
             <button id="btn2" type="submit" class="btn btn-primary">Valider</button>
         </form>
 
@@ -62,13 +62,13 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($this->getLestest2 as $key => $val):?>
-                        <tr>
-                            <td><?php echo $val['id'] ?></td>
-                            <td><?php echo $val['type'] ?></td>
-                            <td><?php echo $val['description'] ?></td>
-                            <td class="text-center bg-success">SUPPRIMER</td>
-                        </tr>
+                        <?php foreach ($this->getLestest2 as $key => $val): ?>
+                            <tr>
+                                <td><?php echo $val['id'] ?></td>
+                                <td><?php echo $val['type'] ?></td>
+                                <td><?php echo $val['description'] ?></td>
+                                <td class="text-center bg-success">SUPPRIMER</td>
+                            </tr>
                         <?php endforeach; ?>
                         </tbody>
                     </table>
