@@ -14,16 +14,22 @@
 
         }
 
-//SELECT
+
+
+        public function getDernieridFiche($id,$mois)
+        {
+            return $this->db->select('SELECT MAX(id)AS max FROM fichefrais WHERE id_user=:id AND mois=:mois AND id_statut=1',[':id'=>$id,':mois'=>$mois]);
+        }
+
         /**
          * Retourne le nombre de justificatif d'un Visiteur pour un mois donné
          * @param $idVisiteur
          * @param $mois sous la forme aaaamm
          * @return le nombre entier de justificatifs
          */
-        public function getNbjustificatifs()
+        public function getNbjustificatifs($id,$mois)
         {
-
+            return $this->db->select('SELECT nb_justificatifs as justif FROM fichefrais WHERE id_user=:id AND mois=:mois',[':id'=>$id,':mois'=>$mois]);
         }
 
         /**
@@ -33,9 +39,9 @@
          * @param $mois sous la forme aaaamm
          * @return l'id, le libelle et la quantité sous la forme d'un tableau associatif
          */
-        public function getLesFraisForfait()
+        public function getLesFraisForfait($id,$mois)
         {
-
+            return $this->db->select('',[':id'=>$id,':mois'=>$mois]);
         }
 
         /**
@@ -106,14 +112,9 @@
             ]);
         }
 
+
         /**
-         * Crée un nouveau frais hors forfait pour un Visiteur un mois donné
-         * à partir des informations fournies en paramètre
-         * @param $idVisiteur
-         * @param $mois    sous la forme aaaamm
-         * @param $libelle : le libelle du frais
-         * @param $date    : la date du frais au format français jj//mm/aaaa
-         * @param $montant : le montant
+         * @param $data
          */
         public function creeNouveauFraisHorsForfait($data)
         {
@@ -132,6 +133,9 @@
         }
 
 
+        /**
+         * @param $data
+         */
         public function creeNouveauFraisForfait($data)
         {
             //Compter le nombre d'entrée

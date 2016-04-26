@@ -71,7 +71,9 @@
 
         public function ValFraisForfaits()
         {
+            //selectionner le dernier id de la fichefrais enregistre par l'utilisateur
             $gar=($this->view->compter = $this->model->compter());
+
             $data = [];
             $data['type']=$_POST['type'];
             $data['description']=$_POST['description'];

@@ -1,12 +1,14 @@
 <div class="bg-info col-md-10">
     <div class="form-group" data-pg-collapsed>
         <label class="control-label" for="formInput11">Field label</label>
-
+        <form>
         <select id="formInput11" class="form-control">
             <?php foreach ($this->getLesMoisDisponibles as $key => $value): ?>
                 <option><?php echo $value['mois'] ?></option>
             <?php endforeach ?>
         </select>
+            <button id="btn2" type="submit" class="btn btn-primary">Valider</button>
+        </form>
 
     </div>
     <hr id="separateur1"/>
