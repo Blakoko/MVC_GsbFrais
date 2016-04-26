@@ -128,9 +128,9 @@
 
             $compt = count($data);
             for ($i = 0; $i < $compt; $i++) {
-                $this->db->insert('test', [
-                    'date'    => $data['date_hf'][ $i ],
-                    'libelle' => $data['libelle_hf'][ $i ],
+                $this->db->insert('fraishorsforfaits', [
+                    'date'    => $data['date'][ $i ],
+                    'libelle' => $data['libelle'][ $i ],
                     'montant' => $data['montant'][ $i ],
 
                 ]);
@@ -148,10 +148,10 @@
             $compt = count($data);
             for ($i = 0; $i < $compt; $i++) {
 
-                $this->db->insert('test2', [
-                    'type'        => $data['type'][ $i ],
+                $this->db->insert('fraisforfaits', [
+                    'id_type'        => $data['id_type'][ $i ],
                     'description' => $data['description'][ $i ],
-                    'gar'         => $data['gar'],
+                    'quantite'         => $data['quantite'][$i],
 
                 ]);
             }
@@ -213,6 +213,11 @@
             return $this->db->select('SELECT * FROM types');
         }
 
+        public function getLestatuts()
+        {
+            return $this->db->select('SELECT * FROM statuts');
+        }
+
         public function getLestest()
         {
             return $this->db->select('SELECT * FROM test');
@@ -222,6 +227,7 @@
         {
             return $this->db->select('SELECT * FROM test2');
         }
+
 
         /**
          * Verifie si une fiche de frais est existante pour le mois en cours.
@@ -244,4 +250,14 @@
             }
 
         }
+
+        public function getVisiteur()
+        {
+            return $this->db->select('SELECT id,concat(nom," ",prenom)AS name from users');
+        }
+
+
+
+
     }
+

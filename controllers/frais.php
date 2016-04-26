@@ -22,6 +22,8 @@
             //$this->view->js = ['frais/js/jquery.js','frais/js/default.js'];
         }
 
+
+
         public function index()
         {
             //$this->view->listformation = $this->model->listformation();
@@ -31,6 +33,13 @@
             $this->view->render('frais/index');
         }
 
+
+        public function validation()
+        {
+            $this->view->getlesvisiteurs = $this->model->getVisiteur();
+            $this->view->getlestatuts = $this->model->getLestatuts();
+            $this->view->render('frais/validation');
+        }
         public function liste()
         {
 

@@ -32,7 +32,7 @@
         function run()
         {
             $this->model->run();
-            header('location:'.URL);
-            exit;
+            //header('location:'.URL);
+            //exit;
         }
     }

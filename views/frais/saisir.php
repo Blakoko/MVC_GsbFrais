@@ -3,7 +3,7 @@
     <div id="fraisforfait">
         <div class="row">
             <h3>Frais au forfait<br></h3>
-            <form id="formff" action="<?php echo URL ;?>frais/ValFraisForfaits" method="post">
+            <form id="formff" action="" method="post">
                 <div>
                     <div class="repeat1">
                         <div class="col-md-4">
@@ -109,7 +109,7 @@
     <div id="horsforfait">
     </div>
     <div class="row">
-        <form id="formhf" action="<?php echo URL ;?>frais/ValFraishorforfaits" method="post">
+        <form id="formhf" action="" method="post">
             <div class="repeat2">
                 <div class="col-md-3">
                     <div class="form-group">
@@ -155,8 +155,8 @@
 
 
 
-<?php //var_dump($_POST); ?>
+<?php var_dump($_POST); ?>
 <?php //var_dump($this->veriffichefrais);?>
 <?php //var_dump($this->compter[0]['cont'])?>
 
-<?php print_r($_POST);?>
+<?php //print_r($_POST);?>

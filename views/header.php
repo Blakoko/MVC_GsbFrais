@@ -40,5 +40,6 @@
             <li class="list-group-item"><a href="<?php echo URL ?>dashboard/logout">Deconnexion</a></li>
         </ul>
     </div>
-    <div class="bg-info col-md-10 pg-empty-placeholder">
+
 <?php endif ?>
+      <---!FIIIIIIN --->
