@@ -36,13 +36,14 @@
 
         public function validation()
         {
-            //double roue libre
-            $mois=$_POST['idmois'];
-            $malo=($this->view->getlesmois = $this->model->getLesMoisDisponibles($mois));
-            
-            //Roue Libre
-            $id = $_POST['idtest'];
-            $mala=($this->view->getlestest = $this->model->getLestest($id));
+            ///
+            $id = $_POST['id_user'];
+            $mois = $_POST['val_mois'];
+            ///
+            $maoam=($this->view->allo = $this->model->getLesFraisForfait($id, $mois));
+            $maori=($this->view->ello = $this->model->getLesFraisHorsForfait($id,$mois));
+            ///
+            $this->view->getLesMoisDisponibles = $this->model->getLesMoisDisponibles($id);
             
             //Original
             $this->view->getlesvisiteurs = $this->model->getVisiteur();
@@ -50,8 +51,8 @@
             $this->view->render('frais/validation');
             
             //Roue LIBRE
-            var_dump($mala);
-            var_dump($malo);
+            //var_dump($maoam);
+            //var_dump($maori);
 
         }
         public function liste()
@@ -116,7 +117,8 @@
 
         public function selectionmois()
         {
-            $id = 3;//Session::get('id');
+            ///
+            $id =Session::get('id');
             $mois = $_POST['val_mois'];
             ///
             $maoam=($this->view->allo = $this->model->getLesFraisForfait($id, $mois));
