@@ -37,7 +37,7 @@
                                 <td><?php echo $this->allo[1]['quantite'] ?></td>
                                 <td><?php echo $this->allo[0]['quantite'] ?></td>
                                 <td><?php echo $this->allo[2]['quantite'] ?></td>
-                                <td class="text-uppercase bg-success text-center">++</td>
+                                <td class="text-uppercase bg-success text-center"><?php echo $this->allo[0]['libelle'] ?></td>
                                 <td><?php echo $this->allo[0]['dateAjout'] ?></td>
                             </tr>
                         <?php //endforeach; ?>

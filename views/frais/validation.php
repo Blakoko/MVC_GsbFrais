@@ -124,10 +124,12 @@
                                 <input type="text" class="form-control" placeholder="" name="hf_montant[]" value="<?php echo $item['montant']?>">
                             </td>
                             <td>
-                                <select size="3" class="form-control" multiple="multiple" >
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
+                                <select size="3" class="form-control" multiple="multiple" name="hf_situation[]" >
+                                    <?php foreach ($this->illo as $cle=>$val):?>
+                                        <option value="<?php echo $val['id']?>" <?php if($val['id']==$this->ello[0]['situation_id']):?>selected="selected"<?php endif;?>>
+                                            <?php echo $val['libelle']?>
+                                        </option>
+                                    <?php endforeach; ?>
                                 </select>
                             </td>
                         </tr>

@@ -23,7 +23,6 @@
         }
 
 
-
         public function index()
         {
             //$this->view->listformation = $this->model->listformation();
@@ -33,42 +32,53 @@
             $this->view->render('frais/index');
         }
 
+        /**
+         *
+         */
         public function test3()
         {
             $id = $_POST['id_user'];
-            $narval=($this->model->getLesMoisDisponibles($id));
-            $cpt=count($narval);
+            $narval = ($this->model->getLesMoisDisponibles($id));
+            $cpt = count($narval);
             echo '<option value="">--Choisir Un Mois--</option>';
-            for ($i=0;$i<$cpt;$i++) {
+            for ($i = 0; $i < $cpt; $i++) {
 
-                echo '<option' .' value=' .$narval[$i]['mois'] .'>' .$narval[$i]['mois'] .'</option>';
+                echo '<option' . ' value=' . $narval[ $i ]['mois'] . '>' . $narval[ $i ]['mois'] . '</option>';
             }
 
         }
 
+        /**
+         *
+         */
         public function validation()
         {
             $this->view->js = ['frais/js/default.js'];
-            
+
             ///
             $id = $_POST['id_user'];
             $mois = $_POST['val_mois'];
             ///
-            $maoam=($this->view->allo = $this->model->getLesFraisForfait($id, $mois));
-            $maori=($this->view->ello = $this->model->getLesFraisHorsForfait($id,$mois));
+            $this->view->illo = $this->model->getLasituation();
+            $maoam = ($this->view->allo = $this->model->getLesFraisForfait($id, $mois));
+            $maori = ($this->view->ello = $this->model->getLesFraisHorsForfait($id, $mois));
             ///
             $this->view->getLesMoisDisponibles = $this->model->getLesMoisDisponibles($id);
-            
+
             //Original
             $this->view->getlesvisiteurs = $this->model->getVisiteur();
             $this->view->getlestatuts = $this->model->getLestatuts();
             $this->view->render('frais/validation');
-            
+
             //Roue LIBRE
             var_dump($maoam);
             var_dump($maori);
 
         }
+
+        /**
+         *
+         */
         public function liste()
         {
 
@@ -78,6 +88,9 @@
             $this->view->render('frais/list');
         }
 
+        /**
+         *
+         */
         public function saisir()
         {
 
@@ -93,6 +106,9 @@
 
         }
 
+        /**
+         *
+         */
         public function ValFraishorforfaits()
         {
             $data = [];
@@ -101,12 +117,15 @@
             $data['montant'] = $_POST['montant'];
 
             $this->model->creeNouveauFraisHorsForfait($data);
-            unset($_POST);
             header('location:' . URL . 'frais/saisir');
+            exit;
 
 
         }
 
+        /**
+         *
+         */
         public function ValFraisForfaits()
         {
             //selectionner le dernier id de la fichefrais enregistre par l'utilisateur
@@ -118,11 +137,15 @@
             $data['gar'] = $gar[0]['cont'];
             $this->model->creeNouveauFraisForfait($data);
             //var_dump($gar);
-            unset($_POST);
+            unset($data);
             header('location:' . URL . 'frais/saisir');
+            exit;
         }
 
 
+        /**
+         *
+         */
         public function afficher()
         {
             $this->view->getLesFraisForfait = $this->model->getLesFraisForfait();
@@ -131,14 +154,20 @@
         }
 
 
+        /**
+         *
+         */
         public function selectionmois()
         {
+
+
             ///
-            $id =Session::get('id');
+            $id = Session::get('id');
             $mois = $_POST['val_mois'];
             ///
-            $maoam=($this->view->allo = $this->model->getLesFraisForfait($id, $mois));
-            $maori=($this->view->ello = $this->model->getLesFraisHorsForfait($id,$mois));
+            $this->view->illo = $this->model->getLasituation();
+            $maoam = ($this->view->allo = $this->model->getLesFraisForfait($id, $mois));
+            $maori = ($this->view->ello = $this->model->getLesFraisHorsForfait($id, $mois));
             ///
             $this->view->getLesMoisDisponibles = $this->model->getLesMoisDisponibles($id);
             $this->view->render('frais/selectmois');

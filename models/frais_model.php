@@ -49,6 +49,7 @@
         {
             return $this->db->select('SELECT * from fichefrais
             inner join fraisforfaits on fichefrais.id = fraisforfaits.id_fichefrais
+            inner join statuts on fichefrais.id_statut = statuts.id
             WHERE id_user =:id
             AND mois = :mois ORDER BY id_types ASC' , [':id' => $id, ':mois' => $mois]);
         }
@@ -216,27 +217,26 @@
         /**
          * @return mixed
          */
+        //Recuperer Les Types Pour Select
         public function getLestypes()
         {
             return $this->db->select('SELECT * FROM types');
         }
-
+        ///Recuperer les status pour Select
         public function getLestatuts()
         {
             return $this->db->select('SELECT * FROM statuts');
         }
-
-        public function getLestest($id)
-        {
-            return $this->db->select('SELECT * FROM test WHERE id=:id',[':id'=>$id]);
+        ///Recuperer la situation pour Select
+        public function getLasituation(){
+            return $this->db->select('SELECT * FROM situation');
         }
-
-        public function getLestest2()
+        ///Recuperer Les Visteurs Pour Select
+        public function getVisiteur()
         {
-            return $this->db->select('SELECT * FROM test2');
+            return $this->db->select('SELECT id,concat(nom," ",prenom)AS name from users');
         }
-
-
+        
         /**
          * Verifie si une fiche de frais est existante pour le mois en cours.
          * Cree une nouvelle ligne si elle n'existe pas.
@@ -259,10 +259,7 @@
 
         }
 
-        public function getVisiteur()
-        {
-            return $this->db->select('SELECT id,concat(nom," ",prenom)AS name from users');
-        }
+       
 
 
 
