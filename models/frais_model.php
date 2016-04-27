@@ -50,7 +50,7 @@
             return $this->db->select('SELECT * from fichefrais
             inner join fraisforfaits on fichefrais.id = fraisforfaits.id_fichefrais
             WHERE id_user =:id
-            AND mois = :mois', [':id' => $id, ':mois' => $mois]);
+            AND mois = :mois ORDER BY id_types ASC' , [':id' => $id, ':mois' => $mois]);
         }
 
         /**
@@ -156,7 +156,6 @@
 
                 $this->db->insert('fraisforfaits', [
                     'id_type'        => $data['id_type'][ $i ],
-                    'description' => $data['description'][ $i ],
                     'quantite'         => $data['quantite'][$i],
 
                 ]);

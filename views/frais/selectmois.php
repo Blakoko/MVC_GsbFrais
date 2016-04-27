@@ -31,16 +31,16 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($this->allo as $key => $val): ?>
+                        <?php //foreach ($this->allo as $key => $val): ?>
                             <tr>
-                                <td><?php echo $val['date'] ?></td>
-                                <td><?php echo $val['libelle'] ?></td>
-                                <td><?php echo $val['montant'] ?></td>
-                                <td><?php echo $val['id'] ?></td>
+                                <td><?php echo $this->allo[3]['quantite'] ?></td>
+                                <td><?php echo $this->allo[1]['quantite'] ?></td>
+                                <td><?php echo $this->allo[0]['quantite'] ?></td>
+                                <td><?php echo $this->allo[2]['quantite'] ?></td>
                                 <td class="text-uppercase bg-success text-center">++</td>
-                                <td> </td>
+                                <td><?php echo $this->allo[0]['dateAjout'] ?></td>
                             </tr>
-                        <?php endforeach; ?>
+                        <?php //endforeach; ?>
                         </tbody>
                     </table>
                 </div>
@@ -67,7 +67,7 @@
                         <tbody>
                         <?php foreach ($this->ello as $key => $val): ?>
                             <tr>
-                                <td><?php echo $val['id'] ?></td>
+                                <td><?php echo $val['date'] ?></td>
                                 <td><?php echo $val['libelle'] ?></td>
                                 <td><?php echo $val['montant'] ?></td>
                                 <td class="text-center bg-success">SUPPRIMER</td>
@@ -82,4 +82,4 @@
     </div>
     <hr id="separateur3">
 </div>
-<?php print_r($this->ello[0]['quantite']) ?>
+<?php print_r($this->allo) ?>

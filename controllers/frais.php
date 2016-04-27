@@ -65,8 +65,8 @@
             $this->view->render('frais/validation');
             
             //Roue LIBRE
-            //var_dump($maoam);
-            //var_dump($maori);
+            var_dump($maoam);
+            var_dump($maori);
 
         }
         public function liste()
@@ -101,6 +101,7 @@
             $data['montant'] = $_POST['montant'];
 
             $this->model->creeNouveauFraisHorsForfait($data);
+            unset($_POST);
             header('location:' . URL . 'frais/saisir');
 
 
@@ -117,6 +118,7 @@
             $data['gar'] = $gar[0]['cont'];
             $this->model->creeNouveauFraisForfait($data);
             //var_dump($gar);
+            unset($_POST);
             header('location:' . URL . 'frais/saisir');
         }
 

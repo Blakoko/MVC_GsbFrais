@@ -1,41 +1,44 @@
 <div class="col-md-10 bg-warning">
     <form action="" method="post">
-    <div class="row" id="Visiteur">
-        <h1>Validation des frais par Visiteur<br><br></h1>
-        <div class="col-md-4">
-            <h5>
-                Choisir le visiteur :</h5>
+        <div class="row" id="Visiteur">
+            <h1>Validation des frais par Visiteur<br><br></h1>
+            <div class="col-md-4">
+                <h5>
+                    Choisir le visiteur :</h5>
+            </div>
+            <div class="col-md-4">
+                <select class="form-control" name="id_user" class="iduser" onChange="getMois(this.value);">
+                    <option selected="selected">--Choisir Un Utilisateur--</option>
+                    <?php foreach($this->getlesvisiteurs as $key => $value):?>
+                        <option value="<?php echo $value['id'] ?>"><?php echo $value['name'] ?></option>
+                    <?php endforeach;?>
+                </select>
+            </div>
         </div>
-        <div class="col-md-4">
-            <select class="form-control" name="id_user" class="iduser" onChange="getMois(this.value);">
-                <option selected="selected">--Choisir Un Utilisateur--</option>
-                <?php foreach($this->getlesvisiteurs as $key => $value):?>
-                <option value="<?php echo $value['id'] ?>"><?php echo $value['name'] ?></option>
-                <?php endforeach;?>
-            </select>
-        </div>
-    </div>
 
-    <div class="row" id="Mois">
-        <div class="col-md-4">
-            <h5>
-                Mois:</h5>
-        </div>
-        <div class="col-md-4">
-            <select class="form-control" name="val_mois" class="valmois" id="list_mois">
-                <option value="">--Choisir Un Mois--</option>
-              <?php 
-              /*
+        <div class="row" id="Mois">
+            <div class="col-md-4">
+                <h5>
+                    Mois:</h5>
+            </div>
+            <div class="col-md-4">
+                <select class="form-control" name="val_mois" class="valmois" id="list_mois">
+                    <option value="">--Choisir Un Mois--</option>
+                    <?php
+                        /*
                *   <?php foreach($this->getLesMoisDisponibles as $key => $value):?>
                     <option value="<?php echo $value['mois'] ?>"><?php echo $value['mois'] ?></option>
                 <?php endforeach; ?>
               */
-              ?>
-            </select>
-            <button type="submit" class="btn btn-default">Valider</button>
+                    ?>
+                </select>
+                <button type="submit" class="btn btn-default">Valider</button>
+            </div>
         </div>
-    </div>
     </form>
+    <?php if(empty($this->allo && $this->ello)):?>
+        <h3>SELECTIONNER UN VISITEUR ET LE MOIS</h3>
+    <?php else:?>
     <form action="" method="post">
         <div class="row" id="FraisauForfait">
             <h1>Frais au Forfait</h1>
@@ -57,21 +60,23 @@
 
                         <td>1</td>
                         <td>
-                            <input type="text" class="form-control" placeholder="" name="ff_repas" value="">
+                            <input type="text" class="form-control" placeholder="" name="ff_repas" value="<?php echo $this->allo[0]['quantite'] ?>">
                         </td>
                         <td>
-                            <input type="text" class="form-control" placeholder="" name="ff_nuit">
+                            <input type="text" class="form-control" placeholder="" name="ff_nuit" value="<?php echo $this->allo[1]['quantite'] ?>">
                         </td>
                         <td>
-                            <input type="text" class="form-control" placeholder="" name="ff_etape">
+                            <input type="text" class="form-control" placeholder="" name="ff_etape" value="<?php echo $this->allo[2]['quantite'] ?>">
                         </td>
                         <td>
-                            <input type="text" class="form-control" placeholder="" name="ff_km">
+                            <input type="text" class="form-control" placeholder="" name="ff_km" value="<?php echo $this->allo[3]['quantite'] ?>">
                         </td>
                         <td>
                             <select size="3" class="form-control" multiple="multiple" name="statuts">
                                 <?php foreach ($this->getlestatuts as $key => $value) : ?>
-                                    <option value="<?php echo $value['id']?>"><?php echo $value['libelle']?></option>
+                                    <option value="<?php echo $value['id'] ?>" <?php if($value['id']==$this->allo[0]['id_statut']):?>selected="selected"<?php endif;?>>
+                                        <?php echo $value['libelle']?>
+                                    </option>
                                 <?php endforeach;?>
                             </select>
                         </td>
@@ -146,13 +151,5 @@
 </div>
 </div>
 
-<form action="test3" method="post" >
-
-    <input type="text" name="id_user">
-    <button type="submit">hiiii</button>
-</form>
-
+<?php endif;?>
 <?php var_dump($_POST)?>
-<?php //var_dump($this->getlestest)?>
-<?php //print_r($this->mala)?>
-<?php var_dump($this->ello)?>
