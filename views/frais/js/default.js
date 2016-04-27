@@ -29,7 +29,7 @@ $(function ladate(){
 $(function number(){
 
     $('.number-only').keyup(function(e) {
-        if(this.value!='-')
+        if(this.value!='-')Bienvenue
             while(isNaN(this.value))
                 this.value = this.value.split('').reverse().join('').replace(/[\D]/i,'')
                     .split('').reverse().join('');

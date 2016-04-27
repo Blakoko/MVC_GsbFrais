@@ -47,7 +47,10 @@
          */
         public function getLesFraisForfait($id, $mois)
         {
-            return $this->db->select('', [':id' => $id, ':mois' => $mois]);
+            return $this->db->select('SELECT * from fichefrais
+            inner join fraisforfaits on fichefrais.id = fraisforfaits.id_fichefrais
+            WHERE id_user =:id
+            AND mois = :mois', [':id' => $id, ':mois' => $mois]);
         }
 
         /**
@@ -59,9 +62,12 @@
          * @param $mois sous la forme aaaamm
          * @return tous les champs des lignes de frais hors forfait sous la forme d'un tableau associatif
          */
-        public function getLesFraisHorsForfait()
+        public function getLesFraisHorsForfait($id,$mois)
         {
-            return $this->db->select('');
+            return $this->db->select('SELECT * from fichefrais
+            inner join fraishorsforfaits on fichefrais.id = fraishorsforfaits.id_fichefrais
+            WHERE id_user =:id
+            AND mois = :mois',[':id' => $id, ':mois' => $mois]);
         }
 
         /**
@@ -182,7 +188,7 @@
          */
         public function getLesMoisDisponibles($id)
         {
-            return $this->db->select('SELECT fichefrais.mois AS mois FROM fichefrais WHERE fichefrais.id_user =:id
+            return $this->db->select('SELECT * FROM fichefrais WHERE fichefrais.id_user =:id
             ORDER BY fichefrais.mois DESC', [':id' => $id]);
         }
 
@@ -208,6 +214,9 @@
             return $this->db->update('');
         }
 
+        /**
+         * @return mixed
+         */
         public function getLestypes()
         {
             return $this->db->select('SELECT * FROM types');
@@ -218,9 +227,9 @@
             return $this->db->select('SELECT * FROM statuts');
         }
 
-        public function getLestest()
+        public function getLestest($id)
         {
-            return $this->db->select('SELECT * FROM test');
+            return $this->db->select('SELECT * FROM test WHERE id=:id',[':id'=>$id]);
         }
 
         public function getLestest2()

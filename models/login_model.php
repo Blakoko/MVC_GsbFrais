@@ -34,10 +34,11 @@
                 Session::set('prenom', $data['prenom']);
                 Session::set('profil', $data['id_profile']);
                 Session::set('loggedIn', true);
-                echo "Bienvenue";
+                echo "Succes";
+                //header('location: ../dashboard');
 
             } else {
-
+                //header('location: '.URL.'/login');
                 echo "Mauvais Mot de Passe Ou Login";
             }
 

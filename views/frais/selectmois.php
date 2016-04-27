@@ -1,10 +1,10 @@
 <div class="bg-info col-md-10">
     <div class="form-group" data-pg-collapsed>
         <label class="control-label" for="formInput11">Field label</label>
-        <form>
-            <select id="formInput11" class="form-control">
+        <form action="" method="post">
+            <select id="formInput11" class="form-control" name="val_mois">
                 <?php foreach ($this->getLesMoisDisponibles as $key => $value): ?>
-                    <option><?php echo $value['mois'] ?></option>
+                    <option value="<?php echo $value['mois'] ?>"><?php echo $value['mois'] ?></option>
                 <?php endforeach ?>
             </select>
             <button id="btn2" type="submit" class="btn btn-primary">Valider</button>
@@ -29,7 +29,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($this->getLestest as $key => $val): ?>
+                        <?php foreach ($this->allo as $key => $val): ?>
                             <tr>
                                 <td><?php echo $val['date'] ?></td>
                                 <td><?php echo $val['libelle'] ?></td>
@@ -62,11 +62,11 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($this->getLestest2 as $key => $val): ?>
+                        <?php foreach ($this->ello as $key => $val): ?>
                             <tr>
                                 <td><?php echo $val['id'] ?></td>
-                                <td><?php echo $val['type'] ?></td>
-                                <td><?php echo $val['description'] ?></td>
+                                <td><?php echo $val['libelle'] ?></td>
+                                <td><?php echo $val['montant'] ?></td>
                                 <td class="text-center bg-success">SUPPRIMER</td>
                             </tr>
                         <?php endforeach; ?>
@@ -80,4 +80,3 @@
     <hr id="separateur3">
 </div>
 <?php print_r($this->getLesMoisDisponibles) ?>
-<?php echo date('Ym'); ?>

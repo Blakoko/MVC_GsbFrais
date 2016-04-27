@@ -22,9 +22,9 @@
         </div>
         <div class="col-md-4">
             <select class="form-control">
-                <option value="" class="form-control" name="mois">
-
-                </option>
+                <?php foreach($this->getlesmois  as $key => $value):?>
+                    <option value="<?php echo $value['id'] ?>"><?php echo $value['mois'] ?></option>
+                <?php endforeach; ?>
             </select>
             <button type="submit" class="btn btn-default">Valider</button>
         </div>
@@ -123,5 +123,12 @@
     </div>
 </div>
 
-<?php var_dump($_POST)?>
-<?php var_dump($_SESSION)?>
+<form action="" method="post" >
+
+    <input type="text" name="idmois">
+    <button type="submit">hiiii</button>
+</form>
+
+<?php //var_dump($_POST)?>
+<?php //var_dump($this->getlestest)?>
+<?php //print_r($this->mala)?>
