@@ -74,3 +74,16 @@ $(function repet2(){
         $clone.appendTo('#repetition1:last');
     });
 });
+
+
+///
+function getMois(val) {
+    $.ajax({
+        type: "POST",
+        url: "test3",
+        data:'id_user='+val,
+        success: function(data){
+            $("#list_mois").html(data);
+        }
+    });
+}

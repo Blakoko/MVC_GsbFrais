@@ -3,6 +3,7 @@
         <label class="control-label" for="formInput11">Field label</label>
         <form action="" method="post">
             <select id="formInput11" class="form-control" name="val_mois">
+                <option selected="selected">--CHoisir Un mois--</option>
                 <?php foreach ($this->getLesMoisDisponibles as $key => $value): ?>
                     <option value="<?php echo $value['mois'] ?>"><?php echo $value['mois'] ?></option>
                 <?php endforeach ?>
@@ -20,12 +21,13 @@
                         <thead>
                         <h3>Fiches Frais<br><br></h3>
                         <tr class="bg-primary">
-                            <th>Type
-                                <br>
-                            </th>
-                            <th>Montant</th>
-                            <th>Date Debut</th>
-                            <th>Date Fin</th>
+                            <th>Repas Midi</th>
+                            <th>Nuitée Hotel</th>
+                            <th>Forfait Etape</th>
+                            <th>Kilometre</th>
+                            <th>Situation</th>
+                            <th>Date d'ajout</th>
+
                         </tr>
                         </thead>
                         <tbody>
@@ -35,7 +37,8 @@
                                 <td><?php echo $val['libelle'] ?></td>
                                 <td><?php echo $val['montant'] ?></td>
                                 <td><?php echo $val['id'] ?></td>
-                                <td class="text-uppercase bg-success text-center">Supprimer</td>
+                                <td class="text-uppercase bg-success text-center">++</td>
+                                <td> </td>
                             </tr>
                         <?php endforeach; ?>
                         </tbody>
@@ -79,4 +82,4 @@
     </div>
     <hr id="separateur3">
 </div>
-<?php print_r($this->getLesMoisDisponibles) ?>
+<?php print_r($this->ello[0]['quantite']) ?>

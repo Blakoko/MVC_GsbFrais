@@ -7,7 +7,8 @@
                 Choisir le visiteur :</h5>
         </div>
         <div class="col-md-4">
-            <select class="form-control" name="id_user">
+            <select class="form-control" name="id_user" class="iduser" onChange="getMois(this.value);">
+                <option selected="selected">--Choisir Un Utilisateur--</option>
                 <?php foreach($this->getlesvisiteurs as $key => $value):?>
                 <option value="<?php echo $value['id'] ?>"><?php echo $value['name'] ?></option>
                 <?php endforeach;?>
@@ -21,10 +22,15 @@
                 Mois:</h5>
         </div>
         <div class="col-md-4">
-            <select class="form-control" name="val_mois">
-                <?php foreach($this->getLesMoisDisponibles as $key => $value):?>
+            <select class="form-control" name="val_mois" class="valmois" id="list_mois">
+                <option value="">--Choisir Un Mois--</option>
+              <?php 
+              /*
+               *   <?php foreach($this->getLesMoisDisponibles as $key => $value):?>
                     <option value="<?php echo $value['mois'] ?>"><?php echo $value['mois'] ?></option>
                 <?php endforeach; ?>
+              */
+              ?>
             </select>
             <button type="submit" class="btn btn-default">Valider</button>
         </div>
@@ -140,7 +146,7 @@
 </div>
 </div>
 
-<form action="" method="post" >
+<form action="test3" method="post" >
 
     <input type="text" name="id_user">
     <button type="submit">hiiii</button>

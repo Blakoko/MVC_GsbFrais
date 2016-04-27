@@ -33,9 +33,23 @@
             $this->view->render('frais/index');
         }
 
+        public function test3()
+        {
+            $id = $_POST['id_user'];
+            $narval=($this->model->getLesMoisDisponibles($id));
+            $cpt=count($narval);
+            echo '<option value="">--Choisir Un Mois--</option>';
+            for ($i=0;$i<$cpt;$i++) {
+
+                echo '<option' .' value=' .$narval[$i]['mois'] .'>' .$narval[$i]['mois'] .'</option>';
+            }
+
+        }
 
         public function validation()
         {
+            $this->view->js = ['frais/js/default.js'];
+            
             ///
             $id = $_POST['id_user'];
             $mois = $_POST['val_mois'];
