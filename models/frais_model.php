@@ -198,9 +198,13 @@
          * @param $mois sous la forme aaaamm
          * @return un tableau avec des champs de jointure entre une fiche de frais et la ligne d'état
          */
-        public function getLesInfosFicheFrais()
+        public function getLesInfosFicheFrais($mois)
         {
-            return $this->db->select('');
+            return $this->db->select('SELECT concat(prenom," ",nom)as nom , (DATE_FORMAT(dateAjout,"%d-%m-%Y")) as date,libelle,mois from fichefrais
+            inner join users on fichefrais.id_user=users.id
+            inner join statuts on fichefrais.id_statut=statuts.id
+            where id_statut != 1
+            and mois=:mois',[':mois'=>$mois]);
         }
 
         /**
@@ -236,7 +240,11 @@
         {
             return $this->db->select('SELECT id,concat(nom," ",prenom)AS name from users');
         }
-        
+        //Recuper tous les mois disponible en bdd
+        public function getLesmois()
+        {
+            return $this->db->select('SELECT mois from fichefrais WHERE mois <= (DATE_FORMAT( NOW( ) , "%Y%m" )) group by mois DESC');
+        }
         /**
          * Verifie si une fiche de frais est existante pour le mois en cours.
          * Cree une nouvelle ligne si elle n'existe pas.

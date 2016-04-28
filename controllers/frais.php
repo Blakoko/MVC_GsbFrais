@@ -48,6 +48,22 @@
 
         }
 
+        public function suivi()
+        {
+            $mois = $_POST['mois'];
+
+            $this->view->js = ['frais/js/default.js'];
+            $this->view->Lesinfos = $this->model->getLesInfosFicheFrais($mois);
+            $this->view->ToutLesMois = $this->model->getLesmois();
+            $this->view->render('frais/suivi');
+
+           // var_dump($mois);
+
+        }
+        public function test()
+        {
+                echo "<a class=\"close\" href=\"#\">x</a><h3>Here is some text</h3><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse 	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><p>Id: 1</p>";
+        }
         /**
          *
          */
