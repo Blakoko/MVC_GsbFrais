@@ -88,3 +88,12 @@ function getMois(val) {
     });
 }
 
+$(document).ready(function(){
+    $("a.delete").click(function(e){
+        if(!confirm('Etes Vous Sur?')){
+            e.preventDefault();
+            return false;
+        }
+        return true;
+    });
+});

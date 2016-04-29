@@ -131,6 +131,7 @@
          */
         public function creeNouveauFraisHorsForfait($data)
         {
+
             //Compter le nombre d'entrée
 
             $compt = count($data);
@@ -156,8 +157,9 @@
             for ($i = 0; $i < $compt; $i++) {
 
                 $this->db->insert('fraisforfaits', [
-                    'id_type'        => $data['id_type'][ $i ],
-                    'quantite'         => $data['quantite'][$i],
+                    'id_types'   => $data['type'][$i],
+                    'quantite'        => $data['quantite'][ $i ],
+                    'id_fichefrais'     =>$data['id'],
 
                 ]);
             }
@@ -166,9 +168,9 @@
         /**
          * @return mixed
          */
-        public function compter()
+        public function _getLeDernierId($id)
         {
-            return $this->db->select('SELECT count(id)AS cont FROM fichefrais');
+            return $this->db->select('SELECT max(id)AS max FROM fichefrais where id_user = :id',[':id' => $id]);
         }
 
         /**

@@ -3,7 +3,7 @@
     <div id="fraisforfait">
         <div class="row">
             <h3>Frais au forfait<br></h3>
-            <form id="formff" action="" method="post">
+            <form id="formff" action="valfraisforfaits" method="post">
                 <div>
                     <div class="repeat1">
                         <div class="col-md-4">
@@ -22,7 +22,7 @@
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label class="control-label" for="formInput27">Quantité / Nombres</label>
-                                <input type="text" class="form-control number-only" name="description[]">
+                                <input type="text" class="form-control number-only" name="quantite[]">
                             </div>
                         </div>
                     </div>
@@ -96,7 +96,7 @@
                             <td>00-00-0000</td>
                             <td>Seminaire</td>
                             <td>0.89€</td>
-                            <td class="text-center bg-success">SUPPRIMER</td>
+                            <td class="text-center bg-success"><a href="delete" class="delete">SUPPRIMER</a></td>
                         </tr>
                         </tbody>
                     </table>
@@ -157,6 +157,6 @@
 
 <?php var_dump($_POST); ?>
 <?php //var_dump($this->VeriFicheFrais);?>
-<?php //var_dump($this->compter[0]['cont'])?>
+<?php var_dump($this->LeDernierId)?>
 
 <?php //print_r($_POST);?>

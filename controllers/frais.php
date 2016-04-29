@@ -113,6 +113,8 @@
          */
         public function saisir()
         {
+            //CHarger Le JS (DATEPICKER,APPEND)
+            $this->view->js = ['frais/js/jquery.js', 'frais/js/default.js'];
 
             $this->view->VeriFicheFrais = $this->model->_VeriFicheFrais(Session::get('id'));
             $this->view->getLestypes = $this->model->_getToutLestypes();
@@ -120,8 +122,7 @@
             $this->view->LesFraisHorsForfait = $this->model->_getLesFraisHorsForfait();
 
 
-            //CHarger Le JS (DATEPICKER,APPEND)
-            $this->view->js = ['frais/js/jquery.js', 'frais/js/default.js'];
+
             $this->view->render('frais/saisir');
 
         }
@@ -129,7 +130,7 @@
         /**
          *
          */
-        public function ValFraishorforfaits()
+        public function valfraishorforfaits()
         {
             $data = [];
             $data['date_hf'] = $_POST['date_hf'];
@@ -146,17 +147,17 @@
         /**
          *
          */
-        public function ValFraisForfaits()
+        public function valfraisforfaits()
         {
-            //selectionner le dernier id de la fichefrais enregistre par l'utilisateur
-            $gar = ($this->view->compter = $this->model->compter());
+            //selectionner le dernier id de la fichefrais enregistré par l'utilisateur
+            $id = ($this->view->LeDernierId = $this->model->_getLeDernierId(Session::get('id')));
 
             $data = [];
             $data['type'] = $_POST['type'];
-            $data['description'] = $_POST['description'];
-            $data['gar'] = $gar[0]['cont'];
+            $data['quantite'] = $_POST['quantite'];
+            $data['id'] = $id[0]['max'];
             $this->model->creeNouveauFraisForfait($data);
-            //var_dump($gar);
+            var_dump($_POST);
             unset($data);
             header('location:' . URL . 'frais/saisir');
             exit;
@@ -180,7 +181,7 @@
         public function selectionmois()
         {
 
-
+            $this->view->js = ['frais/js/jquery.js','frais/js/default.js'];
             ///
             $id = Session::get('id');
             $mois = $_POST['val_mois'];

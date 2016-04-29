@@ -70,7 +70,6 @@
                                 <td><?php echo $val['date'] ?></td>
                                 <td><?php echo $val['libelle'] ?></td>
                                 <td><?php echo $val['montant'] ?></td>
-                                <td class="text-center bg-success">SUPPRIMER</td>
                             </tr>
                         <?php endforeach; ?>
                         </tbody>
