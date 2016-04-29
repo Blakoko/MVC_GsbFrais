@@ -29,7 +29,7 @@ var $Datedata = {
 $(document).ready(function(){
 
 
-
+//------//
     $("button#btn2").click(function () {
 
         //EMPECHER VALEUR VIDE
@@ -54,6 +54,7 @@ $(document).ready(function(){
         });
 
     });
+    //----//
 
 
     /*$('#formhf').submit(function() {

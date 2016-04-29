@@ -47,16 +47,15 @@
          */
         public function _getLesFraisForfait($id, $mois)
         {
-            
-            
-            
+
+
             return $this->db->select('SELECT * from fichefrais
             inner join fraisforfaits on fichefrais.id = fraisforfaits.id_fichefrais
             inner join statuts on fichefrais.id_statut = statuts.id
             WHERE id_user =:id
             AND mois = :mois 
             AND statuts.id=1
-            ORDER BY id_types ASC' , [':id' => $id, ':mois' => $mois]);
+            ORDER BY id_types ASC', [':id' => $id, ':mois' => $mois]);
         }
 
         /**
@@ -68,16 +67,15 @@
          * @param $mois sous la forme aaaamm
          * @return tous les champs des lignes de frais hors forfait sous la forme d'un tableau associatif
          */
-        public function _getLesFraisHorsForfait($id,$mois)
+        public function _getLesFraisHorsForfait($id, $mois)
         {
-            
-            
-            
+
+
             return $this->db->select('SELECT * from fichefrais
             inner join fraishorsforfaits on fichefrais.id = fraishorsforfaits.id_fichefrais
             WHERE id_user =:id
             AND mois = :mois
-            AND id_statut=1',[':id' => $id, ':mois' => $mois]);
+            AND id_statut=1', [':id' => $id, ':mois' => $mois]);
         }
 
         /**
@@ -136,17 +134,18 @@
 
 
         /**
-         * @param $data
+         *
          */
         public function creeNouveauFraisHorsForfait()
         {
-
+            $id_user = Session::get('id');
+            $id = $this->_getLeDernierId($id_user);
             $data = [];
             $data['date_hf'] = $_POST['date_hf'];
             $data['libelle_hf'] = $_POST['libelle_hf'];
             $data['montant'] = $_POST['montant'];
-            $date=date('Y-m-d');
-            $verif=date('Y-m-d',strtotime('-1 year'));
+            $date = date('Y-m-d');
+            $verif = date('Y-m-d', strtotime('-1 year'));
 
             //Compter le nombre d'entrée
             $compt = count($data['date_hf']);
@@ -154,27 +153,41 @@
 
             for ($i = 0; $i < $compt; $i++) {
 
-                if ($data['date_hf'][$i]<$verif){
-                    echo "la date ne peut etre inferieur a plus de 1 an";
-                }
-                else if ($data['date_hf'][$i]>$date){
-                    echo "la date ne peut etre superieur a la date d'aujourdhui";
-                }
-                else if(($verif<$data['date_hf'][$i])&&($data['date_hf'][$i]<$date))
+                if (!is_numeric($data['montant'][ $i ]))
                 {
-                    $this->db->insert('fraishorsforfaits', [
+                    echo "le champ doit etre numerique</br>";
+                    exit;
+                }
+                else if ($data['montant'] == "")
+                {
+                    echo "montant vide";
+                    exit;
+                }
+                else if (preg_match("/\d{4}\-\d{2}-\d{2}/", implode("|", $data['date_hf'])) == false)
+                {
+                    echo "La date doit être du format Année/Mois/Jour";
+                    exit;
+                }
+                else if (($verif < $data['date_hf'][ $i ]) && ($data['date_hf'][ $i ] < $date))
+                {
+                    $this->db->insert('test', [
                         'date'    => $data['date_hf'][ $i ],
                         'libelle' => $data['libelle_hf'][ $i ],
                         'montant' => $data['montant'][ $i ],
-
+                        'id_user'=> $id[$i]['max'],
 
                     ]);
-                    echo "ajouté";
+                    echo "Succes";
+                    exit;
+                }
+                else
+                {
+                    echo "Date d'enregistrement du frais depassé de de plus de 1 an<br/>";
+                    exit;
                 }
 
 
             }
-            var_dump($compt);
         }
 
 
@@ -189,9 +202,9 @@
             for ($i = 0; $i < $compt; $i++) {
 
                 $this->db->insert('fraisforfaits', [
-                    'id_types'   => $data['type'][$i],
-                    'quantite'        => $data['quantite'][ $i ],
-                    'id_fichefrais'     =>$data['id'],
+                    'id_types'      => $data['type'][ $i ],
+                    'quantite'      => $data['quantite'][ $i ],
+                    'id_fichefrais' => $data['id'],
 
                 ]);
             }
@@ -202,7 +215,7 @@
          */
         public function _getLeDernierId($id)
         {
-            return $this->db->select('SELECT max(id)AS max FROM fichefrais where id_user = :id',[':id' => $id]);
+            return $this->db->select('SELECT max(id)AS max FROM fichefrais where id_user = :id', [':id' => $id]);
         }
 
         /**
@@ -238,7 +251,7 @@
             inner join users on fichefrais.id_user=users.id
             inner join statuts on fichefrais.id_statut=statuts.id
             where id_statut != 1
-            and mois=:mois',[':mois'=>$mois]);
+            and mois=:mois', [':mois' => $mois]);
         }
 
         /**
@@ -260,15 +273,19 @@
         {
             return $this->db->select('SELECT * FROM types');
         }
+
         ///Recuperer les status pour Select
         public function _getLestatuts()
         {
             return $this->db->select('SELECT * FROM statuts');
         }
+
         ///Recuperer la situation pour Select
-        public function _getLasituation(){
+        public function _getLasituation()
+        {
             return $this->db->select('SELECT * FROM situation');
         }
+
         ///Recuperer Les Visteurs Pour Select
         public function _getVisiteur()
         {
@@ -278,7 +295,7 @@
         //Recuperer le nom du et prenom du visiteur
         public function _getLeVisiteur($id)
         {
-            return $this->db->select('SELECT CONCAT(nom," ",prenom)AS nom FROM users WHERE id=:id',[':id'=>$id]);
+            return $this->db->select('SELECT CONCAT(nom," ",prenom)AS nom FROM users WHERE id=:id', [':id' => $id]);
         }
 
         //Recuper tous les mois disponible en bdd
@@ -286,6 +303,7 @@
         {
             return $this->db->select('SELECT mois from fichefrais WHERE mois <= (DATE_FORMAT( NOW( ) , "%Y%m" )) group by mois DESC');
         }
+
         /**
          * Verifie si une fiche de frais est existante pour le mois en cours.
          * Cree une nouvelle ligne si elle n'existe pas.
@@ -307,10 +325,6 @@
             }
 
         }
-
-       
-
-
 
 
     }
