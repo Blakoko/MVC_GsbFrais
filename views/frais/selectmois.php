@@ -32,14 +32,14 @@
                         </thead>
                         <tbody>
                         <?php //foreach ($this->LesFraisForfait as $key => $val): ?>
-                            <tr>
-                                <td><?php echo $this->LesFraisForfait[3]['quantite'] ?></td>
-                                <td><?php echo $this->LesFraisForfait[1]['quantite'] ?></td>
-                                <td><?php echo $this->LesFraisForfait[0]['quantite'] ?></td>
-                                <td><?php echo $this->LesFraisForfait[2]['quantite'] ?></td>
-                                <td class="text-uppercase bg-success text-center"><?php echo $this->LesFraisForfait[0]['libelle'] ?></td>
-                                <td><?php echo $this->LesFraisForfait[0]['dateAjout'] ?></td>
-                            </tr>
+                        <tr>
+                            <td><?php echo $this->LesFraisForfait[3]['quantite'] ?></td>
+                            <td><?php echo $this->LesFraisForfait[1]['quantite'] ?></td>
+                            <td><?php echo $this->LesFraisForfait[0]['quantite'] ?></td>
+                            <td><?php echo $this->LesFraisForfait[2]['quantite'] ?></td>
+                            <td class="text-uppercase bg-success text-center"><?php echo $this->LesFraisForfait[0]['libelle'] ?></td>
+                            <td><?php echo $this->LesFraisForfait[0]['dateAjout'] ?></td>
+                        </tr>
                         <?php //endforeach; ?>
                         </tbody>
                     </table>
@@ -79,6 +79,5 @@
             </div>
         </div>
     </div>
-    <hr id="separateur3">
 </div>
 <?php print_r($this->LesFraisForfait) ?>

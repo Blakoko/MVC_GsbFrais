@@ -113,10 +113,11 @@
         </div>
     </div>
     <hr id="separateur3">
+    <div id="ack" class="alert"></div>
     <div id="horsforfait">
     </div>
     <div class="row">
-        <form id="formhf" action="" method="post">
+        <form id="myform" action="valfraishorforfaits" method="post">
             <div class="repeat2">
                 <div class="col-md-3">
                     <div class="form-group">
@@ -128,14 +129,14 @@
                     <div class="form-group">
                         <label class="control-label" for="formInput25">Description &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                         </label>
-                        <input type="text" class="form-control" id="desc" name="libelle_hf[]">
+                        <input type="text" class="desc form-control" name="libelle_hf[]">
                     </div>
                 </div>
                 <div class="col-md-4">
                     <div class="form-group">
                         <label class="control-label" for="formInput7">Montant&nbsp;
                         </label>
-                        <input type="text" class="form-control number-only" id="montant" name="montant[]">
+                        <input type="text" class="montant form-control number-only"  name="montant[]">
                     </div>
                 </div>
             </div>
@@ -143,7 +144,7 @@
             <div class="col-md-1" data-pg-collapsed>
                 <div class="form-group">
                     <label class="control-label" for="formInput12">Ajouter</label>
-                    <button id="addhf" type="button" class="btn btn-primary btn-sm repeat" onclick="repet()">+</button>
+                    <button id="submit" type="button" class="btn btn-primary btn-sm repeat" onclick="repet()">+</button>
                 </div>
             </div>
             <div class="row">

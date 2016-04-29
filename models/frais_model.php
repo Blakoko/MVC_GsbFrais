@@ -54,7 +54,9 @@
             inner join fraisforfaits on fichefrais.id = fraisforfaits.id_fichefrais
             inner join statuts on fichefrais.id_statut = statuts.id
             WHERE id_user =:id
-            AND mois = :mois ORDER BY id_types ASC' , [':id' => $id, ':mois' => $mois]);
+            AND mois = :mois 
+            AND statuts.id=1
+            ORDER BY id_types ASC' , [':id' => $id, ':mois' => $mois]);
         }
 
         /**
@@ -74,7 +76,8 @@
             return $this->db->select('SELECT * from fichefrais
             inner join fraishorsforfaits on fichefrais.id = fraishorsforfaits.id_fichefrais
             WHERE id_user =:id
-            AND mois = :mois',[':id' => $id, ':mois' => $mois]);
+            AND mois = :mois
+            AND id_statut=1',[':id' => $id, ':mois' => $mois]);
         }
 
         /**
@@ -135,20 +138,43 @@
         /**
          * @param $data
          */
-        public function creeNouveauFraisHorsForfait($data)
+        public function creeNouveauFraisHorsForfait()
         {
 
+            $data = [];
+            $data['date_hf'] = $_POST['date_hf'];
+            $data['libelle_hf'] = $_POST['libelle_hf'];
+            $data['montant'] = $_POST['montant'];
+            $date=date('Y-m-d');
+            $verif=date('Y-m-d',strtotime('-1 year'));
+
             //Compter le nombre d'entrée
+            $compt = count($data['date_hf']);
 
-            $compt = count($data);
+
             for ($i = 0; $i < $compt; $i++) {
-                $this->db->insert('fraishorsforfaits', [
-                    'date'    => $data['date_hf'][ $i ],
-                    'libelle' => $data['libelle_hf'][ $i ],
-                    'montant' => $data['montant'][ $i ],
 
-                ]);
+                if ($data['date_hf'][$i]<$verif){
+                    echo "la date ne peut etre inferieur a plus de 1 an";
+                }
+                else if ($data['date_hf'][$i]>$date){
+                    echo "la date ne peut etre superieur a la date d'aujourdhui";
+                }
+                else if(($verif<$data['date_hf'][$i])&&($data['date_hf'][$i]<$date))
+                {
+                    $this->db->insert('fraishorsforfaits', [
+                        'date'    => $data['date_hf'][ $i ],
+                        'libelle' => $data['libelle_hf'][ $i ],
+                        'montant' => $data['montant'][ $i ],
+
+
+                    ]);
+                    echo "ajouté";
+                }
+
+
             }
+            var_dump($compt);
         }
 
 
@@ -248,6 +274,13 @@
         {
             return $this->db->select('SELECT id,concat(nom," ",prenom)AS name from users');
         }
+
+        //Recuperer le nom du et prenom du visiteur
+        public function _getLeVisiteur($id)
+        {
+            return $this->db->select('SELECT CONCAT(nom," ",prenom)AS nom FROM users WHERE id=:id',[':id'=>$id]);
+        }
+
         //Recuper tous les mois disponible en bdd
         public function _getToutLesMois()
         {

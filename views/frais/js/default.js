@@ -28,13 +28,40 @@ var $Datedata = {
  * */
 $(document).ready(function(){
 
-    //EMPECHER VALEUR VIDE
-    $('#formhf').submit(function() {
-        if ($.trim($("#montant").val()) === "" || $.trim($(".datepicker").val()) === "" || $.trim($("#desc").val()) === "" ) {
+
+
+    $("button#btn2").click(function () {
+
+        //EMPECHER VALEUR VIDE
+        if ($(".montant").val() =="" || $(".datepicker").val() =="" || $(".desc").val()=="")
+            $("div#ack").html("Remplissez les champs");
+
+            //XHR poster le formulaire
+        else
+            $.post($("#myform").attr("action"),
+                $("#myform :input").serializeArray(),
+                function (data) {
+                    $("div#ack").html(data);
+                    if(data=='ajouté'){
+                        window.location ='frais';
+                    }
+
+                });
+
+        $("#myform").submit( function(){
+            return false;
+
+        });
+
+    });
+
+
+    /*$('#formhf').submit(function() {
+        if ($.trim($(".montant").val()) === "" || $.trim($(".datepicker").val()) === "" || $.trim($(".desc").val()) === "" ) {
             alert('Remplissez Les champs');
             return false;
         }
-    });
+    });*/
 
     //NE RENTRER QUE DES CHIFFRES
     $('.number-only').keyup(function(e) {
@@ -57,13 +84,14 @@ $(document).ready(function(){
     });
 
     //POPUP CONFIRMATION BOUTON
+    /*
     $("button#btn2").click(function (e) {
         if(!confirm($Confirmation)){
             e.preventDefault();
             return false;
         }
 
-    });
+    });*/
 });
 /***
  * Fin Chargement page

@@ -89,11 +89,13 @@
             $this->view->LesMoisDisponibles = $this->model->_getLesMoisDisponibles($id);
 
             //Original
+            $visiteur=($this->view->LeVisiteur = $this->model->_getLeVisiteur($id));
             $this->view->getlesvisiteurs = $this->model->_getVisiteur();
             $this->view->getlestatuts = $this->model->_getLestatuts();
             $this->view->render('frais/validation');
 
             //Roue LIBRE
+            var_dump($visiteur);
             var_dump($fraisforfait);
             var_dump($fraishorsforfait);
 
@@ -139,13 +141,13 @@
          */
         public function valfraishorforfaits()
         {
-            $data = [];
+            /*$data = [];
             $data['date_hf'] = $_POST['date_hf'];
             $data['libelle_hf'] = $_POST['libelle_hf'];
-            $data['montant'] = $_POST['montant'];
+            $data['montant'] = $_POST['montant'];*/
 
-            $this->model->creeNouveauFraisHorsForfait($data);
-            header('location:' . URL . 'frais/saisir');
+            $this->model->creeNouveauFraisHorsForfait();
+            //header('location:' . URL . 'frais/saisir');
             exit;
 
 

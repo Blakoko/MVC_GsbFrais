@@ -3,8 +3,7 @@
         <div class="row" id="Visiteur">
             <h1>Validation des frais par Visiteur<br><br></h1>
             <div class="col-md-4">
-                <h5>
-                    Choisir le visiteur :</h5>
+                <h5>Choisir le visiteur :</h5>
             </div>
             <div class="col-md-4">
                 <select class="form-control" name="id_user" class="iduser" onChange="getMois(this.value);">
@@ -36,10 +35,18 @@
             </div>
         </div>
     </form>
+    <h3><?php echo $this->LeVisiteur[0]['nom']?></h3>
     <?php //if(empty($this->LesFraisForfait && $this->LesFraisHorsForfait)):?>
     <h3>SELECTIONNER UN VISITEUR ET LE MOIS</h3>
     <?php //else:?>
     <form action="" method="post">
+        <?php if(empty($this->LesFraisForfait)):?>
+            <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                PAS DE FRAIS FORFAITS
+            </div>
+        <?php else:?>
         <div class="row" id="FraisauForfait">
             <h1>Frais au Forfait</h1>
             <div class="table-responsive">
@@ -84,9 +91,18 @@
 
                     </tbody>
                 </table>
+
             </div>
         </div>
+        <?php endif;?>
 
+        <?php if(empty($this->LesFraisHorsForfait)):?>
+        <div class="alert alert-danger" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            PAS DE FRAIS HORS FORFAITS
+        </div>
+        <?php else:?>
         <div class="row" id="HorsForfait">
             <h1>Frais Hors Forfait</h1>
             <div class="table-responsive">
@@ -100,16 +116,8 @@
                         <th>Situation</th>
                     </tr>
 
-                    <?php if(empty($this->LesFraisHorsForfait)):?>
-                    <div class="alert alert-danger" role="alert">
-                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                        <span class="sr-only">Error:</span>
-                        PAS DE FRAIS HORS FORFAITS
-                    </div>
-
-
                     </thead>
-                    <?php endif;?>
+
                     <tbody>
                     <?php foreach($this->LesFraisHorsForfait as $key =>$item):?>
 
@@ -126,7 +134,7 @@
                             </td>
                             <td>
                                 <select size="3" class="form-control" multiple="multiple" name="hf_situation[]" >
-                                    <?php foreach ($this->illo as $cle=>$val):?>
+                                    <?php foreach ($this->LaSituation as $cle=>$val):?>
                                         <option value="<?php echo $val['id']?>" <?php if($val['id']==$this->LesFraisHorsForfait[0]['situation_id']):?>selected="selected"<?php endif;?>>
                                             <?php echo $val['libelle']?>
                                         </option>
@@ -137,6 +145,7 @@
                     <?php endforeach;?>
                     </tbody>
                 </table>
+
             </div>
         </div>
         <div class="row" id="Justificatifs">
@@ -150,9 +159,10 @@
         <div class="row" id="Validation">
             <button type="reset" class="btn btn-default">Reset</button>
             <button type="submit" class="btn btn-default">Valider</button>
-    </form>
-</div>
-</div>
 
-<?php //endif;?>
+        <?php endif;?>
+    </form>
+
+</div>
 <?php var_dump($_POST)?>
+<?php //endif;?>
