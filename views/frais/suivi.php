@@ -33,17 +33,26 @@
                 </tr>
                 </thead>
                 <tbody>
+                <form action="" method="post">
                 <?php foreach ($this->Lesinfos as $key=>$value):?>
                 <tr class="repeat">
                     <td><?php echo $value['nom']?></td>
                     <td><?php echo $value['date']?></td>
                     <td><?php echo $value['libelle']?></td>
-                    <td><button type="button" class="btn btn-default btn-block button" value="<?php echo $value['']?>" name="id_user">Afficher</button></td>
+                    <td>
+
+                            <input name="id" type="hidden" value="<?php echo $value['id']?>">
+                        <input name="mois" type="hidden" value="<?php echo $value['mois']?>">
+                        <button type="submit" class="btn btn-default btn-block button" >Afficher</button>
+
+                    </td>
                 </tr>
                 <?php endforeach;?>
+                </form>
                 </tbody>
             </table>
         </div>
     </div>
 </div>
+<?php var_dump($_POST)?>
  

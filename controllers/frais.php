@@ -56,9 +56,13 @@
             $this->view->Lesinfos = $this->model->getLesInfosFicheFrais($mois);
             $this->view->ToutLesMois = $this->model->getLesmois();
             $this->view->render('frais/suivi');
+            var_dump($mois);
 
-           // var_dump($mois);
-
+        }
+        public function popup()
+        {
+            
+            $this->view->render('frais/popup');
         }
         public function test()
         {

@@ -200,7 +200,7 @@
          */
         public function getLesInfosFicheFrais($mois)
         {
-            return $this->db->select('SELECT concat(prenom," ",nom)as nom , (DATE_FORMAT(dateAjout,"%d-%m-%Y")) as date,libelle,mois from fichefrais
+            return $this->db->select('SELECT users.id as id, concat(prenom," ",nom)as nom , (DATE_FORMAT(dateAjout,"%d-%m-%Y")) as date,libelle,mois from fichefrais
             inner join users on fichefrais.id_user=users.id
             inner join statuts on fichefrais.id_statut=statuts.id
             where id_statut != 1
