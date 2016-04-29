@@ -59,15 +59,18 @@
             var_dump($mois);
 
         }
+
         public function popup()
         {
-            
+
             $this->view->render('frais/popup');
         }
+
         public function test()
         {
-                echo "<a class=\"close\" href=\"#\">x</a><h3>Here is some text</h3><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse 	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><p>Id: 1</p>";
+            echo "<a class=\"close\" href=\"#\">x</a><h3>Here is some text</h3><p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse 	cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><p>Id: 1</p>";
         }
+
         /**
          *
          */
@@ -113,16 +116,20 @@
          */
         public function saisir()
         {
+
+            $id = Session::get('id');
+            $mois = date('Ym');
             //CHarger Le JS (DATEPICKER,APPEND)
             $this->view->js = ['frais/js/jquery.js', 'frais/js/default.js'];
 
-            $this->view->VeriFicheFrais = $this->model->_VeriFicheFrais(Session::get('id'));
+            $this->view->VeriFicheFrais = $this->model->_VeriFicheFrais($id);
             $this->view->getLestypes = $this->model->_getToutLestypes();
-            $this->view->LesFraisForfait = $this->model->_getLesFraisForfait();
-            $this->view->LesFraisHorsForfait = $this->model->_getLesFraisHorsForfait();
+            $fraisforfait = ($this->view->LesFraisForfait = $this->model->_getLesFraisForfait($id, $mois));
+            $fraishorsforfait = ($this->view->LesFraisHorsForfait = $this->model->_getLesFraisHorsForfait($id, $mois));
 
 
-
+            var_dump($mois);
+            var_dump($fraisforfait);
             $this->view->render('frais/saisir');
 
         }
@@ -181,7 +188,7 @@
         public function selectionmois()
         {
 
-            $this->view->js = ['frais/js/jquery.js','frais/js/default.js'];
+            $this->view->js = ['frais/js/jquery.js', 'frais/js/default.js'];
             ///
             $id = Session::get('id');
             $mois = $_POST['val_mois'];

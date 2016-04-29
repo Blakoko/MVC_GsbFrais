@@ -2,55 +2,77 @@
  * Created by albert on 08/04/16.
  */
 
-//SELECTION DE LA DATE
+var $Confirmation = 'Êtes-vous sûr?';
+var $Datedata = {
+    yearRange: '-1:+0',
+    minDate:'-1Y',
+    maxDate:'+0',
+    firstDay: 1,
+    altField: ".datepicker",
+    closeText: 'Fermer',
+    prevText: 'Précédent',
+    nextText: 'Suivant',
+    currentText: 'Aujourd\'hui',
+    monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
+    monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
+    dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
+    dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
+    dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
+    weekHeader: 'Sem.',
+    dateFormat: 'yy-mm-dd'
+};
 
-$(function ladate(){
-    $( ".datepicker" ).datepicker({
-        yearRange: '-1:+0',
-        minDate:'-1Y',
-        maxDate:'+0',
-        firstDay: 1,
-        altField: ".datepicker",
-        closeText: 'Fermer',
-        prevText: 'Précédent',
-        nextText: 'Suivant',
-        currentText: 'Aujourd\'hui',
-        monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-        monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
-        dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
-        dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
-        dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
-        weekHeader: 'Sem.',
-        dateFormat: 'yy-mm-dd'
-    });
-});
+/**
+ * Demarrer au Chargement de la page
+ *
+ * */
+$(document).ready(function(){
 
-//ne mettre que des chiffres
-$(function number(){
-
-    $('.number-only').keyup(function(e) {
-        if(this.value!='-')Bienvenue
-            while(isNaN(this.value))
-                this.value = this.value.split('').reverse().join('').replace(/[\D]/i,'')
-                    .split('').reverse().join('');
-    })
-        .on("cut copy paste",function(e){
-            e.preventDefault();
-        });
-
-});
-
-
-//Empecher des valeures vides
-$(function empty(){
+    //EMPECHER VALEUR VIDE
     $('#formhf').submit(function() {
         if ($.trim($("#montant").val()) === "" || $.trim($(".datepicker").val()) === "" || $.trim($("#desc").val()) === "" ) {
             alert('Remplissez Les champs');
             return false;
         }
     });
-});
 
+    //NE RENTRER QUE DES CHIFFRES
+    $('.number-only').keyup(function(e) {
+            if(this.value!='-')
+                while(isNaN(this.value))
+                    this.value = this.value.split('').reverse().join('').replace(/[\D]/i,'')
+                        .split('').reverse().join('');
+        })
+        .on("cut copy paste",function(e){
+            e.preventDefault();
+        });
+
+    //POPUP CONFIRMATION LIEN
+    $("a.delete").click(function(e){
+        if(!confirm($Confirmation)){
+            e.preventDefault();
+            return false;
+        }
+        return true;
+    });
+
+    //POPUP CONFIRMATION BOUTON
+    $("button#btn2").click(function (e) {
+        if(!confirm($Confirmation)){
+            e.preventDefault();
+            return false;
+        }
+
+    });
+});
+/***
+ * Fin Chargement page
+ */
+
+
+$(function ladate(){
+    $( ".datepicker" ).datepicker($Datedata);
+});
 
 //repetition
 $(function repet(){
@@ -88,12 +110,3 @@ function getMois(val) {
     });
 }
 
-$(document).ready(function(){
-    $("a.delete").click(function(e){
-        if(!confirm('Etes Vous Sur?')){
-            e.preventDefault();
-            return false;
-        }
-        return true;
-    });
-});

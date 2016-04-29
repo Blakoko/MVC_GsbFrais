@@ -55,7 +55,7 @@
                         <thead>
                         <h3>Au Forfait</h3><br>
                         <tr class="bg-primary">
-                            <th>Repas Restaurants</th>
+                            <th>Repas Midi</th>
                             <th>Nuitée Hotel</th>
                             <th>Forfait Etape</th>
                             <th>Frais Kilometriques</th>
@@ -63,10 +63,13 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
-                            <td>0</td>
+                            <form action="" method="post">
+                                <td><input value="<?php echo $this->LesFraisForfait[3]['quantite'] ?>" type="text" class="form-control number-only" id="montant" name="ff_repas"></td>
+                                <td><input value="<?php echo $this->LesFraisForfait[1]['quantite'] ?>" type="text" class="form-control number-only" id="montant" name="ff_hotel"></td>
+                                <td><input value="<?php echo $this->LesFraisForfait[2]['quantite'] ?>" type="text" class="form-control number-only" id="montant" name="ff_etape"></td>
+                                <td><input value="<?php echo $this->LesFraisForfait[0]['quantite'] ?>" type="text" class="form-control number-only" id="montant" name="ff_km"></td>
+                                <td><button id="btn2" type="submit" class="btn btn-primary btn-block">mettre a jour</button></td>
+                            </form>
                         </tr>
                         </tbody>
                     </table>
@@ -92,12 +95,16 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>00-00-0000</td>
-                            <td>Seminaire</td>
-                            <td>0.89€</td>
+                        <?php foreach ($this->LesFraisHorsForfait as $key => $val): ?>
+                            <tr>
+                                <td><?php echo $val['date'] ?></td>
+                                <td><?php echo $val['libelle'] ?></td>
+                                <td><?php echo $val['montant'] ?></td>
                             <td class="text-center bg-success"><a href="delete" class="delete">SUPPRIMER</a></td>
-                        </tr>
+                            </tr>
+                        <?php endforeach; ?>
+
+
                         </tbody>
                     </table>
                     <!-- FIN DIV hors forfait-->

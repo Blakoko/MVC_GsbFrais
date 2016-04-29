@@ -47,6 +47,9 @@
          */
         public function _getLesFraisForfait($id, $mois)
         {
+            
+            
+            
             return $this->db->select('SELECT * from fichefrais
             inner join fraisforfaits on fichefrais.id = fraisforfaits.id_fichefrais
             inner join statuts on fichefrais.id_statut = statuts.id
@@ -65,6 +68,9 @@
          */
         public function _getLesFraisHorsForfait($id,$mois)
         {
+            
+            
+            
             return $this->db->select('SELECT * from fichefrais
             inner join fraishorsforfaits on fichefrais.id = fraishorsforfaits.id_fichefrais
             WHERE id_user =:id
@@ -137,8 +143,8 @@
             $compt = count($data);
             for ($i = 0; $i < $compt; $i++) {
                 $this->db->insert('fraishorsforfaits', [
-                    'date'    => $data['date'][ $i ],
-                    'libelle' => $data['libelle'][ $i ],
+                    'date'    => $data['date_hf'][ $i ],
+                    'libelle' => $data['libelle_hf'][ $i ],
                     'montant' => $data['montant'][ $i ],
 
                 ]);
