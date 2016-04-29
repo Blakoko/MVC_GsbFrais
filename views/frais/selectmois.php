@@ -4,7 +4,7 @@
         <form action="" method="post">
             <select id="formInput11" class="form-control" name="val_mois">
                 <option selected="selected">--CHoisir Un mois--</option>
-                <?php foreach ($this->getLesMoisDisponibles as $key => $value): ?>
+                <?php foreach ($this->LesMoisDisponibles as $key => $value): ?>
                     <option value="<?php echo $value['mois'] ?>"><?php echo $value['mois'] ?></option>
                 <?php endforeach ?>
             </select>
@@ -31,14 +31,14 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php //foreach ($this->allo as $key => $val): ?>
+                        <?php //foreach ($this->LesFraisForfait as $key => $val): ?>
                             <tr>
-                                <td><?php echo $this->allo[3]['quantite'] ?></td>
-                                <td><?php echo $this->allo[1]['quantite'] ?></td>
-                                <td><?php echo $this->allo[0]['quantite'] ?></td>
-                                <td><?php echo $this->allo[2]['quantite'] ?></td>
-                                <td class="text-uppercase bg-success text-center"><?php echo $this->allo[0]['libelle'] ?></td>
-                                <td><?php echo $this->allo[0]['dateAjout'] ?></td>
+                                <td><?php echo $this->LesFraisForfait[3]['quantite'] ?></td>
+                                <td><?php echo $this->LesFraisForfait[1]['quantite'] ?></td>
+                                <td><?php echo $this->LesFraisForfait[0]['quantite'] ?></td>
+                                <td><?php echo $this->LesFraisForfait[2]['quantite'] ?></td>
+                                <td class="text-uppercase bg-success text-center"><?php echo $this->LesFraisForfait[0]['libelle'] ?></td>
+                                <td><?php echo $this->LesFraisForfait[0]['dateAjout'] ?></td>
                             </tr>
                         <?php //endforeach; ?>
                         </tbody>
@@ -65,7 +65,7 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <?php foreach ($this->ello as $key => $val): ?>
+                        <?php foreach ($this->LesFraisHorsForfait as $key => $val): ?>
                             <tr>
                                 <td><?php echo $val['date'] ?></td>
                                 <td><?php echo $val['libelle'] ?></td>
@@ -82,4 +82,4 @@
     </div>
     <hr id="separateur3">
 </div>
-<?php print_r($this->allo) ?>
+<?php print_r($this->LesFraisForfait) ?>

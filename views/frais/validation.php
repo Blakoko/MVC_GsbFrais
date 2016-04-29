@@ -26,7 +26,7 @@
                     <option value="">--Choisir Un Mois--</option>
                     <?php
                         /*
-               *   <?php foreach($this->getLesMoisDisponibles as $key => $value):?>
+               *   <?php foreach($this->LesMoisDisponibles as $key => $value):?>
                     <option value="<?php echo $value['mois'] ?>"><?php echo $value['mois'] ?></option>
                 <?php endforeach; ?>
               */
@@ -36,9 +36,9 @@
             </div>
         </div>
     </form>
-    <?php if(empty($this->allo && $this->ello)):?>
-        <h3>SELECTIONNER UN VISITEUR ET LE MOIS</h3>
-    <?php else:?>
+    <?php //if(empty($this->LesFraisForfait && $this->LesFraisHorsForfait)):?>
+    <h3>SELECTIONNER UN VISITEUR ET LE MOIS</h3>
+    <?php //else:?>
     <form action="" method="post">
         <div class="row" id="FraisauForfait">
             <h1>Frais au Forfait</h1>
@@ -60,21 +60,21 @@
 
                         <td>1</td>
                         <td>
-                            <input type="text" class="form-control" placeholder="" name="ff_repas" value="<?php echo $this->allo[0]['quantite'] ?>">
+                            <input type="text" class="form-control" placeholder="" name="ff_repas" value="<?php echo $this->LesFraisForfait[0]['quantite'] ?>">
                         </td>
                         <td>
-                            <input type="text" class="form-control" placeholder="" name="ff_nuit" value="<?php echo $this->allo[1]['quantite'] ?>">
+                            <input type="text" class="form-control" placeholder="" name="ff_nuit" value="<?php echo $this->LesFraisForfait[1]['quantite'] ?>">
                         </td>
                         <td>
-                            <input type="text" class="form-control" placeholder="" name="ff_etape" value="<?php echo $this->allo[2]['quantite'] ?>">
+                            <input type="text" class="form-control" placeholder="" name="ff_etape" value="<?php echo $this->LesFraisForfait[2]['quantite'] ?>">
                         </td>
                         <td>
-                            <input type="text" class="form-control" placeholder="" name="ff_km" value="<?php echo $this->allo[3]['quantite'] ?>">
+                            <input type="text" class="form-control" placeholder="" name="ff_km" value="<?php echo $this->LesFraisForfait[3]['quantite'] ?>">
                         </td>
                         <td>
                             <select size="3" class="form-control" multiple="multiple" name="statuts">
                                 <?php foreach ($this->getlestatuts as $key => $value) : ?>
-                                    <option value="<?php echo $value['id'] ?>" <?php if($value['id']==$this->allo[0]['id_statut']):?>selected="selected"<?php endif;?>>
+                                    <option value="<?php echo $value['id'] ?>" <?php if($value['id']==$this->LesFraisForfait[0]['id_statut']):?>selected="selected"<?php endif;?>>
                                         <?php echo $value['libelle']?>
                                     </option>
                                 <?php endforeach;?>
@@ -100,17 +100,18 @@
                         <th>Situation</th>
                     </tr>
 
-                    <?php if(empty($this->ello)):?>
-                        <div class="alert alert-danger" role="alert">
-                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                            <span class="sr-only">Error:</span>
-                            PAS DE FRAIS HORS FORFAITS
-                        </div>
-                    <?php endif;?>
+                    <?php if(empty($this->LesFraisHorsForfait)):?>
+                    <div class="alert alert-danger" role="alert">
+                        <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                        <span class="sr-only">Error:</span>
+                        PAS DE FRAIS HORS FORFAITS
+                    </div>
+
 
                     </thead>
+                    <?php endif;?>
                     <tbody>
-                    <?php foreach($this->ello as $key =>$item):?>
+                    <?php foreach($this->LesFraisHorsForfait as $key =>$item):?>
 
                         <tr>
                             <td><?php echo $item['id']?></td>
@@ -126,7 +127,7 @@
                             <td>
                                 <select size="3" class="form-control" multiple="multiple" name="hf_situation[]" >
                                     <?php foreach ($this->illo as $cle=>$val):?>
-                                        <option value="<?php echo $val['id']?>" <?php if($val['id']==$this->ello[0]['situation_id']):?>selected="selected"<?php endif;?>>
+                                        <option value="<?php echo $val['id']?>" <?php if($val['id']==$this->LesFraisHorsForfait[0]['situation_id']):?>selected="selected"<?php endif;?>>
                                             <?php echo $val['libelle']?>
                                         </option>
                                     <?php endforeach; ?>
@@ -143,7 +144,7 @@
                 <h5>Nb Justificatifs<br></h5>
             </div>
             <div class="col-md-4">
-                <input type="text" class="form-control" placeholder="" size="4" name="justif" value="<?php echo $this->ello[0]['nb_justificatifs']?>">
+                <input type="text" class="form-control" placeholder="" size="4" name="justif" value="<?php echo $this->LesFraisHorsForfait[0]['nb_justificatifs']?>">
             </div>
         </div>
         <div class="row" id="Validation">
@@ -153,5 +154,5 @@
 </div>
 </div>
 
-<?php endif;?>
+<?php //endif;?>
 <?php var_dump($_POST)?>

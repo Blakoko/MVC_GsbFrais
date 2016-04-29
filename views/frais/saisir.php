@@ -156,7 +156,7 @@
 
 
 <?php var_dump($_POST); ?>
-<?php //var_dump($this->veriffichefrais);?>
+<?php //var_dump($this->VeriFicheFrais);?>
 <?php //var_dump($this->compter[0]['cont'])?>
 
 <?php //print_r($_POST);?>

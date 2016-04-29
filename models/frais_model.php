@@ -45,7 +45,7 @@
          * @param $mois sous la forme aaaamm
          * @return l'id, le libelle et la quantité sous la forme d'un tableau associatif
          */
-        public function getLesFraisForfait($id, $mois)
+        public function _getLesFraisForfait($id, $mois)
         {
             return $this->db->select('SELECT * from fichefrais
             inner join fraisforfaits on fichefrais.id = fraisforfaits.id_fichefrais
@@ -63,7 +63,7 @@
          * @param $mois sous la forme aaaamm
          * @return tous les champs des lignes de frais hors forfait sous la forme d'un tableau associatif
          */
-        public function getLesFraisHorsForfait($id,$mois)
+        public function _getLesFraisHorsForfait($id,$mois)
         {
             return $this->db->select('SELECT * from fichefrais
             inner join fraishorsforfaits on fichefrais.id = fraishorsforfaits.id_fichefrais
@@ -186,7 +186,7 @@
          * @param $idVisiteur
          * @return un tableau associatif de clé un mois -aaaamm- et de valeurs l'année et le mois correspondant
          */
-        public function getLesMoisDisponibles($id)
+        public function _getLesMoisDisponibles($id)
         {
             return $this->db->select('SELECT * FROM fichefrais WHERE fichefrais.id_user =:id
             ORDER BY fichefrais.mois DESC', [':id' => $id]);
@@ -198,7 +198,7 @@
          * @param $mois sous la forme aaaamm
          * @return un tableau avec des champs de jointure entre une fiche de frais et la ligne d'état
          */
-        public function getLesInfosFicheFrais($mois)
+        public function _getLesInfosFicheFrais($mois)
         {
             return $this->db->select('SELECT users.id as id, concat(prenom," ",nom)as nom , (DATE_FORMAT(dateAjout,"%d-%m-%Y")) as date,libelle,mois from fichefrais
             inner join users on fichefrais.id_user=users.id
@@ -222,26 +222,26 @@
          * @return mixed
          */
         //Recuperer Les Types Pour Select
-        public function getLestypes()
+        public function _getToutLestypes()
         {
             return $this->db->select('SELECT * FROM types');
         }
         ///Recuperer les status pour Select
-        public function getLestatuts()
+        public function _getLestatuts()
         {
             return $this->db->select('SELECT * FROM statuts');
         }
         ///Recuperer la situation pour Select
-        public function getLasituation(){
+        public function _getLasituation(){
             return $this->db->select('SELECT * FROM situation');
         }
         ///Recuperer Les Visteurs Pour Select
-        public function getVisiteur()
+        public function _getVisiteur()
         {
             return $this->db->select('SELECT id,concat(nom," ",prenom)AS name from users');
         }
         //Recuper tous les mois disponible en bdd
-        public function getLesmois()
+        public function _getToutLesMois()
         {
             return $this->db->select('SELECT mois from fichefrais WHERE mois <= (DATE_FORMAT( NOW( ) , "%Y%m" )) group by mois DESC');
         }
@@ -251,7 +251,7 @@
          *
          * @param $id
          */
-        public function veriffichefrais($id)
+        public function _VeriFicheFrais($id)
         {
             $verif = $this->db->prepare('SELECT id,mois from fichefrais WHERE id_user=:id and mois=(DATE_FORMAT(NOW(),"%Y%m"))', [':id' => $id]);
             $verif->execute([':id' => $id]);
