@@ -42,8 +42,9 @@ $(document).ready(function(){
                 $("#myform :input").serializeArray(),
                 function (data) {
                     $("div#ack").html(data);
-                    if(data=='ajouté'){
-                        window.location ='frais';
+                    if(data==''){
+                        alert('Ajouté'),
+                        window.location ='saisir';
                     }
 
                 });
@@ -56,6 +57,34 @@ $(document).ready(function(){
     });
     //----//
 
+//--//
+    $("button#btn1").click(function () {
+
+        //EMPECHER VALEUR VIDE
+        if ($(".type").val() =="" || $(".quantite").val() =="")
+            $("div#atk").html("Remplissez les champs");
+
+        //XHR poster le formulaire
+        else
+            $.post($("#formff").attr("action"),
+                $("#formff :input").serializeArray(),
+
+                function (data) {
+                    $("div#atk").html(data);
+                    if(data=='ajouté'){
+                        alert('Ajouté'),
+                        window.location ='saisir';
+                    }
+
+                });
+
+        $("#formff").submit( function(){
+            return false;
+
+        });
+
+    });
+//--//
 
     /*$('#formhf').submit(function() {
         if ($.trim($(".montant").val()) === "" || $.trim($(".datepicker").val()) === "" || $.trim($(".desc").val()) === "" ) {

@@ -130,8 +130,8 @@
             $fraishorsforfait = ($this->view->LesFraisHorsForfait = $this->model->_getLesFraisHorsForfait($id, $mois));
 
 
-            var_dump($mois);
-            var_dump($fraisforfait);
+            //var_dump($mois);
+            //var_dump($fraisforfait);
             $this->view->render('frais/saisir');
 
         }
@@ -159,16 +159,18 @@
         public function valfraisforfaits()
         {
             //selectionner le dernier id de la fichefrais enregistré par l'utilisateur
-            $id = ($this->view->LeDernierId = $this->model->_getLeDernierId(Session::get('id')));
+            //$id = ($this->view->LeDernierId = $this->model->_getLeDernierId(Session::get('id')));
 
-            $data = [];
-            $data['type'] = $_POST['type'];
-            $data['quantite'] = $_POST['quantite'];
-            $data['id'] = $id[0]['max'];
-            $this->model->creeNouveauFraisForfait($data);
-            var_dump($_POST);
-            unset($data);
-            header('location:' . URL . 'frais/saisir');
+            //$data = [];
+            //$data['type'] = $_POST['type'];
+            //$data['quantite'] = $_POST['quantite'];
+            //$data['id'] = $id[0]['max'];
+            
+            
+            $this->model->creeNouveauFraisForfait();
+            //var_dump($_POST);
+            //unset($data);
+            //header('location:' . URL . 'frais/saisir');
             exit;
         }
 

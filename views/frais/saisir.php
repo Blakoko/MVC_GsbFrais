@@ -2,7 +2,8 @@
 <div class="bg-info col-md-10" id="content" data-pg-collapsed>
     <div id="fraisforfait">
         <div class="row">
-            <h3>Frais au forfait<br></h3>
+            <h3>Frais au forfait</h3>
+            <div id="atk" class="alert"></div>
             <form id="formff" action="valfraisforfaits" method="post">
                 <div>
                     <div class="repeat1">
@@ -11,7 +12,7 @@
                                 <div class="form-group">
                                     <label class="control-label" for="formInput20">Type
                                     </label>
-                                    <select id="formInput20" class="form-control" name="type[]">
+                                    <select id="formInput20" class="type form-control" name="type[]">
                                         <?php foreach ($this->getLestypes as $key => $value) : ?>
                                             <option value="<?php echo $value['id'] ?>"><?php echo $value['libelle'] ?></option>
                                         <? endforeach; ?>
@@ -22,7 +23,7 @@
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label class="control-label" for="formInput27">Quantité / Nombres</label>
-                                <input type="text" class="form-control number-only" name="quantite[]">
+                                <input type="text" class="quantite form-control number-only" name="quantite[]">
                             </div>
                         </div>
                     </div>
@@ -38,7 +39,7 @@
                 </div>
                 <div class="row" data-pg-hidden>
                     <div class="text-right col-md-12">
-                        <button id="btn2" type="submit" class="btn btn-primary">Valider</button>
+                        <button id="btn1" type="submit" class="btn btn-primary">Valider</button>
                         <!--FIN DIV hors FORFAIT-->
                     </div>
                     <!--fin-->
@@ -47,6 +48,9 @@
         </div>
     </div>
     <hr id="separateur1" />
+    <?php if(empty($this->LesFraisForfait)):?>
+        <h3>Pas De Frais Au Forfait</h3>
+    <?php else :?>
     <div id="fichefrais">
         <div class="row">
             <div class="col-md-12">
@@ -78,7 +82,11 @@
         </div>
         <!-- FIn DIV Fiche FRais -->
     </div>
+    <?php endif;?>
     <hr id="separateur2" />
+    <?php if(empty($this->LesFraisHorsForfait)):?>
+        <h3>Pas de Frais Hors Forfaits Enregistré</h3>
+    <?php else :?>
     <div id="elementshorsforfait">
         <div class="row">
             <div class="col-md-12">
@@ -113,7 +121,9 @@
         </div>
     </div>
     <hr id="separateur3">
-    <div id="ack" class="alert"></div>
+    <?php endif;?>
+    <div id="ack" class="alert">
+    </div>
     <div id="horsforfait">
     </div>
     <div class="row">
@@ -156,15 +166,8 @@
             </div>
         </form>
     </div>
+
 </div>
 
 
 
-
-
-
-<?php var_dump($_POST); ?>
-<?php //var_dump($this->VeriFicheFrais);?>
-<?php var_dump($this->LeDernierId)?>
-
-<?php //print_r($_POST);?>

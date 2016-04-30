@@ -138,6 +138,8 @@
          */
         public function creeNouveauFraisHorsForfait()
         {
+
+
             $id_user = Session::get('id');
             $id = $this->_getLeDernierId($id_user);
             $data = [];
@@ -165,27 +167,34 @@
                 }
                 else if (preg_match("/\d{4}\-\d{2}-\d{2}/", implode("|", $data['date_hf'])) == false)
                 {
-                    echo "La date doit être du format Année/Mois/Jour";
+                    echo "La date doit être du format Année - Mois - Jour";
                     exit;
+
                 }
+
+
                 else if (($verif < $data['date_hf'][ $i ]) && ($data['date_hf'][ $i ] < $date))
                 {
                     $this->db->insert('test', [
                         'date'    => $data['date_hf'][ $i ],
                         'libelle' => $data['libelle_hf'][ $i ],
                         'montant' => $data['montant'][ $i ],
-                        'id_user'=> $id[$i]['max'],
+                        'id_user'=> $id[0]['max'],
+
 
                     ]);
-                    echo "Succes";
-                    exit;
+                    {
+
+
                 }
-                else
-                {
+
+                }
+
+                else{
+
                     echo "Date d'enregistrement du frais depassé de de plus de 1 an<br/>";
                     exit;
                 }
-
 
             }
         }
@@ -194,20 +203,60 @@
         /**
          * @param $data
          */
-        public function creeNouveauFraisForfait($data)
+        public function creeNouveauFraisForfait()
         {
+            $id_user = Session::get('id');
+            $id = $this->_getLeDernierId($id_user);
+            $data = [];
+            $data['type'] = $_POST['type'];
+            $data['quantite'] = $_POST['quantite'];
+            //$data['montant'] = $_POST['montant'];
+            //$date = date('Y-m-d');
+            //$verif = date('Y-m-d', strtotime('-1 year'));
+
             //Compter le nombre d'entrée
 
-            $compt = count($data);
+            $compt = count($data['type']);
+
             for ($i = 0; $i < $compt; $i++) {
 
-                $this->db->insert('fraisforfaits', [
-                    'id_types'      => $data['type'][ $i ],
+                 if(!is_numeric($data['montant'][ $i ]))
+                {
+                    echo "le champ doit etre numerique</br>";
+                    exit;
+                }
+
+                else if ($data['montant'] == "")
+                {
+                    echo "montant vide";
+                    exit;
+                }
+
+
+               /* else if (preg_match("/\d{4}\-\d{2}-\d{2}/", implode("|", $data['date_hf'])) == false)
+                {
+                    echo "La date doit être du format Année/Mois/Jour";
+                    exit;
+                }*/
+                else
+                {
+                $this->db->insert('test2', [
+                    'type'      => $data['type'][ $i ],
                     'quantite'      => $data['quantite'][ $i ],
-                    'id_fichefrais' => $data['id'],
+                    'id_fichefrais' => $id[0]['max'],
 
                 ]);
+
+
+                }
+
             }
+
+            var_dump($data);
+            var_dump($_POST);
+            print_r($compt);
+            var_dump($id_user);
+            var_dump($id);
         }
 
         /**
