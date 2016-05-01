@@ -14,7 +14,8 @@
      * - Valider
      * - Ecrire dans la BDD
      */
-    class Form
+
+    class Form extends Val
     {
         /**@var array $_currentItem */
         private $_currentItem = null;
