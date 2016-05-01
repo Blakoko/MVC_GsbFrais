@@ -21,10 +21,10 @@
 
         public static function vide($data)
         {
-            if(strlen($data)==0)
+            if(strlen($data) == 0)
             {
                 return "Remplissez les Champs";
-                
+
             }
         }
 
@@ -48,17 +48,16 @@
         //Fonction qui n'autorise que des numeros
         public static function digit($data)
         {
-            $cpt = count($data);
+            /*$cpt = count($data);
 
             for($i=0;$i<$cpt;$i++)
-            {
-                if (ctype_digit($data[$i]) == false) {
+            {*/
+                if (ctype_digit($data/*[$i]*/) == false) {
                     
-                    echo "vous ne pouvez entrez que des numeros";
-                    exit;
-
+                    return "vous ne pouvez entrez que des numeros";
+                    
                 }
-            }
+            /*}*/
         }
 
         //Fonction de verification du mail ex: evite les kkkJKD.com
