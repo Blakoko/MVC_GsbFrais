@@ -23,6 +23,7 @@
     <div class="row" id="Fiche">
         <h1>Fiches de Frais a valider et mise en paiement</h1>
         <div class="table-responsive">
+
             <table class="table table-bordered table-striped table-hover table-condensed" id="products">
                 <thead>
                 <tr>
@@ -33,24 +34,25 @@
                 </tr>
                 </thead>
                 <tbody>
-                <form action="" method="post">
+
                 <?php foreach ($this->Lesinfos as $key=>$value):?>
                 <tr class="repeat">
                     <td><?php echo $value['nom']?></td>
                     <td><?php echo $value['date']?></td>
                     <td><?php echo $value['libelle']?></td>
                     <td>
-
+                        <form action="popup" method="post">
                             <input name="id" type="hidden" value="<?php echo $value['id']?>">
                         <input name="mois" type="hidden" value="<?php echo $value['mois']?>">
                         <button type="submit" class="btn btn-default btn-block button" >Afficher</button>
-
+                        </form>
                     </td>
                 </tr>
                 <?php endforeach;?>
-                </form>
+
                 </tbody>
             </table>
+
         </div>
     </div>
 </div>

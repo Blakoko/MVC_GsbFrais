@@ -160,7 +160,7 @@ $(function repet2(){
 function getMois(val) {
     $.ajax({
         type: "POST",
-        url: "test3",
+        url: "moisdispo",
         data:'id_user='+val,
         success: function(data){
             $("#list_mois").html(data);

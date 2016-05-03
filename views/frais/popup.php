@@ -32,9 +32,9 @@
     <div class="row" id="HorsForfait">
         <h1>Hors Forfait</h1>
         <div class="table-responsive">
-            <table class="table table-striped table-bordered table-hover table-condensed bg-primary">
+            <table class="table table-striped table-bordered table-hover table-condensed">
                 <thead>
-                <tr>
+                <tr class="bg-primary">
                     <th>Date<br></th>
                     <th>Description</th>
                     <th>Montant</th>
@@ -42,12 +42,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+                <?php foreach ($this->LesFraisHorsForfait as $key => $val): ?>
+                    <tr>
+                        <td><?php echo $val['date'] ?></td>
+                        <td><?php echo $val['libelle'] ?></td>
+                        <td><?php echo $val['montant'] ?></td>
+                        <td><?php echo $val['libelle_situation']?></td>
+                    </tr>
+                <?php endforeach; ?>
                 </tbody>
             </table>
         </div>
@@ -58,9 +60,9 @@
         </div>
         <div class="col-md-3">
             <select class="form-control">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
+                <?php foreach ($this->lestatuts as $key => $value):?>
+                <option value="<?php echo $value['id'] ?>"><?php echo $value['libelle'] ?></option>
+                <?php endforeach;?>
             </select>
         </div>
         <div class="col-md-5 text-right">
@@ -68,3 +70,5 @@
         </div>
     </div>
 </div>
+<?php var_dump($_POST)?>
+<?echo json_encode($_POST);?>

@@ -18,7 +18,7 @@
          */
         function index()
         {
-            $this->view->msg = 'This page doesnt exist';
+            $this->view->msg = 'Cette Page N\'existe pas';
             $this->view->render('error/index');
         }
     }

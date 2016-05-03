@@ -1,4 +1,3 @@
-
 <div class="bg-info col-md-10" id="content" data-pg-collapsed>
     <div id="fraisforfait">
         <div class="row">
@@ -14,7 +13,8 @@
                                     </label>
                                     <select id="formInput20" class="type form-control" name="type[]">
                                         <?php foreach ($this->getLestypes as $key => $value) : ?>
-                                            <option value="<?php echo $value['id'] ?>"><?php echo $value['libelle'] ?></option>
+                                            <option
+                                                value="<?php echo $value['id'] ?>"><?php echo $value['libelle'] ?></option>
                                         <? endforeach; ?>
                                     </select>
                                 </div>
@@ -22,7 +22,7 @@
                         </div>
                         <div class="col-md-5">
                             <div class="form-group">
-                                <label class="control-label" for="formInput27">Quantité / Nombres</label>
+                                <label class="control-label" for="formInput27">Quantité - Nombres</label>
                                 <input type="text" class="quantite form-control number-only" name="quantite[]">
                             </div>
                         </div>
@@ -47,81 +47,90 @@
             </form>
         </div>
     </div>
-    <hr id="separateur1" />
-    <?php if(empty($this->LesFraisForfait)):?>
+    <hr id="separateur1"/>
+    <?php if (empty($this->LesFraisForfait)): ?>
         <h3>Pas De Frais Au Forfait</h3>
-    <?php else :?>
-    <div id="fichefrais">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-striped table-hover table-condensed">
-                        <thead>
-                        <h3>Au Forfait</h3><br>
-                        <tr class="bg-primary">
-                            <th>Repas Midi</th>
-                            <th>Nuitée Hotel</th>
-                            <th>Forfait Etape</th>
-                            <th>Frais Kilometriques</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <form action="" method="post">
-                                <td><input value="<?php echo $this->LesFraisForfait[3]['quantite'] ?>" type="text" class="form-control number-only" id="montant" name="ff_repas"></td>
-                                <td><input value="<?php echo $this->LesFraisForfait[1]['quantite'] ?>" type="text" class="form-control number-only" id="montant" name="ff_hotel"></td>
-                                <td><input value="<?php echo $this->LesFraisForfait[2]['quantite'] ?>" type="text" class="form-control number-only" id="montant" name="ff_etape"></td>
-                                <td><input value="<?php echo $this->LesFraisForfait[0]['quantite'] ?>" type="text" class="form-control number-only" id="montant" name="ff_km"></td>
-                                <td><button id="btn2" type="submit" class="btn btn-primary btn-block">mettre a jour</button></td>
-                            </form>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        <!-- FIn DIV Fiche FRais -->
-    </div>
-    <?php endif;?>
-    <hr id="separateur2" />
-    <?php if(empty($this->LesFraisHorsForfait)):?>
-        <h3>Pas de Frais Hors Forfaits Enregistré</h3>
-    <?php else :?>
-    <div id="elementshorsforfait">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover table-striped table-condensed">
-                        <thead>
-                        <h3>Hors Forfait</h3><br>
-                        <tr class="bg-primary">
-                            <th>Date</th>
-                            <th>Description</th>
-                            <th>Montant
-                                <br>
-                            </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php foreach ($this->LesFraisHorsForfait as $key => $val): ?>
-                            <tr>
-                                <td><?php echo $val['date'] ?></td>
-                                <td><?php echo $val['libelle'] ?></td>
-                                <td><?php echo $val['montant'] ?></td>
-                            <td class="text-center bg-success"><a href="delete" class="delete">SUPPRIMER</a></td>
+    <?php else : ?>
+        <div id="fichefrais">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-hover table-condensed">
+                            <thead>
+                            <h3>Au Forfait</h3><br>
+                            <tr class="bg-primary">
+                                <th>Repas Midi</th>
+                                <th>Nuitée Hotel</th>
+                                <th>Forfait Etape</th>
+                                <th>Frais Kilometriques</th>
                             </tr>
-                        <?php endforeach; ?>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <form action="" method="post">
+                                    <td><input value="<?php echo $this->LesFraisForfait[3]['quantite'] ?>" type="text"
+                                               class="form-control number-only" id="montant" name="ff_repas"></td>
+                                    <td><input value="<?php echo $this->LesFraisForfait[1]['quantite'] ?>" type="text"
+                                               class="form-control number-only" id="montant" name="ff_hotel"></td>
+                                    <td><input value="<?php echo $this->LesFraisForfait[2]['quantite'] ?>" type="text"
+                                               class="form-control number-only" id="montant" name="ff_etape"></td>
+                                    <td><input value="<?php echo $this->LesFraisForfait[0]['quantite'] ?>" type="text"
+                                               class="form-control number-only" id="montant" name="ff_km"></td>
+                                    <td>
+                                        <button id="btn2" type="submit" class="btn btn-primary btn-block">mettre a
+                                            jour
+                                        </button>
+                                    </td>
+                                </form>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- FIn DIV Fiche FRais -->
+        </div>
+    <?php endif; ?>
+    <hr id="separateur2"/>
+    <?php if (empty($this->LesFraisHorsForfait)): ?>
+        <h3>Pas de Frais Hors Forfaits Enregistré</h3>
+    <?php else : ?>
+        <div id="elementshorsforfait">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover table-striped table-condensed">
+                            <thead>
+                            <h3>Hors Forfait</h3><br>
+                            <tr class="bg-primary">
+                                <th>Date</th>
+                                <th>Description</th>
+                                <th>Montant
+                                    <br>
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php foreach ($this->LesFraisHorsForfait as $key => $val): ?>
+                                <tr>
+                                    <td><?php echo $val['date'] ?></td>
+                                    <td><?php echo $val['libelle'] ?></td>
+                                    <td><?php echo $val['montant'] ?></td>
+                                    <td class="text-center bg-success"><a href="delete" class="delete">SUPPRIMER</a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
 
 
-                        </tbody>
-                    </table>
-                    <!-- FIN DIV hors forfait-->
+                            </tbody>
+                        </table>
+                        <!-- FIN DIV hors forfait-->
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-    <hr id="separateur3">
-    <?php endif;?>
+        <hr id="separateur3">
+    <?php endif; ?>
     <div id="ack" class="alert">
     </div>
     <div id="horsforfait">
@@ -137,7 +146,8 @@
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label class="control-label" for="formInput25">Description &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                        <label class="control-label" for="formInput25">Description &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                         </label>
                         <input type="text" class="desc form-control" name="libelle_hf[]">
                     </div>
@@ -146,7 +156,7 @@
                     <div class="form-group">
                         <label class="control-label" for="formInput7">Montant&nbsp;
                         </label>
-                        <input type="text" class="montant form-control number-only"  name="montant[]">
+                        <input type="text" class="montant form-control number-only" name="montant[]">
                     </div>
                 </div>
             </div>

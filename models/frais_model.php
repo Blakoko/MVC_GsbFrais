@@ -12,7 +12,9 @@
         {
             parent::__construct();
 
+
         }
+
 
 
         /**
@@ -54,7 +56,7 @@
             inner join statuts on fichefrais.id_statut = statuts.id
             WHERE id_user =:id
             AND mois = :mois 
-            AND statuts.id=1
+            /*AND statuts.id=1*/
             ORDER BY id_types ASC', [':id' => $id, ':mois' => $mois]);
         }
 
@@ -73,9 +75,10 @@
 
             return $this->db->select('SELECT * from fichefrais
             inner join fraishorsforfaits on fichefrais.id = fraishorsforfaits.id_fichefrais
+            inner join situation on fraishorsforfaits.situation_id = situation.id_situation
             WHERE id_user =:id
             AND mois = :mois
-            AND id_statut=1', [':id' => $id, ':mois' => $mois]);
+            /*AND id_statut=1*/', [':id' => $id, ':mois' => $mois]);
         }
 
         /**
@@ -210,7 +213,6 @@
             $data = [];
             $data['type'] = $_POST['type'];
             $data['quantite'] = $_POST['quantite'];
-            //$data['montant'] = $_POST['montant'];
             //$date = date('Y-m-d');
             //$verif = date('Y-m-d', strtotime('-1 year'));
 
@@ -220,13 +222,13 @@
 
             for ($i = 0; $i < $compt; $i++) {
 
-                 if(!is_numeric($data['montant'][ $i ]))
+                 if(!is_numeric($data['quantite'][ $i ]))
                 {
-                    echo "le champ doit etre numerique</br>";
+                    echo "le champ doit etre numerique";
                     exit;
                 }
 
-                else if ($data['montant'] == "")
+                else if (empty($data['quantite']))
                 {
                     echo "montant vide";
                     exit;
@@ -274,7 +276,8 @@
         public function supprimerFraisHorsForfait($id)
         {
 
-            return $this->db->delete('');
+
+            $this->db->delete('fraishorsforfaits',"id = '$id'");
         }
 
         /**
@@ -369,9 +372,9 @@
 
                 echo 'YHIHAAAAAAAAAAAAAAAAAAAAA';
 
-            } else {
-                $this->db->insert('fichefrais', ['id_test' => $id]);
             }
+                $this->db->insert('fichefrais', ['id_user' => $id]);
+
 
         }
 

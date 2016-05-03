@@ -14,17 +14,6 @@
             parent::__construct();
         }
 
-        public function listformations($id)
-        {
-            return $this->db->select('SELECT formation.idFormation,libelle_formation,date_formation,nbrplace,nom_formateur,categorie.libelle ,((nbrplace) - Count( * )) AS placerestante
-            FROM inscrire
-            INNER JOIN formation,categorie,formateur
-            WHERE formation.idFormation = inscrire.idFormation
-            AND categorie_idCategorie = categorie.idCategorie
-            AND formateur_id_Formateur = formateur.id_Formateur
-            AND membre_id=:id
-            GROUP BY formation.idFormation', [':id' => $id]);
-        }
 
         public function monprofil($id)
         {
