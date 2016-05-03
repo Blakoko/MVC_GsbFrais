@@ -122,11 +122,28 @@ $(document).ready(function(){
         }
 
     });*/
+
+    $("button.loadModal").click(function(){
+        $.post(
+            $("#sForm").attr("action"),
+            $("#sForm:input").serializeArray(),
+            function () {
+
+                $("div.modal-body").load("popup #attention");
+                $("#myModal").modal()
+            });
+        $("#sForm").submit(function () {
+            return false;
+        });
+    });
+
+
+
+
 });
 /***
  * Fin Chargement page
  */
-
 
 $(function ladate(){
     $( ".datepicker" ).datepicker($Datedata);

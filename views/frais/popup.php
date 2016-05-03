@@ -1,4 +1,5 @@
 <div class="col-md-10 bg-warning" id="popup_suivi">
+    <div id="attention">
     <div class="row bg-primary" id="Titre">
         <h1>Fiche de Frais de :</h1>
     </div>
@@ -20,7 +21,7 @@
                 </thead>
                 <tbody>
                 <tr class="repeat">
-                    <td></td>
+                    <td><?php var_dump($_POST)?></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -69,6 +70,5 @@
             <button type="button" class="btn btn-primary btn-sm btn-block">Valider</button>
         </div>
     </div>
+    </div>
 </div>
-<?php var_dump($_POST)?>
-<?echo json_encode($_POST);?>

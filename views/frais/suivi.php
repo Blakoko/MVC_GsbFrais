@@ -41,10 +41,10 @@
                     <td><?php echo $value['date']?></td>
                     <td><?php echo $value['libelle']?></td>
                     <td>
-                        <form action="popup" method="post">
+                        <form id="sForm" action="popup" method="post">
                             <input name="id" type="hidden" value="<?php echo $value['id']?>">
                         <input name="mois" type="hidden" value="<?php echo $value['mois']?>">
-                        <button type="submit" class="btn btn-default btn-block button" >Afficher</button>
+                        <button type="button" class="loadModal btn btn-default">Afficher</button>
                         </form>
                     </td>
                 </tr>
@@ -52,9 +52,28 @@
 
                 </tbody>
             </table>
-
         </div>
     </div>
 </div>
-<?php var_dump($_POST)?>
+ 
+ <div id="myModal" class="modal fade" role="dialog">
+     <div class="modal-dialog">
+
+         <!-- Modal content-->
+         <div class="modal-content">
+             <div class="modal-header">
+                 <button type="button" class="close" data-dismiss="modal">&times;</button>
+                 <h4 class="modal-title"></h4>
+             </div>
+             <div class="modal-body">
+                 
+             </div>
+             <div class="modal-footer">
+                 <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+             </div>
+         </div>
+
+     </div>
+ </div>
+
  
