@@ -30,7 +30,7 @@
         <?php if (Session::get('loggedIn')): ?>
             <div class="col-md-2" id="gauche">
                 <h3>BIENVENUE</h3>
-                <h4><?php echo Session::get('prenom') ?> <?php echo Session::get('nom') ?></h4>
+                <h4><?php echo Session::get('prenom') ?>&nbsp;<?php echo Session::get('nom') ?></h4>
                 <ul class="list-group">
 
                     <?php if (Session::get('profil') == 1): ?>
@@ -46,4 +46,4 @@
             </div>
         <?php endif; ?>
 
-        <?php var_dump($_SESSION) ?>
+        <?php //var_dump($_SESSION) ?>

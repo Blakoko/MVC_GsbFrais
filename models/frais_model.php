@@ -12,7 +12,6 @@
         {
             parent::__construct();
 
-
         }
 
 
@@ -48,13 +47,11 @@
          */
         public function _getLesFraisForfait($id, $mois)
         {
-
-
             return $this->db->select('SELECT * from fichefrais
             inner join fraisforfaits on fichefrais.id = fraisforfaits.id_fichefrais
             inner join statuts on fichefrais.id_statut = statuts.id
             WHERE id_user =:id
-            AND mois = :mois 
+            AND fichefrais.mois = :mois 
             /*AND statuts.id=1*/
             ORDER BY id_types ASC', [':id' => $id, ':mois' => $mois]);
         }
@@ -70,13 +67,11 @@
          */
         public function _getLesFraisHorsForfait($id, $mois)
         {
-
-
             return $this->db->select('SELECT * from fichefrais
             inner join fraishorsforfaits on fichefrais.id = fraishorsforfaits.id_fichefrais
             inner join situation on fraishorsforfaits.situation_id = situation.id_situation
             WHERE id_user =:id
-            AND mois = :mois
+            AND fichefrais.mois = :mois
             /*AND id_statut=1*/', [':id' => $id, ':mois' => $mois]);
         }
 
@@ -168,16 +163,13 @@
                     exit;
 
                 } else if (($verif < $data['date_hf'][ $i ]) && ($data['date_hf'][ $i ] < $date)) {
-                    $this->db->insert('test', [
+                    $this->db->insert('fraishorsforfaits', [
                         'date'    => $data['date_hf'][ $i ],
                         'libelle' => $data['libelle_hf'][ $i ],
                         'montant' => $data['montant'][ $i ],
-                        'id_user' => $id[0]['max'],
-
-
+                        'id_fichefrais' => $id[0]['max'],
                     ]);
                     {
-
 
                     }
 
@@ -201,7 +193,7 @@
             $data = [];
             $data['type'] = $_POST['type'];
             $data['quantite'] = $_POST['quantite'];
-            //$date = date('Y-m-d');
+            $date = date('Ym');
             //$verif = date('Y-m-d', strtotime('-1 year'));
 
             //Compter le nombre d'entrée
@@ -216,16 +208,17 @@
                 } else if (empty($data['quantite'])) {
                     echo "montant vide";
                     exit;
-                } /* else if (preg_match("/\d{4}\-\d{2}-\d{2}/", implode("|", $data['date_hf'])) == false)
+                }/*else if (preg_match("/\d{4}\-\d{2}-\d{2}/", implode("|", $data['date_hf'])) == false)
                 {
                     echo "La date doit être du format Année/Mois/Jour";
                     exit;
                 }*/
                 else {
-                    $this->db->insert('test2', [
-                        'type'          => $data['type'][ $i ],
+                    $this->db->insert('fraisforfaits', [
+                        'id_types'          => $data['type'][ $i ],
                         'quantite'      => $data['quantite'][ $i ],
                         'id_fichefrais' => $id[0]['max'],
+                        'mois' => $date,
 
                     ]);
 
@@ -253,11 +246,11 @@
          * Supprime le frais hors forfait dont l'id est passé en argument
          * @param $idFrais
          */
-        public function supprimerFraisHorsForfait($id)
-        {
-
-
-            $this->db->delete('fraishorsforfaits', "id = '$id'");
+        public function _supprimerFraisHorsForfait($id)
+        {       
+            $id_user=Session::get('id');
+            $this->db->delete('fraishorsforfaits', "id_fichefrais in (select fichefrais.id from fichefrais
+              where fichefrais.id_user='$id_user' AND fichefrais.id_statut='1')","id='$id'");
         }
 
         /**
@@ -359,7 +352,7 @@
 
             if ($count > 0) {
 
-                echo 'YHIHAAAAAAAAAAAAAAAAAAAAA';
+                //echo 'YHIHAAAAAAAAAAAAAAAAAAAAA';
 
             }
             $this->db->insert('fichefrais', ['id_user' => $id]);

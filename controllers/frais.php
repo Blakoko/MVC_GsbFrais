@@ -131,6 +131,8 @@
             $this->view->VeriFicheFrais = $this->model->_VeriFicheFrais($id);
             $this->view->LesFraisForfait = $this->model->_getLesFraisForfait($id, $mois);
             $this->view->LesFraisHorsForfait = $this->model->_getLesFraisHorsForfait($id, $mois);
+
+            echo ($id);
             //charge la vue saisir.php
             $this->view->render('frais/saisir');
         }
@@ -148,6 +150,12 @@
             exit;
 
 
+        }
+
+        public function delete($id)
+        {
+            $this->model->_supprimerFraisHorsForfait($id);
+            header('location:'.URL);
         }
 
         /**

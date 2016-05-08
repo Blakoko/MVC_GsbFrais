@@ -1,9 +1,8 @@
 
-
 body {
- background-image: url('http://localhost/BTS/Mvc_GsbFormation/public/img/background.png');
-  background-repeat: no-repeat;
-   background-attachment: fixed;
+    background-image: url('http://localhost/BTS/Mvc_GsbFormation/public/img/background.png');
+    background-repeat: no-repeat;
+    background-attachment: fixed;
 }
 
 #header-logo{
@@ -62,4 +61,8 @@ div#atk.alert{
     font-style: normal;
     font-size: medium;
     background-color: pink;
+}
+
+hr{
+    color: #333333;
 }

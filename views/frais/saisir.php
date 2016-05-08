@@ -116,7 +116,7 @@
                                     <td><?php echo $val['date'] ?></td>
                                     <td><?php echo $val['libelle'] ?></td>
                                     <td><?php echo $val['montant'] ?></td>
-                                    <td class="text-center bg-success"><a href="delete" class="delete">SUPPRIMER</a>
+                                    <td class="text-center bg-success"><a href="delete/<?php echo $val['id'] ?>" class="delete">SUPPRIMER</a>
                                     </td>
                                 </tr>
                             <?php endforeach; ?>
