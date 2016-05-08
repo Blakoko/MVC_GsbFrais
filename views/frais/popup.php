@@ -32,7 +32,7 @@
     </div>
     <div class="row" id="HorsForfait">
         <h1>Hors Forfait</h1>
-        <h2><?php print_r($_POST)?></h2>
+        <h2>Montant:</h2>
         <div class="table-responsive">
             <table class="table table-striped table-bordered table-hover table-condensed">
                 <thead>

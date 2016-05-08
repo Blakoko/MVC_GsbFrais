@@ -30,13 +30,12 @@
         <?php if (Session::get('loggedIn')): ?>
             <div class="col-md-2" id="gauche">
                 <h3>BIENVENUE</h3>
-                <h4><?php echo Session::get('prenom') ?><?php echo Session::get('nom') ?></h4>
+                <h4><?php echo Session::get('prenom') ?> <?php echo Session::get('nom') ?></h4>
                 <ul class="list-group">
 
                     <?php if (Session::get('profil') == 1): ?>
                         <li class="list-group-item"><a href="<?php echo URL ?>frais/validation">Validation</a></li>
                         <li class="list-group-item"><a href="<?php echo URL ?>frais/suivi">Suivi</a></li>
-                        <li class="list-group-item"><a href="<?php echo URL ?>frais/popup">Popup</a></li>
                     <?php else: ?>
                         <li class="list-group-item"><a href="<?php echo URL ?>frais/saisir">Nouveau</a></li>
                         <li class="list-group-item"><a href="<?php echo URL ?>frais/selectionmois">Consulter</a></li>

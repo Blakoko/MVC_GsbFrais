@@ -28,12 +28,17 @@
 
         public function moisdispo()
         {
-            $id = $_POST['id_user'];
-            $lesmois = ($this->model->_getLesMoisDisponibles($id));
-            $cpt = count($lesmois);
-            echo '<option value="">--Choisir Un Mois--</option>';
-            for ($i = 0; $i < $cpt; $i++) {
-                echo '<option' . ' value=' . $lesmois[ $i ]['mois'] . '>' . $lesmois[ $i ]['mois'] . '</option>';
+            if(!empty($_POST)) {
+                $id = $_POST['id_user'];
+
+                $lesmois = ($this->model->_getLesMoisDisponibles($id));
+                $cpt = count($lesmois);
+                echo '<option value="">--Choisir Un Mois--</option>';
+                for ($i = 0; $i < $cpt; $i++) {
+                    echo '<option' . ' value=' . $lesmois[ $i ]['mois'] . '>' . $lesmois[ $i ]['mois'] . '</option>';
+                }
+            } else{
+                header('location:' .URL.'');
             }
         }
 
@@ -55,24 +60,31 @@
 
         public function popup()
         {
-            if (Session::get('profil') == 1) {
+            if(!empty($_POST)) {
 
-                $id = $_POST['id'];
-                $mois = $_POST['mois'];
-                
-                
-                $this->view->LesFraisForfait = $this->model->_getLesFraisForfait($id, $mois);
-                $this->view->LesFraisHorsForfait = $this->model->_getLesFraisHorsForfait($id, $mois);
-                $this->view->situationfiche = $this->model->_getSituationFiche($id,$mois);
-                $this->view->lestatuts = $this->model->_getLestatuts();
-                $this->view->InfoVisiteur = $this->model->_getLeVisiteur($id);
-                //charge la vue popup.php
-                $this->view->render('frais/popup');
+                if (Session::get('profil') == 1) {
+
+                    $id = $_POST['id'];
+                    $mois = $_POST['mois'];
 
 
-            } else {
-                header('location: ' . URL . '');
+                    $this->view->LesFraisForfait = $this->model->_getLesFraisForfait($id, $mois);
+                    $this->view->LesFraisHorsForfait = $this->model->_getLesFraisHorsForfait($id, $mois);
+                    $this->view->situationfiche = $this->model->_getSituationFiche($id, $mois);
+                    $this->view->lestatuts = $this->model->_getLestatuts();
+                    $this->view->InfoVisiteur = $this->model->_getLeVisiteur($id);
+                    //charge la vue popup.php
+                    $this->view->render('frais/popup');
+
+
+                } else {
+                    header('location: ' . URL . '');
+                }
             }
+            else {
+                header('location:' . URL);
+            }
+
         }
 
         public function validation()
@@ -173,12 +185,10 @@
             ///Charge Les Fonctions  du model 
             $this->view->LaSituation = $this->model->_getLasituation();
             $this->view->LesMoisDisponibles = $this->model->_getLesMoisDisponibles($id);
-            $fraisforfait = ($this->view->LesFraisForfait = $this->model->_getLesFraisForfait($id, $mois));
-            $fraishorsforfait = ($this->view->LesFraisHorsForfait = $this->model->_getLesFraisHorsForfait($id, $mois));
+            $this->view->LesFraisForfait = $this->model->_getLesFraisForfait($id, $mois);
+            $this->view->LesFraisHorsForfait = $this->model->_getLesFraisHorsForfait($id, $mois);
             //charge la vue selectmois.php
             $this->view->render('frais/selectmois');
-            var_dump($fraisforfait);
-            var_dump($fraishorsforfait);
-            echo json_encode($fraishorsforfait);
+
         }
     }
