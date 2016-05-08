@@ -1,10 +1,8 @@
 <div class="col-md-10 bg-warning" id="popup_suivi">
     <div id="attention">
-    <div class="row bg-primary" id="Titre">
-        <h1>Fiche de Frais de :</h1>
-    </div>
     <div class="row" id="Titre">
-        <h3>Etat:</h3>
+        <h1><?php echo($this->InfoVisiteur[0]['nom'])?></h1>
+        <h3>Etat: <?php echo($this->situationfiche[0]['libelle'])?></h3>
         <h3>Montant valide:</h3>
     </div>
     <div class="row" id="FraisauForfait">
@@ -20,18 +18,21 @@
                 </tr>
                 </thead>
                 <tbody>
+                <?php// foreach ($this->LesFraisForfait as $key =>$val):?>
                 <tr class="repeat">
-                    <td><?php var_dump($_POST)?></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><?php echo $this->LesFraisForfait[0]['quantite'] ?></td>
+                    <td><?php echo $this->LesFraisForfait[1]['quantite'] ?></td>
+                    <td><?php echo $this->LesFraisForfait[2]['quantite'] ?></td>
+                    <td><?php echo $this->LesFraisForfait[3]['quantite'] ?></td>
                 </tr>
+                <?php //endforeach;?>
                 </tbody>
             </table>
         </div>
     </div>
     <div class="row" id="HorsForfait">
         <h1>Hors Forfait</h1>
+        <h2><?php print_r($_POST)?></h2>
         <div class="table-responsive">
             <table class="table table-striped table-bordered table-hover table-condensed">
                 <thead>
@@ -72,3 +73,4 @@
     </div>
     </div>
 </div>
+

@@ -2,7 +2,7 @@
     <div id="fraisforfait">
         <div class="row">
             <h3>Frais au forfait</h3>
-            <div id="atk" class="alert"></div>
+            <div id="atk" class=""></div>
             <form id="formff" action="valfraisforfaits" method="post">
                 <div>
                     <div class="repeat1">
@@ -131,7 +131,7 @@
         </div>
         <hr id="separateur3">
     <?php endif; ?>
-    <div id="ack" class="alert">
+    <div id="ack" class="">
     </div>
     <div id="horsforfait">
     </div>

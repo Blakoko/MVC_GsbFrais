@@ -5,8 +5,8 @@
 var $Confirmation = 'Êtes-vous sûr?';
 var $Datedata = {
     yearRange: '-1:+0',
-    minDate:'-1Y',
-    maxDate:'+0',
+    minDate: '-1Y',
+    maxDate: '+0',
     firstDay: 1,
     altField: ".datepicker",
     closeText: 'Fermer',
@@ -26,30 +26,30 @@ var $Datedata = {
  * Demarrer au Chargement de la page
  *
  * */
-$(document).ready(function(){
+$(document).ready(function () {
 
 
 //------//
     $("button#btn2").click(function () {
 
         //EMPECHER VALEUR VIDE
-        if ($(".montant").val() =="" || $(".datepicker").val() =="" || $(".desc").val()=="")
-            $("div#ack").html("Remplissez les champs");
+        if ($(".montant").val() == "" || $(".datepicker").val() == "" || $(".desc").val() == "")
+            $("div#ack").addClass("alert").html("Remplissez les champs");
 
-            //XHR poster le formulaire
+        //XHR poster le formulaire
         else
             $.post($("#myform").attr("action"),
                 $("#myform :input").serializeArray(),
                 function (data) {
                     $("div#ack").html(data);
-                    if(data==''){
+                    if (data == '') {
                         alert('Ajouté'),
-                        window.location ='saisir';
+                            window.location = 'saisir';
                     }
 
                 });
 
-        $("#myform").submit( function(){
+        $("#myform").submit(function () {
             return false;
 
         });
@@ -61,8 +61,8 @@ $(document).ready(function(){
     $("button#btn1").click(function () {
 
         //EMPECHER VALEUR VIDE
-        if ($(".type").val() =="" || $(".quantite").val() =="")
-            $("div#atk").html("Remplissez les champs");
+        if ($(".type").val() == "" || $(".quantite").val() == "")
+            $("div#atk").addClass("alert").html("Remplissez les champs");
 
         //XHR poster le formulaire
         else
@@ -71,14 +71,14 @@ $(document).ready(function(){
 
                 function (data) {
                     $("div#atk").html(data);
-                    if(data=='ajouté'){
+                    if (data == '') {
                         alert('Ajouté'),
-                        window.location ='saisir';
+                            window.location = 'saisir';
                     }
 
                 });
 
-        $("#formff").submit( function(){
+        $("#formff").submit(function () {
             return false;
 
         });
@@ -87,26 +87,26 @@ $(document).ready(function(){
 //--//
 
     /*$('#formhf').submit(function() {
-        if ($.trim($(".montant").val()) === "" || $.trim($(".datepicker").val()) === "" || $.trim($(".desc").val()) === "" ) {
-            alert('Remplissez Les champs');
-            return false;
-        }
-    });*/
+     if ($.trim($(".montant").val()) === "" || $.trim($(".datepicker").val()) === "" || $.trim($(".desc").val()) === "" ) {
+     alert('Remplissez Les champs');
+     return false;
+     }
+     });*/
 
     //NE RENTRER QUE DES CHIFFRES
-    $('.number-only').keyup(function(e) {
-            if(this.value!='-')
-                while(isNaN(this.value))
-                    this.value = this.value.split('').reverse().join('').replace(/[\D]/i,'')
+    $('.number-only').keyup(function (e) {
+            if (this.value != '-')
+                while (isNaN(this.value))
+                    this.value = this.value.split('').reverse().join('').replace(/[\D]/i, '')
                         .split('').reverse().join('');
         })
-        .on("cut copy paste",function(e){
+        .on("cut copy paste", function (e) {
             e.preventDefault();
         });
 
     //POPUP CONFIRMATION LIEN
-    $("a.delete").click(function(e){
-        if(!confirm($Confirmation)){
+    $("a.delete").click(function (e) {
+        if (!confirm($Confirmation)) {
             e.preventDefault();
             return false;
         }
@@ -115,29 +115,28 @@ $(document).ready(function(){
 
     //POPUP CONFIRMATION BOUTON
     /*
-    $("button#btn2").click(function (e) {
-        if(!confirm($Confirmation)){
-            e.preventDefault();
-            return false;
-        }
+     $("button#btn2").click(function (e) {
+     if(!confirm($Confirmation)){
+     e.preventDefault();
+     return false;
+     }
 
-    });*/
+     });*/
 
-    $("button.loadModal").click(function(){
-        $.post(
-            $("#sForm").attr("action"),
-            $("#sForm:input").serializeArray(),
-            function () {
+    //load modal//
+    /*$("button.loadModal").click(function(){
+     $.post(
+     $("#sForm").attr("action"),
+     $("#sForm:input").serializeArray(),
+     function () {
 
-                $("div.modal-body").load("popup #attention");
-                $("#myModal").modal()
-            });
-        $("#sForm").submit(function () {
-            return false;
-        });
-    });
-
-
+     $("div.modal-body").load("popup #attention");
+     $("#myModal").modal()
+     });
+     $("#sForm").submit(function () {
+     return false;
+     });
+     });*/
 
 
 });
@@ -145,13 +144,34 @@ $(document).ready(function(){
  * Fin Chargement page
  */
 
-$(function ladate(){
-    $( ".datepicker" ).datepicker($Datedata);
+
+$(function popup1() {
+    $("button.loadModal").each(function (i) {
+        $(this).click(function () {
+            $.post("popup",
+                $(".sForm" + (i)).serialize(),
+                function (data) {
+                    var content = $(data).find("div#attention");
+                    $("div.modal-body").html(content);
+                    $("#myModal").modal()
+                }
+            );
+            $('.sForm').submit(function () {
+                return false;
+            })
+        });
+    });
+});
+
+
+//datepicker
+$(function ladate() {
+    $(".datepicker").datepicker($Datedata);
 });
 
 //repetition
-$(function repet(){
-    $('.repeat').click(function(){
+$(function repet() {
+    $('.repeat').click(function () {
 
         var $clone = $('.repeat2:last').clone();
         $clone.find('input').val('').end();
@@ -162,8 +182,8 @@ $(function repet(){
 
 
 ///
-$(function repet2(){
-    $('.repeatx').click(function(){
+$(function repet2() {
+    $('.repeatx').click(function () {
 
         var $clone = $('.repeat1:last').clone();
         $clone.find('input').val('').end();
@@ -178,8 +198,8 @@ function getMois(val) {
     $.ajax({
         type: "POST",
         url: "moisdispo",
-        data:'id_user='+val,
-        success: function(data){
+        data: 'id_user=' + val,
+        success: function (data) {
             $("#list_mois").html(data);
         }
     });

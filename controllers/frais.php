@@ -40,12 +40,12 @@
         public function suivi()
         {
             if (Session::get('profil') == 1) {
-
+                $id = $_POST['id'];
                 $mois = $_POST['mois'];
                 $this->view->js = ['frais/js/default.js'];
                 $this->view->Lesinfos = $this->model->_getLesInfosFicheFrais($mois);
                 $this->view->ToutLesMois = $this->model->_getToutLesMois();
-
+                $this->view->InfoVisiteur = $this->model->_getLeVisiteur($id);
                 //charge la vue suivie.php
                 $this->view->render('frais/suivi');
             } else {
@@ -56,19 +56,20 @@
         public function popup()
         {
             if (Session::get('profil') == 1) {
-                $mois = $_POST['mois'];
+
                 $id = $_POST['id'];
-
-                $fraisforfait = ($this->view->LesFraisForfait = $this->model->_getLesFraisForfait($id, $mois));
-                $fraishorsforfait = ($this->view->LesFraisHorsForfait = $this->model->_getLesFraisHorsForfait($id, $mois));
-
+                $mois = $_POST['mois'];
+                
+                
+                $this->view->LesFraisForfait = $this->model->_getLesFraisForfait($id, $mois);
+                $this->view->LesFraisHorsForfait = $this->model->_getLesFraisHorsForfait($id, $mois);
+                $this->view->situationfiche = $this->model->_getSituationFiche($id,$mois);
                 $this->view->lestatuts = $this->model->_getLestatuts();
-
+                $this->view->InfoVisiteur = $this->model->_getLeVisiteur($id);
                 //charge la vue popup.php
                 $this->view->render('frais/popup');
 
-                var_dump($fraisforfait);
-                var_dump($fraishorsforfait);
+
             } else {
                 header('location: ' . URL . '');
             }

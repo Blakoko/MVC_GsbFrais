@@ -16,7 +16,6 @@
         }
 
 
-
         /**
          * Retourne le dernier id enregistré d'une fiche frais
          * en fonction du mois et de l'id du visiteur.
@@ -158,42 +157,31 @@
 
             for ($i = 0; $i < $compt; $i++) {
 
-                if (!is_numeric($data['montant'][ $i ]))
-                {
+                if (!is_numeric($data['montant'][ $i ])) {
                     echo "le champ doit etre numerique</br>";
                     exit;
-                }
-                else if ($data['montant'] == "")
-                {
+                } else if ($data['montant'] == "") {
                     echo "montant vide";
                     exit;
-                }
-                else if (preg_match("/\d{4}\-\d{2}-\d{2}/", implode("|", $data['date_hf'])) == false)
-                {
+                } else if (preg_match("/\d{4}\-\d{2}-\d{2}/", implode("|", $data['date_hf'])) == false) {
                     echo "La date doit être du format Année - Mois - Jour";
                     exit;
 
-                }
-
-
-                else if (($verif < $data['date_hf'][ $i ]) && ($data['date_hf'][ $i ] < $date))
-                {
+                } else if (($verif < $data['date_hf'][ $i ]) && ($data['date_hf'][ $i ] < $date)) {
                     $this->db->insert('test', [
                         'date'    => $data['date_hf'][ $i ],
                         'libelle' => $data['libelle_hf'][ $i ],
                         'montant' => $data['montant'][ $i ],
-                        'id_user'=> $id[0]['max'],
+                        'id_user' => $id[0]['max'],
 
 
                     ]);
                     {
 
 
-                }
+                    }
 
-                }
-
-                else{
+                } else {
 
                     echo "Date d'enregistrement du frais depassé de de plus de 1 an<br/>";
                     exit;
@@ -222,32 +210,24 @@
 
             for ($i = 0; $i < $compt; $i++) {
 
-                 if(!is_numeric($data['quantite'][ $i ]))
-                {
+                if (!is_numeric($data['quantite'][ $i ])) {
                     echo "le champ doit etre numerique";
                     exit;
-                }
-
-                else if (empty($data['quantite']))
-                {
+                } else if (empty($data['quantite'])) {
                     echo "montant vide";
                     exit;
-                }
-
-
-               /* else if (preg_match("/\d{4}\-\d{2}-\d{2}/", implode("|", $data['date_hf'])) == false)
+                } /* else if (preg_match("/\d{4}\-\d{2}-\d{2}/", implode("|", $data['date_hf'])) == false)
                 {
                     echo "La date doit être du format Année/Mois/Jour";
                     exit;
                 }*/
-                else
-                {
-                $this->db->insert('test2', [
-                    'type'      => $data['type'][ $i ],
-                    'quantite'      => $data['quantite'][ $i ],
-                    'id_fichefrais' => $id[0]['max'],
+                else {
+                    $this->db->insert('test2', [
+                        'type'          => $data['type'][ $i ],
+                        'quantite'      => $data['quantite'][ $i ],
+                        'id_fichefrais' => $id[0]['max'],
 
-                ]);
+                    ]);
 
 
                 }
@@ -277,7 +257,7 @@
         {
 
 
-            $this->db->delete('fraishorsforfaits',"id = '$id'");
+            $this->db->delete('fraishorsforfaits', "id = '$id'");
         }
 
         /**
@@ -356,6 +336,15 @@
             return $this->db->select('SELECT mois from fichefrais WHERE mois <= (DATE_FORMAT( NOW( ) , "%Y%m" )) group by mois DESC');
         }
 
+        //Recuperer le statut de la fiche en cours(Validation)
+        public function _getSituationFiche($id, $mois)
+        {
+            return $this->db->select('SELECT id_statut ,libelle from fichefrais
+            inner join statuts on fichefrais.id_statut = statuts.id
+            WHERE id_user=:id
+            AND mois=:mois', [':id' => $id, ':mois' => $mois]);
+        }
+
         /**
          * Verifie si une fiche de frais est existante pour le mois en cours.
          * Cree une nouvelle ligne si elle n'existe pas.
@@ -373,7 +362,7 @@
                 echo 'YHIHAAAAAAAAAAAAAAAAAAAAA';
 
             }
-                $this->db->insert('fichefrais', ['id_user' => $id]);
+            $this->db->insert('fichefrais', ['id_user' => $id]);
 
 
         }

@@ -1,6 +1,6 @@
 <?php if (Session::get('loggedIn') == false): ?>
     <div class="col-md-4 col-md-offset-4" id="cpt-user">
-        <div id="ack" class="alert"></div>
+        <div id="ack" class=""></div>
         <div class="panel" id="user-all">
             <div class="panel-heading" id="user">CONNEXION UTILISATEUR</div>
         </div>

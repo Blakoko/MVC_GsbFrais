@@ -43,10 +43,23 @@ div#ack.alert{
     color: red;
     font-style: normal;
     font-size: medium;
+    background-color: pink;
+
 }
+
+div#ack.done
+{
+    font-family: Verdana;
+    color: green;
+    font-style: normal;
+    font-size: medium;
+    background-color: greenyellow;
+}
+
 div#atk.alert{
     font-family: Verdana;
     color: red;
     font-style: normal;
     font-size: medium;
+    background-color: pink;
 }
