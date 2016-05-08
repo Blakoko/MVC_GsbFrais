@@ -109,11 +109,7 @@
 
                 //charge la vue validation.php
                 $this->view->render('frais/validation');
-
-                //Roue LIBRE
-                var_dump($visiteur);
-                var_dump($fraisforfait);
-                var_dump($fraishorsforfait);
+                
             } else {
                 header('location: ' . URL . '');
             }
@@ -155,7 +151,7 @@
         public function delete($id)
         {
             $this->model->_supprimerFraisHorsForfait($id);
-            header('location:'.URL);
+            header('location:'.URL.'frais/saisir');
         }
 
         /**

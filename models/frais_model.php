@@ -86,7 +86,7 @@
          */
         public function majFraisForfait()
         {
-            return $this->db->update('');
+            return $this->db->update('f');
         }
 
         /**
@@ -164,9 +164,9 @@
 
                 } else if (($verif < $data['date_hf'][ $i ]) && ($data['date_hf'][ $i ] < $date)) {
                     $this->db->insert('fraishorsforfaits', [
-                        'date'    => $data['date_hf'][ $i ],
-                        'libelle' => $data['libelle_hf'][ $i ],
-                        'montant' => $data['montant'][ $i ],
+                        'date'          => $data['date_hf'][ $i ],
+                        'libelle'       => $data['libelle_hf'][ $i ],
+                        'montant'       => $data['montant'][ $i ],
                         'id_fichefrais' => $id[0]['max'],
                     ]);
                     {
@@ -215,10 +215,10 @@
                 }*/
                 else {
                     $this->db->insert('fraisforfaits', [
-                        'id_types'          => $data['type'][ $i ],
+                        'id_types'      => $data['type'][ $i ],
                         'quantite'      => $data['quantite'][ $i ],
                         'id_fichefrais' => $id[0]['max'],
-                        'mois' => $date,
+                        'mois'          => $date,
 
                     ]);
 
@@ -247,10 +247,10 @@
          * @param $idFrais
          */
         public function _supprimerFraisHorsForfait($id)
-        {       
-            $id_user=Session::get('id');
+        {
+            $id_user = Session::get('id');
             $this->db->delete('fraishorsforfaits', "id_fichefrais in (select fichefrais.id from fichefrais
-              where fichefrais.id_user='$id_user' AND fichefrais.id_statut='1')","id='$id'");
+              where fichefrais.id_user='$id_user' AND fichefrais.id_statut='1')", "id='$id'");
         }
 
         /**

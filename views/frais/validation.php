@@ -135,7 +135,7 @@
                             <td>
                                 <select size="3" class="form-control" multiple="multiple" name="hf_situation[]" >
                                     <?php foreach ($this->LaSituation as $cle=>$val):?>
-                                        <option value="<?php echo $val['id']?>" <?php if($val['id']==$this->LesFraisHorsForfait[0]['situation_id']):?>selected="selected"<?php endif;?>>
+                                        <option value="<?php echo $val['id_situation']?>" <?php if($val['id_situation']==$this->LesFraisHorsForfait[0]['situation_id']):?>selected="selected"<?php endif;?>>
                                             <?php echo $val['libelle_situation']?>
                                         </option>
                                     <?php endforeach; ?>
@@ -165,4 +165,3 @@
 
 </div>
 <?php var_dump($_POST)?>
-<?php //endif;?>
