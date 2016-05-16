@@ -22,7 +22,7 @@
                         <h3>Fiches Frais<br><br></h3>
                         <tr class="bg-primary">
                             <th>Repas Midi</th>
-                            <th>NuitÃ©e Hotel</th>
+                            <th>Nuitée Hotel</th>
                             <th>Forfait Etape</th>
                             <th>Kilometre</th>
                             <th>Situation</th>

@@ -22,7 +22,7 @@
                         </div>
                         <div class="col-md-5">
                             <div class="form-group">
-                                <label class="control-label" for="formInput27">QuantitÃ© - Nombres</label>
+                                <label class="control-label" for="formInput27">Quantité - Nombres</label>
                                 <input type="text" class="quantite form-control number-only" name="quantite[]">
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                             <h3>Au Forfait</h3><br>
                             <tr class="bg-primary">
                                 <th>Repas Midi</th>
-                                <th>NuitÃ©e Hotel</th>
+                                <th>Nuitée Hotel</th>
                                 <th>Forfait Etape</th>
                                 <th>Frais Kilometriques</th>
                             </tr>
@@ -93,7 +93,7 @@
     <?php endif; ?>
     <hr id="separateur2"/>
     <?php if (empty($this->LesFraisHorsForfait)): ?>
-        <h3>Pas de Frais Hors Forfaits EnregistrÃ©</h3>
+        <h3>Pas de Frais Hors Forfaits Enregistré</h3>
     <?php else : ?>
         <div id="elementshorsforfait">
             <div class="row">

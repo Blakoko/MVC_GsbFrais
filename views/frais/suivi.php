@@ -27,6 +27,7 @@
             <table class="table table-bordered table-striped table-hover table-condensed" id="products">
                 <thead>
                 <tr>
+                    <th>#</th>
                     <th>NOM</th>
                     <th>DATE D'AJOUT</th>
                     <th>STATUT</th>
@@ -38,9 +39,10 @@
                 <?php foreach ($this->Lesinfos as $key => $value): ?>
 
                     <tr class="repeat">
+                        <td><?php echo $key+1 ?></td>
                         <td><?php echo $value['nom'] ?></td>
                         <td><?php echo $value['date'] ?></td>
-                        <td><?php echo $value['libelle'] ?><?php echo $key ?></td>
+                        <td><?php echo $value['libelle'] ?></td>
                         <td>
                             <form class="sForm<?php echo $key ?>" action="popup" method="post">
                                 <input class="id" name="id" type="hidden" value="<?php echo $value['id'] ?>">

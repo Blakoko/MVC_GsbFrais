@@ -16,7 +16,7 @@
 
 
         /**
-         * Retourne le dernier id enregistrÃ© d'une fiche frais
+         * Retourne le dernier id enregistré d'une fiche frais
          * en fonction du mois et de l'id du visiteur.
          * @param $id
          * @param $mois
@@ -28,7 +28,7 @@
         }
 
         /**
-         * Retourne le nombre de justificatif d'un Visiteur pour un mois donnÃ©
+         * Retourne le nombre de justificatif d'un Visiteur pour un mois donné
          * @param $idVisiteur
          * @param $mois sous la forme aaaamm
          * @return le nombre entier de justificatifs
@@ -40,10 +40,10 @@
 
         /**
          * Retourne sous forme d'un tableau associatif toutes les lignes de frais au forfait
-         * concernÃ©es par les deux arguments
+         * concernées par les deux arguments
          * @param $idVisiteur
          * @param $mois sous la forme aaaamm
-         * @return l'id, le libelle et la quantitÃ© sous la forme d'un tableau associatif
+         * @return l'id, le libelle et la quantité sous la forme d'un tableau associatif
          */
         public function _getLesFraisForfait($id, $mois)
         {
@@ -58,9 +58,9 @@
 
         /**
          * Retourne sous forme d'un tableau associatif toutes les lignes de frais hors forfait
-         * concernÃ©es par les deux arguments
-         * La boucle foreach ne peut Ãªtre utilisÃ©e ici car on procÃ¨de
-         * Ã  une modification de la structure itÃ©rÃ©e - transformation du champ date-
+         * concernées par les deux arguments
+         * La boucle foreach ne peut être utilisée ici car on procède
+         * à une modification de la structure itérée - transformation du champ date-
          * @param $idVisiteur
          * @param $mois sous la forme aaaamm
          * @return tous les champs des lignes de frais hors forfait sous la forme d'un tableau associatif
@@ -76,12 +76,12 @@
         }
 
         /**
-         * Met Ã  jour la table ligneFraisForfait
-         * Met Ã  jour la table ligneFraisForfait pour un Visiteur et
-         * un mois donnÃ© en enregistrant les nouveaux montants
+         * Met à jour la table ligneFraisForfait
+         * Met à jour la table ligneFraisForfait pour un Visiteur et
+         * un mois donné en enregistrant les nouveaux montants
          * @param $idVisiteur
          * @param $mois     sous la forme aaaamm
-         * @param $lesFrais tableau associatif de clÃ© idFrais et de valeur la quantitÃ© pour ce frais
+         * @param $lesFrais tableau associatif de clé idFrais et de valeur la quantité pour ce frais
          * @return un tableau associatif
          */
         public function majFraisForfait()
@@ -90,8 +90,8 @@
         }
 
         /**
-         * met Ã  jour le nombre de justificatifs de la table fichefrais
-         * pour le mois et le Visiteur concernÃ©
+         * met à jour le nombre de justificatifs de la table fichefrais
+         * pour le mois et le Visiteur concerné
          * @param $idVisiteur
          * @param $mois sous la forme aaaamm
          */
@@ -114,9 +114,9 @@
 
         //Insertion
         /**
-         * CrÃ©e une nouvelle fiche de frais et les lignes de frais au forfait pour un Visiteur et un mois donnÃ©s
-         * rÃ©cupÃ¨re le dernier mois en cours de traitement, met Ã  'CL' son champs idEtat, crÃ©e une nouvelle fiche de frais
-         * avec un idEtat Ã  'CR' et crÃ©e les lignes de frais forfait de quantitÃ©s nulles
+         * Crée une nouvelle fiche de frais et les lignes de frais au forfait pour un Visiteur et un mois donnés
+         * récupère le dernier mois en cours de traitement, met à 'CL' son champs idEtat, crée une nouvelle fiche de frais
+         * avec un idEtat à 'CR' et crée les lignes de frais forfait de quantités nulles
          * @param $idVisiteur
          * @param $mois sous la forme aaaamm
          */
@@ -146,7 +146,7 @@
             $date = date('Y-m-d');
             $verif = date('Y-m-d', strtotime('-1 year'));
 
-            //Compter le nombre d'entrÃ©e
+            //Compter le nombre d'entrée
             $compt = count($data['date_hf']);
 
 
@@ -159,7 +159,7 @@
                     echo "montant vide";
                     exit;
                 } else if (preg_match("/\d{4}\-\d{2}-\d{2}/", implode("|", $data['date_hf'])) == false) {
-                    echo "La date doit Ãªtre du format AnnÃ©e - Mois - Jour";
+                    echo "La date doit être du format Année - Mois - Jour";
                     exit;
 
                 } else if (($verif < $data['date_hf'][ $i ]) && ($data['date_hf'][ $i ] < $date)) {
@@ -175,7 +175,7 @@
 
                 } else {
 
-                    echo "Date d'enregistrement du frais depassÃ© de de plus de 1 an<br/>";
+                    echo "Date d'enregistrement du frais depassé de de plus de 1 an<br/>";
                     exit;
                 }
 
@@ -196,7 +196,7 @@
             $date = date('Ym');
             //$verif = date('Y-m-d', strtotime('-1 year'));
 
-            //Compter le nombre d'entrÃ©e
+            //Compter le nombre d'entrée
 
             $compt = count($data['type']);
 
@@ -210,7 +210,7 @@
                     exit;
                 }/*else if (preg_match("/\d{4}\-\d{2}-\d{2}/", implode("|", $data['date_hf'])) == false)
                 {
-                    echo "La date doit Ãªtre du format AnnÃ©e/Mois/Jour";
+                    echo "La date doit être du format Année/Mois/Jour";
                     exit;
                 }*/
                 else {
@@ -243,7 +243,7 @@
         }
 
         /**
-         * Supprime le frais hors forfait dont l'id est passÃ© en argument
+         * Supprime le frais hors forfait dont l'id est passé en argument
          * @param $idFrais
          */
         public function _supprimerFraisHorsForfait($id)
@@ -256,7 +256,7 @@
         /**
          * Retourne les mois pour lesquel un Visiteur a une fiche de frais
          * @param $idVisiteur
-         * @return un tableau associatif de clÃ© un mois -aaaamm- et de valeurs l'annÃ©e et le mois correspondant
+         * @return un tableau associatif de clé un mois -aaaamm- et de valeurs l'année et le mois correspondant
          */
         public function _getLesMoisDisponibles($id)
         {
@@ -265,10 +265,10 @@
         }
 
         /**
-         * Retourne les informations d'une fiche de frais d'un Visiteur pour un mois donnÃ©
+         * Retourne les informations d'une fiche de frais d'un Visiteur pour un mois donné
          * @param $idVisiteur
          * @param $mois sous la forme aaaamm
-         * @return un tableau avec des champs de jointure entre une fiche de frais et la ligne d'Ã©tat
+         * @return un tableau avec des champs de jointure entre une fiche de frais et la ligne d'état
          */
         public function _getLesInfosFicheFrais($mois)
         {
@@ -280,8 +280,8 @@
         }
 
         /**
-         * Modifie l'Ã©tat et la date de modification d'une fiche de frais
-         * Modifie le champ idEtat et met la date de modif Ã  aujourd'hui
+         * Modifie l'état et la date de modification d'une fiche de frais
+         * Modifie le champ idEtat et met la date de modif à aujourd'hui
          * @param $idVisiteur
          * @param $mois sous la forme aaaamm
          */
