@@ -1,6 +1,6 @@
 <div class="bg-info col-md-10">
     <div class="form-group" data-pg-collapsed>
-        <label class="control-label" for="formInput11">Field label</label>
+        <label class="control-label" for="formInput11">Selectionner un mois dans la liste</label>
         <form action="" method="post">
             <select id="formInput11" class="form-control" name="val_mois">
                 <option selected="selected">--CHoisir Un mois--</option>
@@ -12,6 +12,7 @@
         </form>
 
     </div>
+    <?php if(!empty($this->LesFraisForfait)):?>
     <hr id="separateur1"/>
     <div id="fichefrais" data-pg-collapsed>
         <div class="row">
@@ -48,6 +49,8 @@
         </div>
         <!-- FIn DIV Fiche FRais -->
     </div>
+    <?php endif;?>
+    <?php if(!empty($this->LesFraisHorsForfait)):?>
     <hr id="separateur2"/>
     <div id="elementshorsforfait" data-pg-collapsed>
         <div class="row">
@@ -79,4 +82,5 @@
             </div>
         </div>
     </div>
+    <?php endif;?>
 </div>

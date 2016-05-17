@@ -6,13 +6,13 @@
         <h3>Montant valide:</h3>
     </div>
     <div class="row" id="FraisauForfait">
-        <h1>Element(s) ForfaitisÃ©</h1>
+        <h1>Element(s) Forfaitisé</h1>
         <div class="table-responsive">
             <table class="table table-bordered table-striped table-hover table-condensed bg-primary">
                 <thead>
                 <tr>
                     <th>Repas Midi</th>
-                    <th>NuitÃ©e</th>
+                    <th>Nuitée</th>
                     <th>Etape</th>
                     <th>Km</th>
                 </tr>

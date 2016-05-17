@@ -64,5 +64,5 @@ div#atk.alert{
 }
 
 hr{
-    color: #333333;
+    border-top: 1px solid black;
 }
