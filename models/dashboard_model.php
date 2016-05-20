@@ -22,13 +22,7 @@
             inner join profiles on users.id_profile = profiles.id  WHERE users.id=:id', [':id' => $id]);
         }
 
-        public function unsubscribe($id)
-        {
-            $idx = Session::get('id');
-            $this->db->delete('inscrire', "idFormation = '$id'", "membre_id = '$idx'");
-        }
-
-        function xhrInsert()
+        /*function xhrInsert()
         {
             $text = $_POST['text'];
             $this->db->insert('data', ['text' => $text]);
@@ -47,10 +41,10 @@
         {
             $id = (int)$_POST['id'];
             $this->db->delete('data', "id = '$id'");
-        }
+        }*/
 
         /*Editer son profil (User)*/
-        public function editprofil($data)
+        /*public function editprofil($data)
         {
 
             $postData = [
@@ -96,6 +90,6 @@
                 $this->db->update('membre', $postData, "`id` ={$data['id']}");
             }
 
-        }
+        }*/
 
     }
