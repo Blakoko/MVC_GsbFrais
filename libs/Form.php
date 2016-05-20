@@ -63,7 +63,11 @@
 
         }
 
-        /** Function de validation */
+        /** Function de validation
+         * @param      $typeOfValidator
+         * @param null $arg
+         * @return $this
+         */
         public function validate($typeOfValidator, $arg = null)
         {
 

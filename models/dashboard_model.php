@@ -19,7 +19,7 @@
         {
 
             return $this->db->select('SELECT * FROM users
-            inner join profiles on users.id_profile = profiles.id  WHERE users.id=:id', [':id' => $id]);
+            INNER JOIN profiles ON users.id_profile = profiles.id  WHERE users.id=:id', [':id' => $id]);
         }
 
         /*function xhrInsert()

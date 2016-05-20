@@ -1,8 +1,6 @@
 
 body {
-    background-image: url('http://localhost/BTS/Mvc_GsbFormation/public/img/background.png');
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    background: url('http://localhost/BTS/Mvc_GsbFormation/public/img/background.png') no-repeat fixed;
 }
 
 #header-logo{

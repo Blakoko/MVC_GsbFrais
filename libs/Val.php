@@ -12,8 +12,8 @@
 
         /**
          * @param $data
-         * @param $arg
          * @return string
+         * @internal param $arg
          */
 
 
