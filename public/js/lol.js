@@ -25,7 +25,7 @@ $(document).ready(function()
                     {
 //Shake animation effect.
                         $('#box').shake();
-                        $("#login").val('Login')
+                        $("#login").val('Login');
                         $("#error").html("<span style='color:#cc0000'>Error:</span> Invalid username and password. ");
                     }
                 }
