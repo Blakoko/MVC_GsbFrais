@@ -28,7 +28,7 @@
 
         public function moisdispo()
         {
-            if(!empty($_POST)) {
+            if (!empty($_POST)) {
                 $id = $_POST['id_user'];
 
                 $lesmois = ($this->model->_getLesMoisDisponibles($id));
@@ -37,8 +37,8 @@
                 for ($i = 0; $i < $cpt; $i++) {
                     echo '<option' . ' value=' . $lesmois[ $i ]['mois'] . '>' . $lesmois[ $i ]['mois'] . '</option>';
                 }
-            } else{
-                header('location:' .URL.'');
+            } else {
+                header('location:' . URL . '');
             }
         }
 
@@ -60,7 +60,7 @@
 
         public function popup()
         {
-            if(!empty($_POST)) {
+            if (!empty($_POST)) {
 
                 if (Session::get('profil') == 1) {
 
@@ -80,8 +80,7 @@
                 } else {
                     header('location: ' . URL . '');
                 }
-            }
-            else {
+            } else {
                 header('location:' . URL);
             }
 
@@ -109,7 +108,7 @@
 
                 //charge la vue validation.php
                 $this->view->render('frais/validation');
-                
+
             } else {
                 header('location: ' . URL . '');
             }
@@ -128,7 +127,7 @@
             $this->view->LesFraisForfait = $this->model->_getLesFraisForfait($id, $mois);
             $this->view->LesFraisHorsForfait = $this->model->_getLesFraisHorsForfait($id, $mois);
 
-            echo ($id);
+            echo($id);
             //charge la vue saisir.php
             $this->view->render('frais/saisir');
         }
@@ -151,7 +150,7 @@
         public function delete($id)
         {
             $this->model->_supprimerFraisHorsForfait($id);
-            header('location:'.URL.'frais/saisir');
+            header('location:' . URL . 'frais/saisir');
         }
 
         /**
@@ -172,6 +171,21 @@
             //var_dump($_POST);
             //unset($data);
             //header('location:' . URL . 'frais/saisir');
+            exit;
+        }
+
+        public function majfiche()
+        {
+            $this->model->majEtatFicheFrais();
+            exit;
+        }
+        
+        public function validationfiche()
+        {
+            $this->model->Val_MajFraisForfait();
+            $this->model->Val_MajFraisHorsForfaits();
+
+            var_dump($_POST);
             exit;
         }
 

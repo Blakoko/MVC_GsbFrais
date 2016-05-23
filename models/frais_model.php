@@ -36,7 +36,7 @@
          */
         public function getNbjustificatifs($id, $mois)
         {
-            return $this->db->select('SELECT nb_justificatifs as justif FROM fichefrais WHERE id_user=:id AND mois=:mois', [':id' => $id, ':mois' => $mois]);
+            return $this->db->select('SELECT nb_justificatifs AS justif FROM fichefrais WHERE id_user=:id AND mois=:mois', [':id' => $id, ':mois' => $mois]);
         }
 
         /**
@@ -49,9 +49,9 @@
          */
         public function _getLesFraisForfait($id, $mois)
         {
-            return $this->db->select('SELECT * from fichefrais
-            inner join fraisforfaits on fichefrais.id = fraisforfaits.id_fichefrais
-            inner join statuts on fichefrais.id_statut = statuts.id
+            return $this->db->select('SELECT *,fraisforfaits.id AS WA FROM fichefrais
+            INNER JOIN fraisforfaits ON fichefrais.id = fraisforfaits.id_fichefrais
+            INNER JOIN statuts ON fichefrais.id_statut = statuts.id
             WHERE id_user =:id
             AND fichefrais.mois = :mois 
             /*AND statuts.id=1*/
@@ -70,9 +70,9 @@
          */
         public function _getLesFraisHorsForfait($id, $mois)
         {
-            return $this->db->select('SELECT * from fichefrais
-            inner join fraishorsforfaits on fichefrais.id = fraishorsforfaits.id_fichefrais
-            inner join situation on fraishorsforfaits.situation_id = situation.id_situation
+            return $this->db->select('SELECT * FROM fichefrais
+            INNER JOIN fraishorsforfaits ON fichefrais.id = fraishorsforfaits.id_fichefrais
+            INNER JOIN situation ON fraishorsforfaits.situation_id = situation.id_situation
             WHERE id_user =:id
             AND fichefrais.mois = :mois
             /*AND id_statut=1*/', [':id' => $id, ':mois' => $mois]);
@@ -87,9 +87,49 @@
          * @internal param sous $mois la forme aaaamm
          * @internal param tableau $lesFrais associatif de clé idFrais et de valeur la quantité pour ce frais
          */
-        public function majFraisForfait()
+        public function Val_MajFraisForfait()
         {
-            return $this->db->update('f');
+            $data = $_POST;
+            $postRepas = [
+                'quantite' => $data['ff_repas']
+                //'id_types'=> 4
+            ];
+            $postNuit = [
+                'quantite' => $data['ff_nuit']
+                //'id_types'=> 2
+            ];
+
+            $postEtape = [
+                'quantite' => $data['ff_etape']
+                //'id_types'=> 1
+            ];
+            $postKm = [
+                'quantite' => $data['ff_km']
+                //'id_types'=> 3
+            ];
+            $this->db->update('fraisforfaits', $postRepas, "`id` = {$data['id_repas']}");
+            $this->db->update('fraisforfaits', $postNuit, "`id` = {$data['id_nuit']}");
+            $this->db->update('fraisforfaits', $postEtape, "`id` = {$data['id_etape']}");
+            $this->db->update('fraisforfaits', $postKm, "`id` = {$data['id_km']}");
+
+        }
+
+        public function Val_MajFraisHorsForfaits()
+        {
+            $data = $_POST;
+            $cpt = count($data['hf_situation']);
+            for ($i = 0; $i < $cpt; $i++) {
+                $postData = [
+                    'date'         => $data['hf_date'][ $i ],
+                    'libelle'      => $data['hf_libelle'][ $i ],
+                    'montant'      => $data['hf_montant'][ $i ],
+                    'situation_id' => $data['hf_situation'][ $i ]
+
+                ];
+
+                $this->db->update('fraishorsforfaits', $postData, "`id` = {$data['id'][$i]}");
+            }
+
         }
 
         /**
@@ -101,7 +141,12 @@
 
         public function majNbJustificatifs()
         {
-            return $this->db->update('');
+            $data = $_POST;
+            $postData =
+                [
+
+                ];
+            $this->db->update('');
         }
 
 
@@ -185,6 +230,14 @@
             }
         }
 
+        /**
+         * @param $id
+         * @return mixed
+         */
+        public function _getLeDernierId($id)
+        {
+            return $this->db->select('SELECT max(id)AS max FROM fichefrais WHERE id_user = :id', [':id' => $id]);
+        }
 
         /**
          * @internal param $data
@@ -238,15 +291,6 @@
         }
 
         /**
-         * @param $id
-         * @return mixed
-         */
-        public function _getLeDernierId($id)
-        {
-            return $this->db->select('SELECT max(id)AS max FROM fichefrais where id_user = :id', [':id' => $id]);
-        }
-
-        /**
          * Supprime le frais hors forfait dont l'id est passé en argument
          * @param $id
          * @internal param $idFrais
@@ -278,11 +322,11 @@
          */
         public function _getLesInfosFicheFrais($mois)
         {
-            return $this->db->select('SELECT users.id as id, concat(prenom," ",nom)as nom , (DATE_FORMAT(dateAjout,"%d-%m-%Y")) as date,libelle,mois from fichefrais
-            inner join users on fichefrais.id_user=users.id
-            inner join statuts on fichefrais.id_statut=statuts.id
-            where id_statut != 1
-            and mois=:mois', [':mois' => $mois]);
+            return $this->db->select('SELECT users.id AS id, concat(prenom," ",nom)AS nom , (DATE_FORMAT(dateAjout,"%d-%m-%Y")) AS date,libelle,mois FROM fichefrais
+            INNER JOIN users ON fichefrais.id_user=users.id
+            INNER JOIN statuts ON fichefrais.id_statut=statuts.id
+            WHERE id_statut != 1
+            AND mois=:mois', [':mois' => $mois]);
         }
 
         /**
@@ -293,7 +337,28 @@
          */
         public function majEtatFicheFrais()
         {
-            return $this->db->update('');
+            $data = $_POST;
+
+            $postData = [
+                'id_statut' => $data['id_statut']
+            ];
+
+            $this->db->update('fichefrais', $postData, "`id` = {$data['id']}");
+        }
+
+
+        public function majValidation()
+        {
+            //$data = $_POST;
+            $postData = [
+
+
+            ];
+
+
+            //return $this->db->update('fraisforfaits', , );
+
+            //return $this->db->update(fraishorsforfaits, , );
         }
 
         /**
@@ -320,7 +385,7 @@
         ///Recuperer Les Visteurs Pour Select
         public function _getVisiteur()
         {
-            return $this->db->select('SELECT id,concat(nom," ",prenom)AS name from users');
+            return $this->db->select('SELECT id,concat(nom," ",prenom)AS name FROM users');
         }
 
         //Recuperer le nom du et prenom du visiteur
@@ -332,14 +397,14 @@
         //Recuper tous les mois disponible en bdd
         public function _getToutLesMois()
         {
-            return $this->db->select('SELECT mois from fichefrais WHERE mois <= (DATE_FORMAT( NOW( ) , "%Y%m" )) group by mois DESC');
+            return $this->db->select('SELECT mois FROM fichefrais WHERE mois <= (DATE_FORMAT( NOW( ) , "%Y%m" )) GROUP BY mois DESC');
         }
 
         //Recuperer le statut de la fiche en cours(Validation)
         public function _getSituationFiche($id, $mois)
         {
-            return $this->db->select('SELECT id_statut ,libelle from fichefrais
-            inner join statuts on fichefrais.id_statut = statuts.id
+            return $this->db->select('SELECT id_statut ,libelle,fichefrais.id AS num FROM fichefrais
+            INNER JOIN statuts ON fichefrais.id_statut = statuts.id
             WHERE id_user=:id
             AND mois=:mois', [':id' => $id, ':mois' => $mois]);
         }
@@ -352,7 +417,7 @@
          */
         public function _VeriFicheFrais($id)
         {
-            $verif = $this->db->prepare('SELECT id,mois from fichefrais WHERE id_user=:id and mois=(DATE_FORMAT(NOW(),"%Y%m"))', [':id' => $id]);
+            $verif = $this->db->prepare('SELECT id,mois FROM fichefrais WHERE id_user=:id AND mois=(DATE_FORMAT(NOW(),"%Y%m"))', [':id' => $id]);
             $verif->execute([':id' => $id]);
             $count = $verif->rowCount();
 

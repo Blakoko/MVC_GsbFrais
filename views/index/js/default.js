@@ -11,9 +11,9 @@ else
     $.post($("#myform").attr("action"),
         $("#myform :input").serializeArray(),
     function (data) {
-        $("div#ack").addClass("alert").html(data)
+        $("div#ack").addClass("alert").html(data);
         if(data=='Succes'){
-            $("div#ack").removeClass("alert").addClass("done")
+            $("div#ack").removeClass("alert").addClass("done");
             window.location ='dashboard';
         }
 

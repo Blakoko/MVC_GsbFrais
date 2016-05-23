@@ -3,6 +3,7 @@
     <div class="row" id="Titre">
         <h1><?php echo($this->InfoVisiteur[0]['nom'])?></h1>
         <h3>Etat: <?php echo($this->situationfiche[0]['libelle'])?></h3>
+        <h3>Etat: <?php echo($this->situationfiche[0]['num'])?></h3>
         <h3>Montant valide:</h3>
     </div>
     <div class="row" id="FraisauForfait">
@@ -57,19 +58,22 @@
         </div>
     </div>
     <div class="row" id="Validation">
+        <form action="majfiche" method="post">
         <div class="col-md-4">
             <h5>Changer le Statut:<br></h5>
         </div>
         <div class="col-md-3">
-            <select class="form-control">
+            <select class="form-control" name="id_statut">
                 <?php foreach ($this->lestatuts as $key => $value):?>
                 <option value="<?php echo $value['id'] ?>"><?php echo $value['libelle'] ?></option>
                 <?php endforeach;?>
             </select>
         </div>
         <div class="col-md-5 text-right">
-            <button type="button" class="btn btn-primary btn-sm btn-block">Valider</button>
+            <input type="hidden" name="id" value="<?php echo($this->situationfiche[0]['num'])?>">
+            <button type="submit" class="btn btn-primary btn-sm btn-block">Valider</button>
         </div>
+        </form>
     </div>
     </div>
 </div>

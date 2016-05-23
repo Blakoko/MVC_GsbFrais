@@ -41,7 +41,7 @@
     <?php else : ?>
         <h3><?php echo $this->LeVisiteur[0]['nom'] ?></h3>
     <?php endif; ?>
-    <form action="" method="post">
+    <form action="validationfiche" method="post">
         <?php if (empty($this->LesFraisForfait)): ?>
             <div class="alert alert-danger" role="alert">
                 <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
@@ -69,18 +69,22 @@
                             <td>
                                 <input type="text" class="form-control" placeholder="" name="ff_repas"
                                        value="<?php echo $this->LesFraisForfait[0]['quantite'] ?>">
+                                <input type="hidden" name="id_repas" value="<?php echo $this->LesFraisForfait[0]['WA']?>">
                             </td>
                             <td>
                                 <input type="text" class="form-control" placeholder="" name="ff_nuit"
                                        value="<?php echo $this->LesFraisForfait[1]['quantite'] ?>">
+                                <input type="hidden" name="id_nuit" value="<?php echo $this->LesFraisForfait[1]['WA']?>">
                             </td>
                             <td>
                                 <input type="text" class="form-control" placeholder="" name="ff_etape"
                                        value="<?php echo $this->LesFraisForfait[2]['quantite'] ?>">
+                                <input type="hidden" name="id_etape" value="<?php echo $this->LesFraisForfait[2]['WA']?>">
                             </td>
                             <td>
                                 <input type="text" class="form-control" placeholder="" name="ff_km"
                                        value="<?php echo $this->LesFraisForfait[3]['quantite'] ?>">
+                                <input type="hidden" name="id_km" value="<?php echo $this->LesFraisForfait[3]['WA']?>">
                             </td>
                             <td>
                                 <select class="form-control" multiple="multiple" name="statuts">
@@ -131,6 +135,7 @@
                                 <td>
                                     <input type="date" class="form-control" placeholder="" name="hf_date[]"
                                            value="<?php echo $item['date'] ?>">
+                                    <input type="hidden" name="id[]" value="<?php echo $item['id']?>"
                                 </td>
                                 <td>
                                     <input type="text" class="form-control" placeholder="" name="hf_libelle[]"
@@ -176,3 +181,4 @@
 
 </div>
 <?php var_dump($_POST) ?>
+<?php var_dump(count($_POST['hf_date']))?>
