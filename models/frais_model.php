@@ -27,6 +27,7 @@
             $postNuit = ['quantite' => $data['ff_hotel']];
             $postEtape = ['quantite' => $data['ff_etape']];
             $postKm = ['quantite' => $data['ff_km']];
+
             $this->db->update('fraisforfaits', $postRepas, "`id_types` = '4' AND `id_fichefrais`={$id_fiche}");
             $this->db->update('fraisforfaits', $postNuit, "`id_types` = '2' AND `id_fichefrais`={$id_fiche}");
             $this->db->update('fraisforfaits', $postEtape, "`id_types` = '1' AND `id_fichefrais`={$id_fiche}");

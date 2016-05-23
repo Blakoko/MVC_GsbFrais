@@ -61,14 +61,14 @@ $(document).ready(function () {
 
 
     //-------//
-   /* $("button#btn3").click(function () {
+    $("button#btn3").click(function () {
 
             $.post($("#formupdate").attr("action"),
-                $("#formupdate :input").(),
+                $("#formupdate").serialize(),
 
                 function () {
 
-                        alert('Mis A Jour')
+                    alert('Mis A Jour'),
                             window.location = 'saisir';
 
 
@@ -79,7 +79,7 @@ $(document).ready(function () {
 
         });
 
-    });*/
+    });
 
     //-------//
 

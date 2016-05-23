@@ -183,7 +183,6 @@
         public function majfraisforfait()
         {
             $this->model->MajSaisie();
-            var_dump($_POST);
             exit;
 
         }
