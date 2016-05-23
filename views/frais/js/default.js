@@ -43,6 +43,7 @@ $(document).ready(function () {
                 function (data) {
                     $("div#ack").html(data);
                     if (data == '') {
+                        //noinspection CommaExpressionJS
                         alert('Ajouté'),
                             window.location = 'saisir';
                     }
@@ -56,6 +57,32 @@ $(document).ready(function () {
 
     });
     //----//
+
+
+
+    //-------//
+   /* $("button#btn3").click(function () {
+
+            $.post($("#formupdate").attr("action"),
+                $("#formupdate :input").(),
+
+                function () {
+
+                        alert('Mis A Jour')
+                            window.location = 'saisir';
+
+
+                });
+
+        $("#formupdate").submit(function () {
+            return false;
+
+        });
+
+    });*/
+
+    //-------//
+
 
 //--//
     $("button#btn1").click(function () {
@@ -95,11 +122,11 @@ $(document).ready(function () {
 
     //NE RENTRER QUE DES CHIFFRES
     $('.number-only').keyup(function (e) {
-            if (this.value != '-')
-                while (isNaN(this.value))
-                    this.value = this.value.split('').reverse().join('').replace(/[\D]/i, '')
-                        .split('').reverse().join('');
-        })
+        if (this.value != '-')
+            while (isNaN(this.value))
+                this.value = this.value.split('').reverse().join('').replace(/[\D]/i, '')
+                    .split('').reverse().join('');
+    })
         .on("cut copy paste", function (e) {
             e.preventDefault();
         });

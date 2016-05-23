@@ -67,17 +67,17 @@
                             </thead>
                             <tbody>
                             <tr>
-                                <form action="" method="post">
-                                    <td><input value="<?php echo $this->LesFraisForfait[3]['quantite'] ?>" type="text"
-                                               class="form-control number-only" id="montant" name="ff_repas"></td>
-                                    <td><input value="<?php echo $this->LesFraisForfait[1]['quantite'] ?>" type="text"
-                                               class="form-control number-only" id="montant" name="ff_hotel"></td>
-                                    <td><input value="<?php echo $this->LesFraisForfait[2]['quantite'] ?>" type="text"
-                                               class="form-control number-only" id="montant" name="ff_etape"></td>
-                                    <td><input value="<?php echo $this->LesFraisForfait[0]['quantite'] ?>" type="text"
-                                               class="form-control number-only" id="montant" name="ff_km"></td>
+                                <form action="majfraisforfait" method="post" id="formupdate">
+                                    <td><input name="ff_repas" value="<?php echo $this->LesFraisForfait[3]['quantite'] ?>" type="text"
+                                               class="form-control number-only" ></td>
+                                    <td><input name="ff_hotel" value="<?php echo $this->LesFraisForfait[1]['quantite'] ?>" type="text"
+                                               class="form-control number-only" ></td>
+                                    <td><input name="ff_etape" value="<?php echo $this->LesFraisForfait[2]['quantite'] ?>" type="text"
+                                               class="form-control number-only" ></td>
+                                    <td><input name="ff_km" value="<?php echo $this->LesFraisForfait[0]['quantite'] ?>" type="text"
+                                               class="form-control number-only" ></td>
                                     <td>
-                                        <button id="btn2" type="submit" class="btn btn-primary btn-block">mettre a
+                                        <button id="btn3" type="submit" class="btn btn-primary btn-block">mettre a
                                             jour
                                         </button>
                                     </td>

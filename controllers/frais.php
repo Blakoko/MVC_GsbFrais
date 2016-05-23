@@ -179,6 +179,14 @@
             $this->model->majEtatFicheFrais();
             exit;
         }
+
+        public function majfraisforfait()
+        {
+            $this->model->MajSaisie();
+            var_dump($_POST);
+            exit;
+
+        }
         
         public function validationfiche()
         {

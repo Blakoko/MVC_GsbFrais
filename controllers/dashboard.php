@@ -32,18 +32,17 @@
             $this->view->render('dashboard/index');
         }
 
-        function profil()
-        {
-            $this->view->monprofil = $this->model->monprofil(Session::get('id'));
-            $this->view->render('dashboard/profil');
-        }
-
-
         function logout()
         {
             Session::destroy();
             header('location: ' . URL . '');
             exit;
+        }
+
+        function profil()
+        {
+            $this->view->monprofil = $this->model->monprofil(Session::get('id'));
+            $this->view->render('dashboard/profil');
         }
 
     }

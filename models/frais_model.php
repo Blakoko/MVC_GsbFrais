@@ -14,6 +14,35 @@
 
         }
 
+        public function MajSaisie()
+        {
+
+
+            //Recuperer Le Denier Id De la Fiche
+            $id = $this->_getLeDernierId(Session::get('id'));
+            $id_fiche = $id[0]['max'];
+            $data = $_POST;
+
+            $postRepas = ['quantite' => $data['ff_repas']];
+            $postNuit = ['quantite' => $data['ff_hotel']];
+            $postEtape = ['quantite' => $data['ff_etape']];
+            $postKm = ['quantite' => $data['ff_km']];
+            $this->db->update('fraisforfaits', $postRepas, "`id_types` = '4' AND `id_fichefrais`={$id_fiche}");
+            $this->db->update('fraisforfaits', $postNuit, "`id_types` = '2' AND `id_fichefrais`={$id_fiche}");
+            $this->db->update('fraisforfaits', $postEtape, "`id_types` = '1' AND `id_fichefrais`={$id_fiche}");
+            $this->db->update('fraisforfaits', $postKm, "`id_types` = '3' AND `id_fichefrais` = {$id_fiche}");
+
+        }
+
+        /**
+         * @param $id
+         * @return mixed
+         */
+        public function _getLeDernierId($id)
+        {
+            return $this->db->select('SELECT max(id)AS max FROM fichefrais WHERE id_user = :id', [':id' => $id]);
+        }
+
         /**
          * met à jour le nombre de justificatifs de la table fichefrais
          * pour le mois et le Visiteur concerné
@@ -137,6 +166,8 @@
             ORDER BY id_types ASC', [':id' => $id, ':mois' => $mois]);
         }
 
+        //Insertion
+
         /**
          * Retourne sous forme d'un tableau associatif toutes les lignes de frais hors forfait
          * concernées par les deux arguments
@@ -156,8 +187,6 @@
             AND fichefrais.mois = :mois
             /*AND id_statut=1*/', [':id' => $id, ':mois' => $mois]);
         }
-
-        //Insertion
 
         /**
          * Retourne les informations d'une fiche de frais d'un Visiteur pour un mois donné
@@ -204,7 +233,6 @@
             return $this->db->select('SELECT mois FROM fichefrais WHERE mois <= (DATE_FORMAT( NOW( ) , "%Y%m" )) GROUP BY mois DESC');
         }
 
-
         public function _getToutLestypes()
         {
             return $this->db->select('SELECT * FROM types');
@@ -226,6 +254,11 @@
             $this->db->delete('fraishorsforfaits', "id_fichefrais in (select fichefrais.id from fichefrais
               where fichefrais.id_user='$id_user' AND fichefrais.id_statut='1')", "id='$id'");
         }
+
+        /**
+         * @return mixed
+         */
+        //Recuperer Les Types Pour Select
 
         /**
          * @internal param $data
@@ -276,20 +309,6 @@
             print_r($compt);
             var_dump($id_user);
             var_dump($id);
-        }
-
-        /**
-         * @return mixed
-         */
-        //Recuperer Les Types Pour Select
-
-        /**
-         * @param $id
-         * @return mixed
-         */
-        public function _getLeDernierId($id)
-        {
-            return $this->db->select('SELECT max(id)AS max FROM fichefrais WHERE id_user = :id', [':id' => $id]);
         }
 
         ///Recuperer les status pour Select
@@ -421,20 +440,6 @@
             ];
 
             $this->db->update('fichefrais', $postData, "`id` = {$data['id']}");
-        }
-
-        public function majValidation()
-        {
-            //$data = $_POST;
-            $postData = [
-
-
-            ];
-
-
-            //return $this->db->update('fraisforfaits', , );
-
-            //return $this->db->update(fraishorsforfaits, , );
         }
 
 
