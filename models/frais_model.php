@@ -139,14 +139,15 @@
          * @internal param sous $mois la forme aaaamm
          */
 
-        public function majNbJustificatifs()
+        public function Val_MajFicheFrais()
         {
             $data = $_POST;
             $postData =
                 [
-
+                    'nb_justificatifs' => $data['justif'],
+                    'id_statut'        => $data ['statut']
                 ];
-            $this->db->update('');
+            $this->db->update('fichefrais', $postData, "`id` = {$data['id_fichefrais']}");
         }
 
 

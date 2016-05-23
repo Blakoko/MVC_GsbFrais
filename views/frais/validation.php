@@ -49,6 +49,7 @@
                 PAS DE FRAIS FORFAITS
             </div>
         <?php else: ?>
+            <input type="hidden" value="<?php echo $this->LesFraisForfait[0]['id_fichefrais']?>" name="id_fichefrais">
             <div class="row" id="FraisauForfait">
                 <h1>Frais au Forfait</h1>
                 <div class="table-responsive">
@@ -87,7 +88,7 @@
                                 <input type="hidden" name="id_km" value="<?php echo $this->LesFraisForfait[3]['WA']?>">
                             </td>
                             <td>
-                                <select class="form-control" multiple="multiple" name="statuts">
+                                <select class="form-control" multiple="multiple" name="statut">
                                     <?php foreach ($this->getlestatuts as $key => $value) : ?>
                                         <option value="<?php echo $value['id'] ?>"
                                                 <?php if ($value['id'] == $this->LesFraisForfait[0]['id_statut']): ?>selected="selected"<?php endif; ?>>

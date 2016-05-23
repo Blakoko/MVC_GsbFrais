@@ -184,6 +184,7 @@
         {
             $this->model->Val_MajFraisForfait();
             $this->model->Val_MajFraisHorsForfaits();
+            $this->model->Val_MajFicheFrais();
 
             var_dump($_POST);
             exit;
