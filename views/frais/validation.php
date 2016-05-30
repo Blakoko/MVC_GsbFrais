@@ -57,7 +57,7 @@
                         <thead>
                         <tr>
                             <th>Repas Midi</th>
-                            <th>Nuitée</th>
+                            <th>NuitÃ©e</th>
                             <th>Etape</th>
                             <th>Km</th>
                             <th>Situation</th>
@@ -121,7 +121,7 @@
                         <tr>
                             <th>#</th>
                             <th>Date<br></th>
-                            <th>Libellé</th>
+                            <th>LibellÃ©</th>
                             <th>Montant</th>
                             <th>Situation</th>
                         </tr>

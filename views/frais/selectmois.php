@@ -25,7 +25,7 @@
                         
                         <tr class="bg-primary">
                             <th>Forfait Etape</th>
-                            <th>Nuitée Hotel</th>
+                            <th>NuitÃ©e Hotel</th>
                             <th>Kilometre</th>
                             <th>Repas Midi</th>
                             <th>Situation</th>
