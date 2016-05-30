@@ -35,6 +35,21 @@
 
         }
 
+        public function MajJustif()
+
+        {
+            $id = $this->_getLeDernierId(Session::get('id'));
+            $id_fiche = $id[0]['max'];
+
+            $data = $_POST;
+
+            $postData = [
+                'nb_justificatifs' => $data['justif']
+            ];
+
+            $this->db->update('fichefrais', $postData, "`id_fichefrais`={$id_fiche}");
+        }
+
         /**
          * @param $id
          * @return mixed
@@ -56,11 +71,6 @@
             $totalhf = $this->TotalFraisHorsForfait($id);
             $total = $totalff + $totalhf;
 
-
-            var_dump($totalff);
-            var_dump($totalhf);
-            var_dump($total);
-
             return $total;
         }
 
@@ -80,7 +90,7 @@
 
             $total->execute([':id' => $id]);
 
-            //Recuper Le resultat
+            //Recuperer Le resultat
             $result = $total->fetchColumn();
 
             return $result;
@@ -209,16 +219,18 @@
 
             if ($count > 0) {
 
+                $this->db->update();
                 $this->db->insert('fichefrais', ['id_user' => $id]);
 
             } else
-                echo "YHAOOOOOOOO";
+                //echo "YHAOOOOOOOO";
 
             if ($allo != 1) {
 
                 $this->db->insert('fichefrais', ['mois' => $mois, 'id_user' => $id]);
+                $this->db->update();
 
-                echo "YHIAAAAAAA";
+                //echo "YHIAAAAAAA";
             }
 
 

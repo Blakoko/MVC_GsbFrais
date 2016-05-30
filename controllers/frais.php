@@ -169,6 +169,7 @@
 
 
             $this->model->creeNouveauFraisHorsForfait();
+            //$this->model->MajJustif();
             //unset($_POST)
             //header('location:' . URL . 'frais/saisir');
             exit;

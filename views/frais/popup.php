@@ -3,7 +3,7 @@
     <div class="row" id="Titre">
         <h1><?php echo($this->InfoVisiteur[0]['nom'])?></h1>
         <h2>Etat: <?php echo($this->situationfiche[0]['libelle'])?></h2>
-        <h3>Montant Validé Total: <?php echo $this->Total?></h3>
+        <h3>Montant Validé Total: <?php echo $this->Total ?></h3>
     </div>
     <div class="row" id="FraisauForfait">
         <h1>Element(s) Forfaitisé</h1>
@@ -50,7 +50,7 @@
                         <td><?php echo $val['montant'] ?></td>
                         <td><?php echo $val['libelle_situation']?></td>
                     </tr>
-                <?php endforeach; ?>
+                <?php endforeach ?>
                 </tbody>
             </table>
         </div>
@@ -64,7 +64,7 @@
             <select class="form-control" name="id_statut">
                 <?php foreach ($this->lestatuts as $key => $value):?>
                 <option value="<?php echo $value['id'] ?>"><?php echo $value['libelle'] ?></option>
-                <?php endforeach;?>
+                <?php endforeach?>
             </select>
         </div>
         <div class="col-md-4 text-right">

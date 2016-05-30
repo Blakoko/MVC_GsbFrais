@@ -10,7 +10,7 @@
                     <option>--Choisir Un Mois--</option>
                     <?php foreach ($this->ToutLesMois as $key => $value): ?>
                         <option value="<?php echo $value['mois'] ?>"><?php echo $value['mois'] ?></option>
-                    <?php endforeach; ?>
+                    <?php endforeach ?>
                 </select>
             </div>
 
@@ -53,7 +53,7 @@
                     </tr>
 
 
-                <?php endforeach; ?>
+                <?php endforeach ?>
 
                 </tbody>
             </table>
@@ -82,5 +82,4 @@
     </div>
 </div>
 
-<?php //var_dump($_POST)?>
  
