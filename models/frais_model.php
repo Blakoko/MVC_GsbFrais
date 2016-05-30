@@ -45,6 +45,50 @@
         }
 
         /**
+         * Calcul Le montant total des fiches forfait et hors forfait.
+         * @param $id
+         * @return string
+         */
+        public function TotalFiche($id)
+        {
+
+            $totalff = $this->TotalFraisForfait($id);
+            $totalhf = $this->TotalFraisHorsForfait($id);
+            $total = $totalff + $totalhf;
+            //Transformer L'array En simple String
+            $float = join("", $total[0]);
+
+            return $float;
+        }
+
+        /**
+         * Retourne Le Total De la fiche en fonction de Son id
+         * @param $id
+         * @return mixed
+         */
+        public function TotalFraisForfait($id)
+        {
+            return $this->db->select('SELECT round(sum((quantite*montant)),2)AS total FROM fraisforfaits 
+            INNER JOIN types ON fraisforfaits.id_types = types.id
+            INNER JOIN fichefrais ON fraisforfaits.id_fichefrais = fichefrais.id
+            WHERE id_fichefrais=:id
+            AND (id_statut = 2 OR id_statut = 3 OR id_statut = 5)
+            ', [':id' => $id]);
+        }
+
+        /**
+         * Le Total De la fiche en fonction de Son id
+         * @param $id
+         * @return mixed
+         */
+        public function TotalFraisHorsForfait($id)
+        {
+            return $this->db->select('SELECT round(sum((montant)),2) AS total FROM fraishorsforfaits 
+            WHERE id_fichefrais=:id
+            AND situation_id = 1', [':id' => $id]);
+        }
+
+        /**
          * met à jour le nombre de justificatifs de la table fichefrais
          * pour le mois et le Visiteur concerné
          * @internal param $idVisiteur
@@ -98,6 +142,8 @@
 
         }
 
+        //Insertion
+
         public function Val_MajFraisHorsForfaits()
         {
             $data = $_POST;
@@ -124,18 +170,48 @@
          */
         public function _VeriFicheFrais($id)
         {
+            $mois = date('Ym', strtotime("+1 month"));
+
             $verif = $this->db->prepare('SELECT id,mois FROM fichefrais WHERE id_user=:id AND mois=(DATE_FORMAT(NOW(),"%Y%m"))', [':id' => $id]);
             $verif->execute([':id' => $id]);
+
+            $creation = $this->db->prepare('SELECT id_statut FROM fichefrais WHERE id_user=:id AND mois=(DATE_FORMAT(NOW(),"%Y%m"))', [':id' => $id]);
+            $creation->execute([':id' => $id]);
+
+            //Recuper Le resultat
+            $allo = $creation->fetchColumn();
+
+            //Recuperer le nombre d'enregistrement
             $count = $verif->rowCount();
+
 
             if ($count > 0) {
 
-                //echo 'YHIHAAAAAAAAAAAAAAAAAAAAA';
+                $this->db->insert('fichefrais', ['id_user' => $id]);
 
+            } else
+                echo "YHAOOOOOOOO";
+
+            if ($allo != 1) {
+
+                $this->db->insert('fichefrais', ['mois' => $mois, 'id_user' => $id]);
+
+                echo "YHIAAAAAAA";
             }
-            $this->db->insert('fichefrais', ['id_user' => $id]);
 
 
+        }
+
+        /**
+         * Retourne le dernier id enregistré d'une fiche frais
+         * en fonction du mois et de l'id du visiteur.
+         * @param $id
+         * @param $mois
+         * @return mixed
+         */
+        public function _getDernieridFiche($id, $mois)
+        {
+            return $this->db->select('SELECT MAX(id)AS max FROM fichefrais WHERE id_user=:id AND mois=:mois AND id_statut=1', [':id' => $id, ':mois' => $mois]);
         }
 
         public function _getLasituation()
@@ -158,6 +234,7 @@
          */
         public function _getLesFraisForfait($id, $mois)
         {
+
             return $this->db->select('SELECT *,fraisforfaits.id AS WA FROM fichefrais
             INNER JOIN fraisforfaits ON fichefrais.id = fraisforfaits.id_fichefrais
             INNER JOIN statuts ON fichefrais.id_statut = statuts.id
@@ -166,8 +243,6 @@
             /*AND statuts.id=1*/
             ORDER BY id_types ASC', [':id' => $id, ':mois' => $mois]);
         }
-
-        //Insertion
 
         /**
          * Retourne sous forme d'un tableau associatif toutes les lignes de frais hors forfait
@@ -181,11 +256,14 @@
          */
         public function _getLesFraisHorsForfait($id, $mois)
         {
+
+
             return $this->db->select('SELECT * FROM fichefrais
             INNER JOIN fraishorsforfaits ON fichefrais.id = fraishorsforfaits.id_fichefrais
             INNER JOIN situation ON fraishorsforfaits.situation_id = situation.id_situation
             WHERE id_user =:id
             AND fichefrais.mois = :mois
+            AND situation_id = 1
             /*AND id_statut=1*/', [':id' => $id, ':mois' => $mois]);
         }
 
@@ -197,7 +275,7 @@
          */
         public function _getLesInfosFicheFrais($mois)
         {
-            return $this->db->select('SELECT users.id AS id, concat(prenom," ",nom)AS nom , (DATE_FORMAT(dateAjout,"%d-%m-%Y")) AS date,libelle,mois FROM fichefrais
+            return $this->db->select('SELECT users.id AS id, concat(prenom," ",nom)AS nom , (DATE_FORMAT(dateAjout,"%d-%m-%Y")) AS date,libelle,mois,fichefrais.id AS idfiche FROM fichefrais
             INNER JOIN users ON fichefrais.id_user=users.id
             INNER JOIN statuts ON fichefrais.id_statut=statuts.id
             WHERE id_statut != 1
@@ -221,6 +299,24 @@
             return $this->db->select('SELECT * FROM statuts');
         }
 
+        /**
+         * @return mixed
+         */
+        //Recuperer Les Types Pour Select
+        /**
+         * Retourne le nombre de justificatif d'un Visiteur pour un mois donné
+         * @param $id
+         * @param $mois sous la forme aaaamm
+         * @return le nombre entier de justificatifs
+         * @internal param $idVisiteur
+         */
+        public function _getNbjustificatifs($id, $mois)
+        {
+            return $this->db->select('SELECT nb_justificatifs AS justif FROM fichefrais WHERE id_user=:id AND mois=:mois', [':id' => $id, ':mois' => $mois]);
+        }
+
+        ///Recuperer les status pour Select
+
         public function _getSituationFiche($id, $mois)
         {
             return $this->db->select('SELECT id_statut ,libelle,fichefrais.id AS num FROM fichefrais
@@ -229,20 +325,29 @@
             AND mois=:mois', [':id' => $id, ':mois' => $mois]);
         }
 
+        ///Recuperer la situation pour Select
+
+
         public function _getToutLesMois()
         {
             return $this->db->select('SELECT mois FROM fichefrais WHERE mois <= (DATE_FORMAT( NOW( ) , "%Y%m" )) GROUP BY mois DESC');
         }
+
+        ///Recuperer Les Visteurs Pour Select
 
         public function _getToutLestypes()
         {
             return $this->db->select('SELECT * FROM types');
         }
 
+        //Recuperer le nom du et prenom du visiteur
+
         public function _getVisiteur()
         {
             return $this->db->select('SELECT id,concat(nom," ",prenom)AS name FROM users');
         }
+
+        //Recuper tous les mois disponible en bdd
 
         /**
          * Supprime le frais hors forfait dont l'id est passé en argument
@@ -256,10 +361,7 @@
               where fichefrais.id_user='$id_user' AND fichefrais.id_statut='1')", "id='$id'");
         }
 
-        /**
-         * @return mixed
-         */
-        //Recuperer Les Types Pour Select
+        //Recuperer le statut de la fiche en cours(Validation)
 
         /**
          * @internal param $data
@@ -304,15 +406,7 @@
                 }
 
             }
-
-            var_dump($data);
-            var_dump($_POST);
-            print_r($compt);
-            var_dump($id_user);
-            var_dump($id);
         }
-
-        ///Recuperer les status pour Select
 
         /**
          *
@@ -366,8 +460,6 @@
             }
         }
 
-        ///Recuperer la situation pour Select
-
         /**
          * Crée une nouvelle fiche de frais et les lignes de frais au forfait pour un Visiteur et un mois donnés
          * récupère le dernier mois en cours de traitement, met à 'CL' son champs idEtat, crée une nouvelle fiche de frais
@@ -384,47 +476,22 @@
             ]);
         }
 
-        ///Recuperer Les Visteurs Pour Select
-
         /**
          * Retourne le dernier mois en cours d'un Visiteur
          * @return le mois sous la forme aaaamm
          * @internal param $idVisiteur
          */
-        public function dernierMoisSaisi()
+        public function dernierMoisSaisi($id)
         {
-            return $this->db->select('');
+
+            $dernier = $this->db->prepare('SELECT max(mois) FROM fichefrais WHERE id_user=:id',[':id' => $id]);
+            $dernier->execute([':id' => $id]);
+
+            //Recuper Le resultat
+            $mois = $dernier->fetchColumn();
+
+            return $mois;
         }
-
-        //Recuperer le nom du et prenom du visiteur
-
-        /**
-         * Retourne le dernier id enregistré d'une fiche frais
-         * en fonction du mois et de l'id du visiteur.
-         * @param $id
-         * @param $mois
-         * @return mixed
-         */
-        public function getDernieridFiche($id, $mois)
-        {
-            return $this->db->select('SELECT MAX(id)AS max FROM fichefrais WHERE id_user=:id AND mois=:mois AND id_statut=1', [':id' => $id, ':mois' => $mois]);
-        }
-
-        //Recuper tous les mois disponible en bdd
-
-        /**
-         * Retourne le nombre de justificatif d'un Visiteur pour un mois donné
-         * @param $id
-         * @param $mois sous la forme aaaamm
-         * @return le nombre entier de justificatifs
-         * @internal param $idVisiteur
-         */
-        public function getNbjustificatifs($id, $mois)
-        {
-            return $this->db->select('SELECT nb_justificatifs AS justif FROM fichefrais WHERE id_user=:id AND mois=:mois', [':id' => $id, ':mois' => $mois]);
-        }
-
-        //Recuperer le statut de la fiche en cours(Validation)
 
         /**
          * Modifie l'état et la date de modification d'une fiche de frais
@@ -442,7 +509,6 @@
 
             $this->db->update('fichefrais', $postData, "`id` = {$data['id']}");
         }
-
 
     }
 

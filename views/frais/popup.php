@@ -4,7 +4,7 @@
         <h1><?php echo($this->InfoVisiteur[0]['nom'])?></h1>
         <h3>Etat: <?php echo($this->situationfiche[0]['libelle'])?></h3>
         <h3>Etat: <?php echo($this->situationfiche[0]['num'])?></h3>
-        <h3>Montant valide:</h3>
+        <h3>Montant Validé Total: <?php echo $this->Total?></h3>
     </div>
     <div class="row" id="FraisauForfait">
         <h1>Element(s) Forfaitisé</h1>

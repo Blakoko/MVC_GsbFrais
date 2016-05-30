@@ -2,7 +2,7 @@
  * Created by albert on 08/04/16.
  */
 
-var $Confirmation = 'Êtes-vous sûr?';
+var $Confirmation = 'ÃŠtes-vous sÃ»r?';
 var $Datedata = {
     yearRange: '-1:+0',
     minDate: '-1Y',
@@ -10,11 +10,11 @@ var $Datedata = {
     firstDay: 1,
     altField: ".datepicker",
     closeText: 'Fermer',
-    prevText: 'Précédent',
+    prevText: 'PrÃ©cÃ©dent',
     nextText: 'Suivant',
     currentText: 'Aujourd\'hui',
-    monthNames: ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'],
-    monthNamesShort: ['Janv.', 'Févr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Déc.'],
+    monthNames: ['Janvier', 'FÃ©vrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'AoÃ»t', 'Septembre', 'Octobre', 'Novembre', 'DÃ©cembre'],
+    monthNamesShort: ['Janv.', 'FÃ©vr.', 'Mars', 'Avril', 'Mai', 'Juin', 'Juil.', 'AoÃ»t', 'Sept.', 'Oct.', 'Nov.', 'DÃ©c.'],
     dayNames: ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'],
     dayNamesShort: ['Dim.', 'Lun.', 'Mar.', 'Mer.', 'Jeu.', 'Ven.', 'Sam.'],
     dayNamesMin: ['D', 'L', 'M', 'M', 'J', 'V', 'S'],
@@ -44,7 +44,7 @@ $(document).ready(function () {
                     $("div#ack").html(data);
                     if (data == '') {
                         //noinspection CommaExpressionJS
-                        alert('Ajouté'),
+                        alert('AjoutÃ©'),
                             window.location = 'saisir';
                     }
 
@@ -99,7 +99,7 @@ $(document).ready(function () {
                 function (data) {
                     $("div#atk").html(data);
                     if (data == '') {
-                        alert('Ajouté'),
+                        alert('AjoutÃ©'),
                             window.location = 'saisir';
                     }
 

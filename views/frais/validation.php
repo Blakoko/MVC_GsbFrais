@@ -1,7 +1,7 @@
 <div class="col-md-10 bg-warning">
     <form action="" method="post">
         <div class="row" id="Visiteur">
-            <h1>Validation des frais par Visiteur<br><br></h1>
+            <h1>Validation des frais par Visiteur</h1>
             <div class="col-md-4">
                 <h5>Choisir le visiteur :</h5>
             </div>
@@ -174,12 +174,11 @@
             </div>
 
         <div class="row" id="Validation">
-            <button type="reset" class="btn btn-default">Reset</button>
             <button type="submit" class="btn btn-default">Valider</button>
             <?php endif; ?>
 
     </form>
 
 </div>
-<?php var_dump($_POST) ?>
-<?php var_dump(count($_POST['hf_date']))?>
+<?php //var_dump($_POST) ?>
+<?php //var_dump(count($_POST['hf_date']))?>

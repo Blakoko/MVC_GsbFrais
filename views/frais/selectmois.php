@@ -18,26 +18,27 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive">
+                    <h3>Fiches Frais</h3>
+                    <h4>Total des fiches : <?php echo $this->TotalDesFrais ?></h4>
                     <table class="table table-bordered table-striped table-hover table-condensed">
                         <thead>
-                        <h3>Fiches Frais<br><br></h3>
+                        
                         <tr class="bg-primary">
-                            <th>Repas Midi</th>
-                            <th>Nuitée Hotel</th>
                             <th>Forfait Etape</th>
+                            <th>Nuitée Hotel</th>
                             <th>Kilometre</th>
+                            <th>Repas Midi</th>
                             <th>Situation</th>
                             <th>Date d'ajout</th>
-
                         </tr>
                         </thead>
                         <tbody>
                         <?php //foreach ($this->LesFraisForfait as $key => $val): ?>
                         <tr>
-                            <td><?php echo $this->LesFraisForfait[3]['quantite'] ?></td>
-                            <td><?php echo $this->LesFraisForfait[1]['quantite'] ?></td>
                             <td><?php echo $this->LesFraisForfait[0]['quantite'] ?></td>
+                            <td><?php echo $this->LesFraisForfait[1]['quantite'] ?></td>
                             <td><?php echo $this->LesFraisForfait[2]['quantite'] ?></td>
+                            <td><?php echo $this->LesFraisForfait[3]['quantite'] ?></td>
                             <td><?php echo $this->LesFraisForfait[0]['libelle'] ?></td>
                             <td><?php echo $this->LesFraisForfait[0]['dateAjout'] ?></td>
                         </tr>
@@ -56,9 +57,11 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive">
+                    <h3>Hors Forfait</h3>
+                    <h4><?php ?></h4>
                     <table class="table table-bordered table-hover table-striped table-condensed">
                         <thead>
-                        <h3>Hors Forfait<br></h3>
+                        
                         <tr class="bg-primary">
                             <th>Date</th>
                             <th>Description</th>

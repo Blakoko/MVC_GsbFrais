@@ -39,7 +39,7 @@
                 <?php foreach ($this->Lesinfos as $key => $value): ?>
 
                     <tr class="repeat">
-                        <td><?php echo $key+1 ?></td>
+                        <td><?php echo $value['idfiche'] ?></td>
                         <td><?php echo $value['nom'] ?></td>
                         <td><?php echo $value['date'] ?></td>
                         <td><?php echo $value['libelle'] ?></td>
@@ -82,5 +82,5 @@
     </div>
 </div>
 
-<?php var_dump($_POST)?>
+<?php //var_dump($_POST)?>
  
