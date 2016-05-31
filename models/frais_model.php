@@ -14,6 +14,61 @@
 
         }
 
+        /**
+         *
+         * Cloture Les FIches Dont le Statut est en cours pour les mettre a l'etat cloturé
+         */
+        public function Cloture()
+    {
+        /*
+         * 1 = En cours
+         * 2 = Validé
+         * 3 = Mise En paiement
+         * 4 = Cloturé
+         * 5 = Remboursé
+         * */
+        
+        $statut = 1;
+
+        $postData = [
+            'id_statut'=> 4
+        ];
+
+        $this->db->update('fichefrais', $postData, "`id_statut` = {$statut}");
+    }
+        /**
+         * Modifie l'état et la date de modification d'une fiche de frais
+         * Modifie le champ idEtat et met la date de modif à aujourd'hui
+         * @internal param $idVisiteur
+         * @internal param sous $mois la forme aaaamm
+         */
+        public function MajEtatFicheFrais()
+        {
+            $data = $_POST;
+
+            $postData = [
+                'id_statut' => $data['id_statut']
+            ];
+
+            $this->db->update('fichefrais', $postData, "`id` = {$data['id']}");
+        }
+
+        public function MajJustif()
+
+        {
+            $id = $this->_getLeDernierId(Session::get('id'));
+            $id_fiche = $id[0]['max'];
+
+            $data = $_POST;
+
+            $postData = [
+                'nb_justificatifs' => $data['justif']
+            ];
+
+            $this->db->update('fichefrais', $postData, "`id_fichefrais`={$id_fiche}");
+        }
+
+
         public function MajSaisie()
         {
 
@@ -33,30 +88,6 @@
             $this->db->update('fraisforfaits', $postEtape, "`id_types` = '1' AND `id_fichefrais`={$id_fiche}");
             $this->db->update('fraisforfaits', $postKm, "`id_types` = '3' AND `id_fichefrais` = {$id_fiche}");
 
-        }
-
-        public function MajJustif()
-
-        {
-            $id = $this->_getLeDernierId(Session::get('id'));
-            $id_fiche = $id[0]['max'];
-
-            $data = $_POST;
-
-            $postData = [
-                'nb_justificatifs' => $data['justif']
-            ];
-
-            $this->db->update('fichefrais', $postData, "`id_fichefrais`={$id_fiche}");
-        }
-
-        /**
-         * @param $id
-         * @return mixed
-         */
-        public function _getLeDernierId($id)
-        {
-            return $this->db->select('SELECT max(id)AS max FROM fichefrais WHERE id_user = :id', [':id' => $id]);
         }
 
         /**
@@ -138,6 +169,8 @@
             $this->db->update('fichefrais', $postData, "`id` = {$data['id_fichefrais']}");
         }
 
+        //Insertion
+
         /**
          * Met à jour la table ligneFraisForfait
          * Met à jour la table ligneFraisForfait pour un Visiteur et
@@ -174,8 +207,6 @@
 
         }
 
-        //Insertion
-
         public function Val_MajFraisHorsForfaits()
         {
             $data = $_POST;
@@ -202,6 +233,8 @@
          */
         public function _VeriFicheFrais($id)
         {
+            //$dernier = $this->_getLeDernierId(Session::get('id'));
+
             $mois = date('Ym', strtotime("+1 month"));
 
             $verif = $this->db->prepare('SELECT id,mois FROM fichefrais WHERE id_user=:id AND mois=(DATE_FORMAT(NOW(),"%Y%m"))', [':id' => $id]);
@@ -210,30 +243,37 @@
             $creation = $this->db->prepare('SELECT id_statut FROM fichefrais WHERE id_user=:id AND mois=(DATE_FORMAT(NOW(),"%Y%m"))', [':id' => $id]);
             $creation->execute([':id' => $id]);
 
-            //Recuper Le resultat
-            $allo = $creation->fetchColumn();
+            /**Recuper Le resultat**/
+            $statut = $creation->fetchColumn();
 
-            //Recuperer le nombre d'enregistrement
+            /**Recuperer le nombre d'enregistrement**/
             $count = $verif->rowCount();
 
+            //$postData = ['id_statut' => 4];
 
             if ($count > 0) {
 
-                $this->db->update();
+                //$this->db->update('fichefrais', $postData, "`id` = {$dernier}");
                 $this->db->insert('fichefrais', ['id_user' => $id]);
 
-            } else
-                //echo "YHAOOOOOOOO";
 
-            if ($allo != 1) {
+            }
+            /*if ($statut != 1) {
 
                 $this->db->insert('fichefrais', ['mois' => $mois, 'id_user' => $id]);
-                $this->db->update();
 
-                //echo "YHIAAAAAAA";
-            }
+            }*/
 
 
+        }
+
+        /**
+         * @param $id
+         * @return mixed
+         */
+        public function _getLeDernierId($id)
+        {
+            return $this->db->select('SELECT max(id)AS max FROM fichefrais WHERE id_user = :id', [':id' => $id]);
         }
 
         /**
@@ -328,15 +368,18 @@
             ORDER BY fichefrais.mois DESC', [':id' => $id]);
         }
 
+        /**
+         * @return mixed
+         */
+        //Recuperer Les Types Pour Select
+
         public function _getLestatuts()
         {
             return $this->db->select('SELECT * FROM statuts');
         }
 
-        /**
-         * @return mixed
-         */
-        //Recuperer Les Types Pour Select
+        ///Recuperer les status pour Select
+
         /**
          * Retourne le nombre de justificatif d'un Visiteur pour un mois donné
          * @param $id
@@ -349,7 +392,7 @@
             return $this->db->select('SELECT nb_justificatifs AS justif FROM fichefrais WHERE id_user=:id AND mois=:mois', [':id' => $id, ':mois' => $mois]);
         }
 
-        ///Recuperer les status pour Select
+        ///Recuperer la situation pour Select
 
         public function _getSituationFiche($id, $mois)
         {
@@ -359,29 +402,28 @@
             AND mois=:mois', [':id' => $id, ':mois' => $mois]);
         }
 
-        ///Recuperer la situation pour Select
-
+        ///Recuperer Les Visteurs Pour Select
 
         public function _getToutLesMois()
         {
             return $this->db->select('SELECT mois FROM fichefrais WHERE mois <= (DATE_FORMAT( NOW( ) , "%Y%m" )) GROUP BY mois DESC');
         }
 
-        ///Recuperer Les Visteurs Pour Select
+        //Recuperer le nom du et prenom du visiteur
 
         public function _getToutLestypes()
         {
             return $this->db->select('SELECT * FROM types');
         }
 
-        //Recuperer le nom du et prenom du visiteur
+        //Recuper tous les mois disponible en bdd
 
         public function _getVisiteur()
         {
             return $this->db->select('SELECT id,concat(nom," ",prenom)AS name FROM users');
         }
 
-        //Recuper tous les mois disponible en bdd
+        //Recuperer le statut de la fiche en cours(Validation)
 
         /**
          * Supprime le frais hors forfait dont l'id est passé en argument
@@ -394,8 +436,6 @@
             $this->db->delete('fraishorsforfaits', "id_fichefrais in (select fichefrais.id from fichefrais
               where fichefrais.id_user='$id_user' AND fichefrais.id_statut='1')", "id='$id'");
         }
-
-        //Recuperer le statut de la fiche en cours(Validation)
 
         /**
          * @internal param $data
@@ -504,10 +544,10 @@
         public function creeNouvellesLignesFrais()
         {
 
-            $this->db->insert('fichefrais', [
+            /*$this->db->insert('fichefrais', [
                 'id_user' => $data['id_user']
 
-            ]);
+            ]);*/
         }
 
         /**
@@ -525,23 +565,6 @@
             $mois = $dernier->fetchColumn();
 
             return $mois;
-        }
-
-        /**
-         * Modifie l'état et la date de modification d'une fiche de frais
-         * Modifie le champ idEtat et met la date de modif à aujourd'hui
-         * @internal param $idVisiteur
-         * @internal param sous $mois la forme aaaamm
-         */
-        public function majEtatFicheFrais()
-        {
-            $data = $_POST;
-
-            $postData = [
-                'id_statut' => $data['id_statut']
-            ];
-
-            $this->db->update('fichefrais', $postData, "`id` = {$data['id']}");
         }
 
     }

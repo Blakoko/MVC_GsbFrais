@@ -8,10 +8,9 @@
 
         <div>
             <form action="<?php echo URL; ?>login/run" method="post" id="myform">
-                <input type="text" class="form-control" placeholder="Nom d'utilisateur" name="login" id="login">
+                <input type="text" class="form-control"  placeholder="Nom d'utilisateur" name="login" id="login">
                 <input type="password" class="form-control" placeholder="Mot de passe" name="password" id="password">
-                <button type="submit" class="btn btn-default btn-block" id="submit">Connexion <i
-                        class="fa fa-angle-right"></i></button>
+                <button type="submit" class="btn btn-default btn-block" id="submit">Connexion <i class="fa fa-angle-right"></i></button>
 
             </form>
         </div>

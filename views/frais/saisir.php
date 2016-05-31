@@ -1,8 +1,7 @@
-<div class="bg-info col-md-10" id="content" data-pg-collapsed>
+<div class="bg-info col-md-10" id="content">
     <div id="fraisforfait">
         <form id="formff" action="valfraisforfaits" method="post">
         <div class="row">
-
             <h3>Frais au forfait</h3>
             <div id="atk" class=""></div>
 
@@ -15,10 +14,9 @@
 
                                     <select id="formInput20" class="type form-control" name="type[]">
                                         <?php foreach ($this->getLestypes as $key => $value) : ?>
-                                            <option
-                                                value="<?php echo $value['id'] ?>"><?php echo $value['libelle'] ?></option>
-                                        <? endforeach; ?>
-                                    </select></label>
+                                            <option value="<?php echo $value['id'] ?>"><?php echo $value['libelle'] ?></option>
+                                        <?php endforeach ?>
+                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -44,7 +42,7 @@
 
 
         </div>
-            <div class="row" data-pg-hidden>
+            <div class="row">
                 <div class="text-right col-md-12">
                     <button id="btn1" type="submit" class="btn btn-primary">Valider</button>
 
@@ -53,7 +51,7 @@
             </div>
         </form>
     </div>
-    <hr id="separateur1"/>
+    <hr id="separateur1">
     <?php if (empty($this->LesFraisForfait)): ?>
         <h3>Pas De Frais Au Forfait</h3>
     <?php else : ?>
@@ -61,8 +59,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="table-responsive">
+                        <h3>Au Forfait</h3>
                         <form action="majfraisforfait" method="post" id="formupdate">
-                            <h3>Au Forfait</h3>
                         <table class="table table-bordered table-striped table-hover table-condensed">
                             <thead>
                             <tr class="bg-primary">
@@ -103,10 +101,9 @@
                     </div>
                 </div>
             </div>
-            <!-- FIn DIV Fiche FRais -->
         </div>
     <?php endif; ?>
-    <hr id="separateur2"/>
+    <hr id="separateur2">
     <?php if (empty($this->LesFraisHorsForfait)): ?>
         <h3>Pas de Frais Hors Forfaits Enregistré</h3>
     <?php else : ?>
@@ -135,12 +132,11 @@
                                     <td class="text-center bg-success"><a href="delete/<?php echo $val['id'] ?>" class="delete">SUPPRIMER</a>
                                     </td>
                                 </tr>
-                            <?php endforeach; ?>
+                            <?php endforeach ?>
 
 
                             </tbody>
                         </table>
-                        <!-- FIN DIV hors forfait-->
                     </div>
                 </div>
             </div>
@@ -176,7 +172,7 @@
                 </div>
             </div>
             <div id="repetition"></div>
-            <div class="col-md-1" data-pg-collapsed>
+            <div class="col-md-1">
                 <div class="form-group">
                     <label class="control-label" for="formInput12">Ajouter</label>
                     <button id="submit" type="button" class="btn btn-primary btn-sm repeat" onclick="repet()">+</button>
@@ -185,7 +181,7 @@
 
 
     </div>
-        <hr id="separateur3">
+        <hr id="separateur4">
         <div class="row">
 
             <div class="col-md-10">
@@ -203,6 +199,7 @@
         </div>
     </form>
 </div>
+
 
 
 

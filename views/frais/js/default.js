@@ -3,6 +3,7 @@
  */
 
 var $Confirmation = 'Êtes-vous sûr?';
+var $Cloturer = 'Souhaitez vous cloturer toutes Les fiches ?';
 var $Datedata = {
     yearRange: '-1:+0',
     minDate: '-1Y',
@@ -87,7 +88,7 @@ $(document).ready(function () {
 //--//
     $("button#btn1").click(function () {
 
-        //EMPECHER VALEUR VIDE
+        /**EMPECHER VALEUR VIDE**/
         if ($(".type").val() == "" || $(".quantite").val() == "")
             $("div#atk").addClass("alert").html("Remplissez les champs");
 
@@ -120,7 +121,7 @@ $(document).ready(function () {
      }
      });*/
 
-    //NE RENTRER QUE DES CHIFFRES
+    /**NE RENTRER QUE DES CHIFFRES**/
     $('.number-only').keyup(function (e) {
         if (this.value != '-')
             while (isNaN(this.value))
@@ -131,9 +132,18 @@ $(document).ready(function () {
             e.preventDefault();
         });
 
-    //POPUP CONFIRMATION LIEN
+    /**POPUP CONFIRMATION LIEN**/
     $("a.delete").click(function (e) {
         if (!confirm($Confirmation)) {
+            e.preventDefault();
+            return false;
+        }
+        return true;
+    });
+    
+    /**POPUP CONFIRMATION CLOTURE**/
+    $("a.cloturer").click(function (e) {
+        if (!confirm($Cloturer)) {
             e.preventDefault();
             return false;
         }
@@ -191,12 +201,12 @@ $(function popup1() {
 });
 
 
-//datepicker
+/**datepicker**/
 $(function ladate() {
     $(".datepicker").datepicker($Datedata);
 });
 
-//repetition
+/**repetition**/
 $(function repet() {
     $('.repeat').click(function () {
 

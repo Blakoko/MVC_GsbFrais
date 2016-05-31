@@ -6,12 +6,14 @@
         </div>
         <form action="" method="post">
             <div class="col-md-4">
-                <select class="form-control" name="mois">
-                    <option>--Choisir Un Mois--</option>
-                    <?php foreach ($this->ToutLesMois as $key => $value): ?>
+                <label>
+                    <select class="form-control" name="mois">
+                        <option>--Choisir Un Mois--</option>
+                        <?php foreach ($this->ToutLesMois as $key => $value): ?>
                         <option value="<?php echo $value['mois'] ?>"><?php echo $value['mois'] ?></option>
-                    <?php endforeach ?>
-                </select>
+                        <?php endforeach ?>
+                    </select>
+                </label>
             </div>
 
             <div class="col-md-4 text-center">

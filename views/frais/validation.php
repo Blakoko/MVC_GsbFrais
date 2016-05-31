@@ -1,17 +1,19 @@
 <div class="col-md-10 bg-warning">
-    <form action="" method="post">
+    <form method="post">
         <div class="row" id="Visiteur">
             <h1>Validation des frais par Visiteur</h1>
             <div class="col-md-4">
                 <h5>Choisir le visiteur :</h5>
             </div>
             <div class="col-md-4">
-                <select class="form-control" name="id_user" class="iduser" onChange="getMois(this.value);">
-                    <option selected="selected">--Choisir Un Utilisateur--</option>
-                    <?php foreach ($this->getlesvisiteurs as $key => $value): ?>
+                <label>
+                    <select class="iduser form-control" name="id_user" onChange="getMois(this.value);">
+                        <option selected="selected">--Choisir Un Utilisateur--</option>
+                        <?php foreach ($this->getlesvisiteurs as $key => $value): ?>
                         <option value="<?php echo $value['id'] ?>"><?php echo $value['name'] ?></option>
-                    <?php endforeach; ?>
-                </select>
+                        <?php endforeach; ?>
+                    </select>
+                </label>
             </div>
         </div>
 
@@ -21,7 +23,7 @@
                     Mois:</h5>
             </div>
             <div class="col-md-4">
-                <select class="form-control" name="val_mois" class="valmois" id="list_mois">
+                <label for="list_mois"></label><select class="valmois form-control" name="val_mois" id="list_mois">
                     <option value="">--Choisir Un Mois--</option>
                     <?php
                         /*
@@ -33,6 +35,9 @@
                 </select>
                 <button type="submit" class="btn btn-default">Valider</button>
             </div>
+            <div class="col-md-4">
+            <h4><a class="cloturer" href="cloture">Cloturer les fiches en cours???</a></h4>
+        </div>
         </div>
     </form>
 
@@ -88,14 +93,17 @@
                                 <input type="hidden" name="id_km" value="<?php echo $this->LesFraisForfait[3]['WA']?>">
                             </td>
                             <td>
-                                <select class="form-control" multiple="multiple" name="statut">
-                                    <?php foreach ($this->getlestatuts as $key => $value) : ?>
+                                <label>
+                                    <select class="form-control" multiple="multiple" name="statut">
+                                        <?php foreach ($this->getlestatuts as $key => $value) : ?>
                                         <option value="<?php echo $value['id'] ?>"
-                                                <?php if ($value['id'] == $this->LesFraisForfait[0]['id_statut']): ?>selected="selected"<?php endif; ?>>
-                                            <?php echo $value['libelle'] ?>
+                                        <?php if ($value['id'] == $this->LesFraisForfait[0]['id_statut']):
+                                        ?>selected="selected"<?php endif; ?>>
+                                        <?php echo $value['libelle'] ?>
                                         </option>
-                                    <?php endforeach; ?>
-                                </select>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </label>
                             </td>
                         </tr>
 
@@ -134,27 +142,37 @@
                             <tr>
                                 <td><?php echo $key+1 ?></td>
                                 <td>
-                                    <input type="date" class="form-control" placeholder="" name="hf_date[]"
-                                           value="<?php echo $item['date'] ?>">
-                                    <input type="hidden" name="id[]" value="<?php echo $item['id']?>"
+                                    <label>
+                                        <input type="date" class="form-control" name="hf_date[]"
+                                               value="<?php echo $item['date'] ?>">
+                                    </label>
+                                    <input type="hidden" name="id[]" value="<?php echo $item['id']?>">
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" placeholder="" name="hf_libelle[]"
-                                           value="<?php echo $item['libelle'] ?>">
+                                    <label>
+                                        <input type="text" class="form-control" name="hf_libelle[]"
+                                               value="<?php echo $item['libelle'] ?>">
+                                    </label>
                                 </td>
                                 <td>
-                                    <input type="text" class="form-control" placeholder="" name="hf_montant[]"
-                                           value="<?php echo $item['montant'] ?>">
+                                    <label>
+                                        <input type="text" class="form-control" name="hf_montant[]"
+                                               value="<?php echo $item['montant'] ?>">
+                                    </label>
                                 </td>
                                 <td>
-                                    <select size="2" class="form-control" multiple="multiple" name="hf_situation[]">
-                                        <?php foreach ($this->LaSituation as $cle => $val): ?>
+                                    <label>
+                                        <select size="2" class="form-control" multiple="multiple" name="hf_situation[]">
+                                            <?php foreach ($this->LaSituation as $cle => $val): ?>
                                             <option value="<?php echo $val['id_situation'] ?>"
-                                                    <?php if ($val['id_situation'] == $this->LesFraisHorsForfait[0]['situation_id']): ?>selected="selected"<?php endif; ?>>
-                                                <?php echo $val['libelle_situation'] ?>
+                                            <?php if ($val['id_situation'] == $this->
+                                            LesFraisHorsForfait[0]['situation_id']):
+                                            ?>selected="selected"<?php endif; ?>>
+                                            <?php echo $val['libelle_situation'] ?>
                                             </option>
-                                        <?php endforeach; ?>
-                                    </select>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </label>
                                 </td>
                             </tr>
                         <?php endforeach; ?>
@@ -176,9 +194,5 @@
         <div class="row" id="Validation">
             <button type="submit" class="btn btn-default">Valider</button>
             <?php endif; ?>
-
     </form>
-
 </div>
-<?php //var_dump($_POST) ?>
-<?php //var_dump(count($_POST['hf_date']))?>

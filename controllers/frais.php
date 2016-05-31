@@ -19,6 +19,11 @@
                 exit;
             }
         }
+        /*Session
+         * 1 = Administrateur
+         * 2 = Visiteur
+         * 3 = Comptable
+         * */
 
         public function delete($id)
         {
@@ -34,7 +39,7 @@
 
         public function majfiche()
         {
-            $this->model->majEtatFicheFrais();
+            $this->model->MajEtatFicheFrais();
             exit;
         }
 
@@ -42,6 +47,21 @@
         {
             $this->model->MajSaisie();
             exit;
+        }
+
+
+        public function cloture()
+
+        {
+            if (Session::get('profil') == 1) {
+                
+                
+                $this->model->Cloture();
+                header('location:' . URL . 'frais/validation');
+                exit;
+            }
+            header('location:' . URL . 'frais/validation');
+            
         }
 
         public function moisdispo()
